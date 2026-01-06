@@ -14,9 +14,15 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY")
 
 INSTALLED_APPS = [
+    "wagtail_modeltranslation",
+    "wagtail_modeltranslation.makemigrations",
+    "wagtail_modeltranslation.migrate",
     "home",
     "search",
     "core",
+    "gallery",
+    "news",
+    "about",
     "wagtail.contrib.forms",
     "wagtail.contrib.settings",
     "wagtail.contrib.redirects",
@@ -30,9 +36,6 @@ INSTALLED_APPS = [
     "wagtail.admin",
     "wagtail",
     "wagtailmedia",
-    "wagtail_modeltranslation",
-    "wagtail_modeltranslation.makemigrations",
-    "wagtail_modeltranslation.migrate",
     "modelcluster",
     "taggit",
     "django_filters",
@@ -179,6 +182,28 @@ WAGTAILSEARCH_BACKENDS = {
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
+
+WAGTAILADMIN_RICH_TEXT_EDITORS = {
+    'default': {
+        'WIDGET': 'wagtail.admin.rich_text.DraftailRichTextArea',
+        'OPTIONS': {
+            'features': ['h2', 'h3', 'h4', 'bold', 'italic', 'link', 'ol', 'ul', 'hr']
+        }
+    },
+    'full': {
+        'WIDGET': 'wagtail.admin.rich_text.DraftailRichTextArea',
+        'OPTIONS': {
+            'features': ['h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'ol', 'ul',
+                         'link', 'hr', 'code', 'document-link', 'blockquote']
+        }
+    },
+    'minimal': {
+        'WIDGET': 'wagtail.admin.rich_text.DraftailRichTextArea',
+        'OPTIONS': {
+            'features': ['bold', 'italic', 'link']
+        }
+    },
+}
 
 # Allowed file extensions for documents in the document library.
 # This can be omitted to allow all files, but note that this may present a security risk
