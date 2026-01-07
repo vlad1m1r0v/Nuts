@@ -6,9 +6,12 @@ from .models import AboutPage
 class AboutPageTR(TranslationOptions):
     fields = (
         'description',
+        'hero',
+        'videos',
         'owner_cite',
         'owner_description',
         'write_us',
         'company_history_title',
         'company_history_description',
+        'image_hero'
     )

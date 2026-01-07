@@ -12,12 +12,12 @@ class StatisticItemBlock(StructBlock):
 class ImageJumbotronBlock(StructBlock):
     background_image = ImageChooserBlock()
     title = CharBlock(max_length=100)
-    text = RichTextBlock(editor="minimal")
+    text = RichTextBlock()
     show_top_image = BooleanBlock(default=True)
 
     class Meta:
         icon = "image"
-        label = "Image Jumbotron"
+        label = "Image jumbotron"
 
 
 class VideoJumbotronBlock(StructBlock):
@@ -27,14 +27,14 @@ class VideoJumbotronBlock(StructBlock):
 
     text_above_play_button = RichTextBlock(
         required=False,
-        editor="minimal"
+        
     )
 
     text_below_play_button = RichTextBlock(
         required=False,
-        editor="minimal"
+        
     )
 
     class Meta:
         icon = "media"
-        label = "Video Jumbotron"
+        label = "Video jumbotron"

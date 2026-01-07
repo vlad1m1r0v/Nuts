@@ -5,10 +5,13 @@ from .models import NewsIndexPage, NewsDetailPage
 class NewsIndexPageTR(TranslationOptions):
     fields = (
         'description',
+        'hero'
     )
 
 
 
 @register(NewsDetailPage)
 class NewsDetailPageTR(TranslationOptions):
-    pass
+    fields = (
+        'body',
+    )

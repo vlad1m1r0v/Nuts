@@ -6,7 +6,7 @@ class GalleryImageWithTextBlock(StructBlock):
 
     title = CharBlock(max_length=100)
 
-    description = RichTextBlock(editor="minimal")
+    description = RichTextBlock()
 
     class Meta:
         icon = "image"
