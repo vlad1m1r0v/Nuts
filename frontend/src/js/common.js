@@ -3,65 +3,16 @@ jQuery(document).ready(function ($) {
     "use strict";
 
     $.Scrollax();
-});
 
-// функция гугл карты
-function initMap() {
-    var odessa = {lat: 46.4846, lng: 30.7326};
-    var map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 15,
-        center: odessa,
-        styles: [
-            {
-                featureType: "road",
-                elementType: "geometry",
-                stylers: [
-                    {
-                        lightness: 100,
-                    },
-                    {
-                        visibility: "simplified",
-                    },
-                ],
-            },
-            {
-                featureType: "water",
-                elementType: "geometry",
-                stylers: [
-                    {
-                        visibility: "on",
-                    },
-                    {
-                        color: "#C6E2FF",
-                    },
-                ],
-            },
-            {
-                featureType: "poi",
-                elementType: "geometry.fill",
-                stylers: [
-                    {
-                        color: "#C5E3BF",
-                    },
-                ],
-            },
-            {
-                featureType: "road",
-                elementType: "geometry.fill",
-                stylers: [
-                    {
-                        color: "#D1D1B8",
-                    },
-                ],
-            },
-        ],
-    });
-    var marker = new google.maps.Marker({
-        position: odessa,
-        map: map,
-        icon: "img/marker.svg",
-    });
-}
+    var map = L.map('map').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    var marker = L.marker([51.5, -0.09]).addTo(map);
+});
 
 (function ($) {
     // :: PreventDefault a Click
