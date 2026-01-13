@@ -9,6 +9,10 @@ from core.blocks import ImageJumbotronBlock
 from .blocks import CustomerInfoBlock
 
 class CustomersPage(Page):
+    parent_page_types = ['home.HomePage']
+    subpage_types = []
+    max_count = 1
+
     hero = StreamField(
         [
             ('image_jumbotron', ImageJumbotronBlock()),

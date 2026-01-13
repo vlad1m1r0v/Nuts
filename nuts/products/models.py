@@ -9,6 +9,10 @@ from .blocks import ProductImageWithTextBlock
 
 @register_setting
 class ProductCommonSettings(BaseSiteSetting):
+    parent_page_types = ['home.HomePage']
+    subpage_types = []
+    max_count = 1
+
     storage_conditions = models.TextField(blank=True, null=True)
 
     description_info = StreamField(

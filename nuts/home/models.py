@@ -7,6 +7,8 @@ from wagtail.fields import StreamField
 from core.blocks import VideoJumbotronBlock, ImageJumbotronBlock
 
 class HomePage(Page):
+    template = 'home.html'
+
     video_hero = StreamField(
         [
             ('video_jumbotron', VideoJumbotronBlock()),

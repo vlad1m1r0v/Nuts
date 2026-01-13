@@ -378,6 +378,24 @@ django = ">=4.2"
 test = ["pytest-django (>=4.0,<5.0)", "pytest-pythonpath (>=0.7,<1.0)"]
 
 [[package]]
+name = "django-vite"
+version = "3.1.0"
+description = "Integration of Vite in a Django project."
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "django_vite-3.1.0-py3-none-any.whl", hash = "sha256:4e46572bd6b1ce70784be129205dc2ffcbc7a3c19fea50bebfb72b327bbde5fc"},
+    {file = "django_vite-3.1.0.tar.gz", hash = "sha256:8b4ffe4a9fa81ff568bfb195e74dde8694aaf13fd4b656ae60bf59cce08b85e8"},
+]
+
+[package.dependencies]
+Django = ">=3.2"
+
+[package.extras]
+dev = ["black"]
+
+[[package]]
 name = "djangorestframework"
 version = "3.16.1"
 description = "Web APIs for Django, made easy."
@@ -968,4 +986,4 @@ wand = ["Wand (>=0.6,<1.0)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13,<4"
-content-hash = "8b1d67f50a7ed7080f71a5ac333d6b5828dd4134c558b316c8e203c8db1ac20c"
+content-hash = "9141f5e2e34b07ed9ed702002c144e527d21a4f1b3993603115d69adb64bd180"

@@ -12,6 +12,10 @@ from core.blocks import VideoJumbotronBlock
 
 
 class NewsIndexPage(Page):
+    parent_page_types = ['home.HomePage']
+    subpage_types = ['news.NewsDetailPage']
+    max_count = 1
+
     description = models.TextField(blank=True)
     hero = StreamField(
         [
@@ -27,13 +31,13 @@ class NewsIndexPage(Page):
         FieldPanel('hero'),
     ]
 
-    subpage_types = ['news.NewsDetailPage']
-
     class Meta:
         verbose_name = "News index page"
 
 
 class NewsDetailPage(Page):
+    parent_page_types = ['news.NewsIndexPage']
+
     publication_date = models.DateField()
 
     main_media = StreamField(
@@ -58,8 +62,6 @@ class NewsDetailPage(Page):
         FieldPanel('main_media'),
         FieldPanel('body'),
     ]
-
-    parent_page_types = ['news.NewsIndexPage']
 
     class Meta:
         verbose_name = "News detail page"

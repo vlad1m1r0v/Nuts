@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "modelcluster",
     "taggit",
     "django_filters",
+    "django_vite",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -53,6 +54,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.postgres"
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -63,7 +66,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware"
 ]
 
@@ -73,7 +75,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            PROJECT_DIR / "templates",
+            BASE_DIR / "templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -124,19 +126,24 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "en"
 
 TIME_ZONE = "UTC"
 
 USE_I18N = True
 
-WAGTAIL_I18N_ENABLED = True
+USE_L10N = True
 
-LANGUAGES = [
+WAGTAIL_I18N_ENABLED = False
+
+LANGUAGES = (
     ("en", _("English")),
     ("ru", _("Russian")),
     ("uk", _("Ukrainian"))
-]
+)
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
+MODELTRANSLATION_LANGUAGES = ('en', 'ru', 'uk')
 
 USE_TZ = True
 
@@ -148,8 +155,9 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
+
 STATICFILES_DIRS = [
-    PROJECT_DIR / "static",
+  BASE_DIR / "static_vite"
 ]
 
 STATIC_ROOT = BASE_DIR / "static"
@@ -158,6 +166,12 @@ STATIC_URL = "/static/"
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"
 
+DJANGO_VITE = {
+    "default": {
+        "manifest_path": STATIC_ROOT / ".vite" / "manifest.json",
+        "dev_mode": True
+    }
+}
 # Default storage settings
 # See https://docs.djangoproject.com/en/6.0/ref/settings/#std-setting-STORAGES
 STORAGES = {
@@ -188,28 +202,6 @@ WAGTAILSEARCH_BACKENDS = {
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
-
-WAGTAILADMIN_RICH_TEXT_EDITORS = {
-    'default': {
-        'WIDGET': 'wagtail.admin.rich_text.DraftailRichTextArea',
-        'OPTIONS': {
-            'features': ['h2', 'h3', 'h4', 'bold', 'italic', 'link', 'ol', 'ul', 'hr']
-        }
-    },
-    'full': {
-        'WIDGET': 'wagtail.admin.rich_text.DraftailRichTextArea',
-        'OPTIONS': {
-            'features': ['h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'ol', 'ul',
-                         'link', 'hr', 'code', 'document-link', 'blockquote']
-        }
-    },
-    'minimal': {
-        'WIDGET': 'wagtail.admin.rich_text.DraftailRichTextArea',
-        'OPTIONS': {
-            'features': ['bold', 'italic', 'link']
-        }
-    },
-}
 
 # Allowed file extensions for documents in the document library.
 # This can be omitted to allow all files, but note that this may present a security risk

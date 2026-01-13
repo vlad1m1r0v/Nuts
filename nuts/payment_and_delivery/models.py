@@ -10,6 +10,10 @@ from .blocks import PaymentAndDeliveryInfoSectionBlock
 
 
 class PaymentAndDeliveryPage(Page):
+    parent_page_types = ['home.HomePage']
+    subpage_types = []
+    max_count = 1
+
     image_hero = StreamField(
         [
             ('image_jumbotron', ImageJumbotronBlock()),

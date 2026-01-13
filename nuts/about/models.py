@@ -11,6 +11,10 @@ from core.blocks import VideoJumbotronBlock, ImageJumbotronBlock
 
 
 class AboutPage(Page):
+    parent_page_types = ['home.HomePage']
+    subpage_types = []
+    max_count = 1
+
     description = models.TextField(blank=True)
 
     hero = StreamField(
