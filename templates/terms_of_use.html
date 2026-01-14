@@ -1,7 +1,5 @@
-{% load i18n %}
-{% get_current_language as LANGUAGE_CODE %}
-{% load django_vite %}
-{% load wagtailcore_tags %}
+{% load core_tags i18n django_vite wagtailcore_tags wagtailimages_tags  wagtail_modeltranslation %}
+{% get_current_language as language_code %}
 {% load wagtail_modeltranslation %}
 <!DOCTYPE html>
 <html lang="ru">
@@ -44,6 +42,19 @@
 
 <body class="page">
 
+<div class="mobile-menu d-lg-none">
+    <div class="row">
+        <div class="col-12">
+            <a href="/" class="logo">
+                {% image settings.core.CompanySettings.logo width-100 height-100 %}
+                <span>
+                    {{ settings.core.CompanySettings.company_name|split_words_br }}
+                </span>
+            </a>
+            <i class="nut-icon icons-close-button"></i>
+        </div>
+    </div>
+</div>
 <header class="top-header">
     <div class="top-header__line">
         <div class="container">
@@ -51,19 +62,30 @@
                 <div class="col-lg-4 col-12 d-lg-block d-none">
                     <ul class="line_social">
                         <li>
-                            <a href="#"><i class="nut-icon icons-facebook"></i></a>
+                            <a href="{{settings.core.ContactSettings.facebook_url}}">
+                                <i class="nut-icon icons-facebook"></i>
+                            </a>
                         </li>
                         <li>
-                            <a href="#"><i class="nut-icon icons-instagram"></i></a>
+                            <a href="{{settings.core.ContactSettings.instagram_url}}">
+                                <i class="nut-icon icons-instagram"></i>
+                            </a>
                         </li>
                         <li>
-                            <a href="#"><i class="nut-icon icons-youtube"></i></a>
+                            <a href="{{settings.core.ContactSettings.youtube_url}}">
+                                <i class="nut-icon icons-youtube"></i>
+                            </a>
                         </li>
                     </ul>
                 </div>
+                {% if settings.core.DiscountBannerSettings.is_enabled %}
                 <div class="col-lg-4 col-12 d-lg-flex d-none justify-content-center">
-                    <p>Ваша персональная скидка - 5%</p>
+                    <p>
+                        {{settings.core.DiscountBannerSettings.text}}
+                        -{{settings.core.DiscountBannerSettings.discount_percent}}%
+                    </p>
                 </div>
+                {% endif %}
                 <div class="col-lg-4 col-12">
                     <div class="wrap">
                         <ul class="log_in d-lg-flex d-none">
@@ -75,11 +97,11 @@
                             </li>
                         </ul>
                         <div id="lang-menu" class="lang-menu">
-                            <span class="title">{{ LANGUAGE_CODE|capfirst }}</span>
+                            <span class="title">{{ language_code|capfirst }}</span>
                             <ul>
                                 {% get_available_languages_wmt as languages %}
                                 {% for lang in languages %}
-                                {% if lang != LANGUAGE_CODE %}
+                                {% if lang != language_code %}
                                 <li><a href="{% change_lang lang page %}">{{ lang|capfirst }}</a></li>
                                 {% endif %}
                                 {% endfor %}
@@ -94,13 +116,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-2 d-lg-none">
-                    <div class="mobile-menu-button d-lg-none d-block"><img src="img/menu.svg" alt="alt"></div>
+                    <div class="mobile-menu-button d-lg-none d-block">
+                        <img src="{% vite_asset_url 'src/img/menu.svg' %}" alt="Menu Icon">
+                    </div>
                 </div>
                 <div class="col-xl-4 col-lg-3 col-8 align-self-center">
-
                     <a href="/" class="logo">
-                        <img src="img/logo.png" alt="alt">
-                        <span>ОРЕХ<br> ПРИЧЕРНОМОРЬЯ</span>
+                        {% image settings.core.CompanySettings.logo width-100 height-100 %}
+                        <span>
+                            {{ settings.core.CompanySettings.company_name|split_words_br }}
+                        </span>
                     </a>
                 </div>
                 <div class="col-xl-8 col-lg-9 col-2 align-self-center">
@@ -109,21 +134,35 @@
                             <div class="wrap">
                                 <ul class="logo_social">
                                     <li>
-                                        <a href="#"><i class="nut-icon icons-viber"></i></a>
+                                        <a href="{{settings.core.ContactSettings.viber_url}}">
+                                            <i class="nut-icon icons-viber"></i>
+                                        </a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="nut-icon icons-telegram"></i></a>
+                                        <a href="{{settings.core.ContactSettings.telegram_url}}">
+                                            <i class="nut-icon icons-telegram"></i>
+                                        </a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="nut-icon icons-whatsapp"></i></a>
+                                        <a href="{{settings.core.ContactSettings.whatsapp_url}}">
+                                            <i class="nut-icon icons-whatsapp"></i>
+                                        </a>
                                     </li>
                                 </ul>
                                 <ul class="logo_tel">
                                     <li>
-                                        <a href="tel:+380447505011"><span>+38 (044)</span> 750-50-11</a>
+                                        {% with phone=settings.core.ContactSettings.phone_1 %}
+                                        <a href="tel:{{ phone|clean_phone }}">
+                                            {{ phone|format_phone_html }}
+                                        </a>
+                                        {% endwith %}
                                     </li>
                                     <li>
-                                        <a href="tel:+380977755051"><span>+38 (097)</span> 775-50-51</a>
+                                        {% with phone=settings.core.ContactSettings.phone_2 %}
+                                        <a href="tel:{{ phone|clean_phone }}">
+                                            {{ phone|format_phone_html }}
+                                        </a>
+                                        {% endwith %}
                                     </li>
                                 </ul>
                             </div>
@@ -132,7 +171,11 @@
                             <div class="wraper">
                                 <ul class="logo_tel_mobile d-lg-none d-flex">
                                     <li>
-                                        <a href="tel:+380447505011"><span>+38 (044)</span> 750-50-11</a>
+                                        {% with phone=settings.core.ContactSettings.manager_phone %}
+                                        <a href="tel:{{ phone|clean_phone }}">
+                                            {{ phone|format_phone_html }}
+                                        </a>
+                                        {% endwith %}
                                     </li>
                                 </ul>
                                 <ul class="logo_button_mobile d-lg-none d-flex">
@@ -145,7 +188,7 @@
                                         <a href="#" class="button">Заказать звонок</a>
                                     </li>
                                     <li>
-                                        <p>Ждем Вашего звонка<br> ежедневно с 9 до 18</p>
+                                        <p>{{ settings.core.CompanySettings.header_text|wordwrap:20|linebreaksbr }}</p>
                                     </li>
                                 </ul>
                                 <a href="#" class="logo_number">
@@ -159,9 +202,14 @@
             </div>
         </div>
     </div>
+    {% if settings.core.DiscountBannerSettings.is_enabled %}
     <div class="top-header__discount d-lg-none d-flex">
-        <p>Ваша персональная скидка - 5%</p>
+        <p>
+            {{settings.core.DiscountBannerSettings.text}}
+            -{{settings.core.DiscountBannerSettings.discount_percent}}%
+        </p>
     </div>
+    {% endif %}
     <div class="top-header__menu d-lg-flex d-none">
         <div class="container">
             <div class="row">
@@ -333,46 +381,73 @@
                                 <i class="nut-icon icons-phone"></i>
                                 <ul>
                                     <li>
-                                        <a href="tel:+380447505011"><span>+38 (044)</span> 750-50-11</a>
+                                        {% with phone=settings.core.ContactSettings.phone_1 %}
+                                        <a href="tel:{{ phone|clean_phone }}">
+                                            {{ phone|format_phone_html }}
+                                        </a>
+                                        {% endwith %}
                                     </li>
                                     <li>
-                                        <a href="tel:+380977755051"><span>+38 (097)</span> 775-50-51</a>
+                                        {% with phone=settings.core.ContactSettings.phone_2 %}
+                                        <a href="tel:{{ phone|clean_phone }}">
+                                            {{ phone|format_phone_html }}
+                                        </a>
+                                        {% endwith %}
                                     </li>
                                 </ul>
                             </div>
                             <div class="bottom_social_links">
                                 <ul>
                                     <li>
-                                        <a href="#"><i class="nut-icon icons-viber"></i></a>
+                                        <a href="{{settings.core.ContactSettings.viber_url}}">
+                                            <i class="nut-icon icons-viber"></i>
+                                        </a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="nut-icon icons-telegram"></i></a>
+                                        <a href="{{settings.core.ContactSettings.telegram_url}}">
+                                            <i class="nut-icon icons-telegram"></i>
+                                        </a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="nut-icon icons-whatsapp"></i></a>
+                                        <a href="{{settings.core.ContactSettings.whatsapp_url}}">
+                                            <i class="nut-icon icons-whatsapp"></i>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="bottom_mail">
-                            <a href="mailto:nuts@nbsc.com.ua"><i class="nut-icon icons-post"></i> nuts@nbsc.com.ua</a>
+                            <a href="mailto:{{settings.core.ContactSettings.email}}">
+                                <i class="nut-icon icons-post"></i>
+                                {{settings.core.ContactSettings.email}}
+                            </a>
                         </div>
                         <address class="bottom_address">
                             <ul>
                                 <li>
                                     <b>Офис и отдел продаж</b>
-                                    <p>Украина, г. Одесса,<br> ул. Космонавтов, 32</p>
+                                    <p>
+                                        {{settings.core.ContactSettings.office_and_sales_department_address|wordwrap:30|linebreaksbr}}
+                                    </p>
                                 </li>
                                 <li>
                                     <b>Производство</b>
-                                    <p>Украина, Одесская обл,<br> с. Яськи, ул. Центральная, 232</p>
+                                    <p>
+                                        {{ settings.core.ContactSettings.production_address|wordwrap:30|linebreaksbr }}
+                                    </p>
                                 </li>
                             </ul>
                         </address>
                     </div>
                 </div>
                 <div class="col-lg-7 col-12">
-                    <div id="map"></div>
+                    <div
+                            id="map"
+                            data-longitude="{{settings.core.ContactSettings.map_longitude}}"
+                            data-latitude="{{settings.core.ContactSettings.map_latitude}}"
+                    >
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -384,8 +459,10 @@
                     <div class="col-lg-2">
                         <div class="wraper">
                             <a href="/" class="logo">
-                                <img src="img/logo.png" alt="alt">
-                                <span>ОРЕХ<br> ПРИЧЕРНОМОРЬЯ</span>
+                                {% image settings.core.CompanySettings.logo width-100 height-100 %}
+                                <span>
+                                {{ settings.core.CompanySettings.company_name|split_words_br }}
+                                </span>
                             </a>
                         </div>
                     </div>
@@ -419,21 +496,27 @@
         <div class="container">
             <div class="row align-items-center ">
                 <div class="col-md-4 col-12">
-                    <p>Разработано <a href="#" class="dev"><span>AVADA</span> MEDIA</a></p>
+                    <p>Разработано <a href="https://avada-media.ua/" class="dev"><span>AVADA</span> MEDIA</a></p>
                 </div>
                 <div class="col-md-4 col-12">
-                    <p class="copy_year">Copyright © 2019. Все права защищены</p>
+                    <p class="copy_year">Copyright © {% now "Y" %}. Все права защищены</p>
                 </div>
                 <div class="col-md-4 col-12">
                     <ul class="copy__social">
                         <li>
-                            <a href="#"><i class="nut-icon icons-facebook"></i></a>
+                            <a href="{{settings.core.ContactSettings.facebook_url}}">
+                                <i class="nut-icon icons-facebook"></i>
+                            </a>
                         </li>
                         <li>
-                            <a href="#"><i class="nut-icon icons-instagram"></i></a>
+                            <a href="{{settings.core.ContactSettings.instagram_url}}">
+                                <i class="nut-icon icons-instagram"></i>
+                            </a>
                         </li>
                         <li>
-                            <a href="#"><i class="nut-icon icons-youtube"></i></a>
+                            <a href="{{settings.core.ContactSettings.youtube_url}}">
+                                <i class="nut-icon icons-youtube"></i>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -442,7 +525,7 @@
     </div>
 </footer>
 <!--Leaflet-->
-<script  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin=""></script>
 {% vite_asset 'src/js/vendor/jquery.min.js' type="text/javascript" %}

@@ -4,14 +4,19 @@ jQuery(document).ready(function ($) {
 
     $.Scrollax();
 
-    var map = L.map('map').setView([51.505, -0.09], 13);
+    const mapElement = document.getElementById('map');
+
+    const longitude = parseFloat(mapElement.dataset.longitude);
+    const latitude = parseFloat(mapElement.dataset.latitude);
+
+    const map = L.map('map').setView([longitude, latitude], 13);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-    var marker = L.marker([51.5, -0.09]).addTo(map);
+    const marker = L.marker([longitude, latitude]).addTo(map);
 });
 
 (function ($) {
@@ -21,9 +26,9 @@ jQuery(document).ready(function ($) {
     });
 
     // создаем html под мобильное меню
-    $(".top-header").before(
-        '<div class="mobile-menu d-lg-none"><div class="row"><div class="col-12"><a href="/" class="logo"><img src="img/logo.png" alt="alt"><span>ОРЕХ<br> ПРИЧЕРНОМОРЬЯ</span></a><i class="nut-icon icons-close-button">'
-    );
+    // $(".top-header").before(
+    //     '<div class="mobile-menu d-lg-none"><div class="row"><div class="col-12"><a href="/" class="logo"><img src="img/logo.png" alt="alt"><span>ОРЕХ<br> ПРИЧЕРНОМОРЬЯ</span></a><i class="nut-icon icons-close-button">'
+    // );
 
     // клонируем меню
     $(".menu_top").clone().appendTo(".mobile-menu");
