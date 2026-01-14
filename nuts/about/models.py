@@ -11,6 +11,8 @@ from core.blocks import VideoJumbotronBlock, ImageJumbotronBlock
 
 
 class AboutPage(Page):
+    template = "about.html"
+
     parent_page_types = ['home.HomePage']
     subpage_types = []
     max_count = 1

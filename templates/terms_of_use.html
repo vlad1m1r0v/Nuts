@@ -1,4 +1,4 @@
-{% load core_tags i18n django_vite wagtailcore_tags wagtailimages_tags  wagtail_modeltranslation %}
+{% load core_tags i18n l10n django_vite wagtailcore_tags wagtailimages_tags  wagtail_modeltranslation %}
 {% get_current_language as language_code %}
 {% load wagtail_modeltranslation %}
 <!DOCTYPE html>
@@ -216,24 +216,7 @@
                 <nav class="menu_main menu_top">
                     <div class="mobile-line d-lg-none d-flex"></div>
                     <ul class="menu_main_ul">
-                        <li>
-                            <a href="#">Магазин</a>
-                        </li>
-                        <li>
-                            <a href="#">О производстве</a>
-                        </li>
-                        <li>
-                            <a href="#">Оплата и доставка</a>
-                        </li>
-                        <li>
-                            <a href="#">Оптовым и корпоративным клиентам</a>
-                        </li>
-                        <li>
-                            <a href="#">Новости и статьи</a>
-                        </li>
-                        <li>
-                            <a href="#">Контакты</a>
-                        </li>
+                        {% menu_links %}
                     </ul>
                 </nav>
             </div>
@@ -370,7 +353,7 @@
 </section>
 
 <footer class="footer__bottom footer__bottom_gray">
-    <div class="gray_section">
+    <div class="gray_section" id="contacts">
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 col-12">
@@ -443,8 +426,8 @@
                 <div class="col-lg-7 col-12">
                     <div
                             id="map"
-                            data-longitude="{{settings.core.ContactSettings.map_longitude}}"
-                            data-latitude="{{settings.core.ContactSettings.map_latitude}}"
+                            data-longitude="{{settings.core.ContactSettings.map_longitude|unlocalize}}"
+                            data-latitude="{{settings.core.ContactSettings.map_latitude|unlocalize}}"
                     >
 
                     </div>
@@ -468,24 +451,7 @@
                     </div>
                     <div class="col-lg-10">
                         <ul class="menu_main_ul">
-                            <li>
-                                <a href="#">Магазин</a>
-                            </li>
-                            <li>
-                                <a href="#">О производстве</a>
-                            </li>
-                            <li>
-                                <a href="#">Оплата и доставка</a>
-                            </li>
-                            <li>
-                                <a href="#">Оптовым и корпоративным клиентам</a>
-                            </li>
-                            <li>
-                                <a href="#">Новости и статьи</a>
-                            </li>
-                            <li>
-                                <a href="#">Контакты</a>
-                            </li>
+                            {% menu_links %}
                         </ul>
                     </div>
                 </div>

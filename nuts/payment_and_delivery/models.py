@@ -10,6 +10,8 @@ from .blocks import PaymentAndDeliveryInfoSectionBlock
 
 
 class PaymentAndDeliveryPage(Page):
+    template = "payment_and_delivery.html"
+
     parent_page_types = ['home.HomePage']
     subpage_types = []
     max_count = 1

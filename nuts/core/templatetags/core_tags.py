@@ -2,6 +2,13 @@ import re
 from django import template
 from django.utils.safestring import mark_safe
 
+from shop.models import ShopPage
+from about.models import AboutPage
+from payment_and_delivery.models import PaymentAndDeliveryPage
+from customers.models import CustomersPage
+from news.models import NewsIndexPage
+
+
 register = template.Library()
 
 
@@ -35,3 +42,14 @@ def format_phone_html(value):
         return mark_safe(f"<span>{prefix}</span> {rest}")
 
     return value
+
+@register.inclusion_tag('tags/menu_links.html', takes_context=True)
+def menu_links(context):
+    return {
+        'shop_page': ShopPage.objects.live().first(),
+        'about_page': AboutPage.objects.live().first(),
+        'delivery_page': PaymentAndDeliveryPage.objects.live().first(),
+        'customers_page': CustomersPage.objects.live().first(),
+        'news_page': NewsIndexPage.objects.live().first(),
+        'request': context.get('request')
+    }

@@ -9,6 +9,8 @@ from core.blocks import ImageJumbotronBlock
 from .blocks import CustomerInfoBlock
 
 class CustomersPage(Page):
+    template = "customers.html"
+
     parent_page_types = ['home.HomePage']
     subpage_types = []
     max_count = 1
@@ -28,31 +30,46 @@ class CustomersPage(Page):
     supermarkets = StreamField(
         [
             ('customer_info_block', CustomerInfoBlock()),
-        ]
+        ],
+        use_json_field=True,
+        blank=True,
+        max_num=1,
     )
 
     retail_stores = StreamField(
         [
             ('customer_info_block', CustomerInfoBlock()),
-        ]
+        ],
+        use_json_field=True,
+        blank=True,
+        max_num=1,
     )
 
     horeca = StreamField(
         [
             ('customer_info_block', CustomerInfoBlock()),
-        ]
+        ],
+        use_json_field=True,
+        blank=True,
+        max_num=1,
     )
 
     fitness_clubs = StreamField(
         [
             ('customer_info_block', CustomerInfoBlock()),
-        ]
+        ],
+        use_json_field=True,
+        blank=True,
+        max_num=1,
     )
 
     confectionary_bakeries = StreamField(
         [
             ('customer_info_block', CustomerInfoBlock()),
-        ]
+        ],
+        use_json_field=True,
+        blank=True,
+        max_num=1,
     )
 
     image_hero = StreamField(

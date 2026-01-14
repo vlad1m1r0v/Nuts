@@ -12,6 +12,8 @@ from core.blocks import VideoJumbotronBlock
 
 
 class NewsIndexPage(Page):
+    template = "news.html"
+
     parent_page_types = ['home.HomePage']
     subpage_types = ['news.NewsDetailPage']
     max_count = 1

@@ -8,6 +8,8 @@ from wagtail.images.blocks import ImageChooserBlock
 from core.blocks import ImageJumbotronBlock
 
 class ShopPage(Page):
+    template = "shop.html"
+
     parent_page_types = ['home.HomePage']
     subpage_types = []
     max_count = 1
