@@ -1,0 +1,91 @@
+{% load django_vite core_tags wagtailimages_tags %}
+<div class="top-header__logo">
+    <div class="container">
+        <div class="row">
+            <div class="col-2 d-lg-none">
+                <div class="mobile-menu-button d-lg-none d-block">
+                    <img src="{% vite_asset_url 'src/img/menu.svg' %}" alt="Menu Icon">
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-3 col-8 align-self-center">
+                <a href="/" class="logo">
+                    {% image settings.core.CompanySettings.logo width-100 height-100 %}
+                    <span>
+                            {{ settings.core.CompanySettings.company_name|split_words_br }}
+                    </span>
+                </a>
+            </div>
+            <div class="col-xl-8 col-lg-9 col-2 align-self-center">
+                <div class="row">
+                    <div class="col-lg-6 col-12 align-self-center d-lg-block d-none">
+                        <div class="wrap">
+                            <ul class="logo_social">
+                                <li>
+                                    <a href="{{settings.core.ContactSettings.viber_url}}">
+                                        <i class="nut-icon icons-viber"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{settings.core.ContactSettings.telegram_url}}">
+                                        <i class="nut-icon icons-telegram"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{settings.core.ContactSettings.whatsapp_url}}">
+                                        <i class="nut-icon icons-whatsapp"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="logo_tel">
+                                <li>
+                                    {% with phone=settings.core.ContactSettings.phone_1 %}
+                                    <a href="tel:{{ phone|clean_phone }}">
+                                        {{ phone|format_phone_html }}
+                                    </a>
+                                    {% endwith %}
+                                </li>
+                                <li>
+                                    {% with phone=settings.core.ContactSettings.phone_2 %}
+                                    <a href="tel:{{ phone|clean_phone }}">
+                                        {{ phone|format_phone_html }}
+                                    </a>
+                                    {% endwith %}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12 align-self-center">
+                        <div class="wraper">
+                            <ul class="logo_tel_mobile d-lg-none d-flex">
+                                <li>
+                                    {% with phone=settings.core.ContactSettings.manager_phone %}
+                                    <a href="tel:{{ phone|clean_phone }}">
+                                        {{ phone|format_phone_html }}
+                                    </a>
+                                    {% endwith %}
+                                </li>
+                            </ul>
+                            <ul class="logo_button_mobile d-lg-none d-flex">
+                                <li>
+                                    <a href="#" class="button">Заказать звонок</a>
+                                </li>
+                            </ul>
+                            <ul class="logo_button d-lg-flex d-none">
+                                <li>
+                                    <a href="#" class="button">Заказать звонок</a>
+                                </li>
+                                <li>
+                                    <p>{{ settings.core.CompanySettings.header_text|wordwrap:20|linebreaksbr }}</p>
+                                </li>
+                            </ul>
+                            <a href="#" class="logo_number">
+                                <i class="nut-icon icons-number"></i>
+                                <span class="quantity">0</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

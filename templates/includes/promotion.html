@@ -1,0 +1,52 @@
+{% load core_tags %}
+<div class="top-header__line">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-4 col-12 d-lg-block d-none">
+                <ul class="line_social">
+                    <li>
+                        <a href="{{settings.core.ContactSettings.facebook_url}}">
+                            <i class="nut-icon icons-facebook"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{settings.core.ContactSettings.instagram_url}}">
+                            <i class="nut-icon icons-instagram"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{settings.core.ContactSettings.youtube_url}}">
+                            <i class="nut-icon icons-youtube"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            {% if settings.core.DiscountBannerSettings.is_enabled %}
+            <div class="col-lg-4 col-12 d-lg-flex d-none justify-content-center">
+                <p>
+                    {{settings.core.DiscountBannerSettings.text}}
+                    -{{settings.core.DiscountBannerSettings.discount_percent}}%
+                </p>
+            </div>
+            {% endif %}
+            <div class="col-lg-4 col-12">
+                <div class="wrap">
+                    <ul class="log_in d-lg-flex d-none">
+                        <li>
+                            <a href="#"><i class="nut-icon icons-man-user"></i><span>Вход</span></a>
+                        </li>
+                        <li>
+                            <a href="#"><span>Регистрация</span></a>
+                        </li>
+                    </ul>
+                    <div id="lang-menu" class="lang-menu">
+                        <span class="title">{{ language_code|capfirst }}</span>
+                        <ul>
+                            {% language_switcher %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

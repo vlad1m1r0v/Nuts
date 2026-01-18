@@ -1,0 +1,8 @@
+{% if settings.core.DiscountBannerSettings.is_enabled %}
+<div class="top-header__discount d-lg-none d-flex">
+    <p>
+        {{settings.core.DiscountBannerSettings.text}}
+        -{{settings.core.DiscountBannerSettings.discount_percent}}%
+    </p>
+</div>
+{% endif %}

@@ -1,0 +1,83 @@
+{% load core_tags l10n %}
+<div class="gray_section" id="contacts">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-12">
+                <div class="wrap">
+                    <h2>Контакты</h2>
+                    <div class="bottom_social">
+                        <div class="bottom_social_tel">
+                            <i class="nut-icon icons-phone"></i>
+                            <ul>
+                                <li>
+                                    {% with phone=settings.core.ContactSettings.phone_1 %}
+                                    <a href="tel:{{ phone|clean_phone }}">
+                                        {{ phone|format_phone_html }}
+                                    </a>
+                                    {% endwith %}
+                                </li>
+                                <li>
+                                    {% with phone=settings.core.ContactSettings.phone_2 %}
+                                    <a href="tel:{{ phone|clean_phone }}">
+                                        {{ phone|format_phone_html }}
+                                    </a>
+                                    {% endwith %}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bottom_social_links">
+                            <ul>
+                                <li>
+                                    <a href="{{settings.core.ContactSettings.viber_url}}">
+                                        <i class="nut-icon icons-viber"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{settings.core.ContactSettings.telegram_url}}">
+                                        <i class="nut-icon icons-telegram"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{settings.core.ContactSettings.whatsapp_url}}">
+                                        <i class="nut-icon icons-whatsapp"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bottom_mail">
+                        <a href="mailto:{{settings.core.ContactSettings.email}}">
+                            <i class="nut-icon icons-post"></i>
+                            {{settings.core.ContactSettings.email}}
+                        </a>
+                    </div>
+                    <address class="bottom_address">
+                        <ul>
+                            <li>
+                                <b>Офис и отдел продаж</b>
+                                <p>
+                                    {{settings.core.ContactSettings.office_and_sales_department_address|wordwrap:30|linebreaksbr}}
+                                </p>
+                            </li>
+                            <li>
+                                <b>Производство</b>
+                                <p>
+                                    {{ settings.core.ContactSettings.production_address|wordwrap:30|linebreaksbr }}
+                                </p>
+                            </li>
+                        </ul>
+                    </address>
+                </div>
+            </div>
+            <div class="col-lg-7 col-12">
+                <div
+                        id="map"
+                        data-longitude="{{settings.core.ContactSettings.map_longitude|unlocalize}}"
+                        data-latitude="{{settings.core.ContactSettings.map_latitude|unlocalize}}"
+                >
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

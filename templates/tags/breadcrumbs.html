@@ -1,0 +1,15 @@
+{% if ancestors %}
+<div class="breadcrumbs">
+    <ul>
+        {% for page in ancestors %}
+        <li>
+            {% if forloop.last %}
+            {{ page.title }}
+            {% else %}
+            <a href="{{ page.url }}">{{ page.title }}</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}

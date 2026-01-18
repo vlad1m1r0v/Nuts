@@ -1,0 +1,13 @@
+{% load i18n wagtail_modeltranslation %}
+{% get_available_languages_wmt as languages %}
+{% get_current_language as language_code %}
+
+{% for language in languages %}
+{% if language != language_code %}
+<li>
+    <a href="{% change_lang language page %}{% if query_parameters %}?{{ query_parameters }}{% endif %}">
+        {{ language|capfirst }}
+    </a>
+</li>
+{% endif %}
+{% endfor %}

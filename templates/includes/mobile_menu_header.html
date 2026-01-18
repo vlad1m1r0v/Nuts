@@ -1,0 +1,14 @@
+{% load core_tags wagtailimages_tags %}
+<div class="mobile-menu d-lg-none">
+    <div class="row">
+        <div class="col-12">
+            <a href="/" class="logo">
+                {% image settings.core.CompanySettings.logo width-100 height-100 %}
+                <span>
+                    {{ settings.core.CompanySettings.company_name|split_words_br }}
+                </span>
+            </a>
+            <i class="nut-icon icons-close-button"></i>
+        </div>
+    </div>
+</div>
