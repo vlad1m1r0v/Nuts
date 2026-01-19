@@ -1,10 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{page.title}}</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags core_tags %}
+{% block content %}
+<!--Image Hero-->
+{% with hero=page.image_hero.0 %}
+{% if hero.block_type == 'image_jumbotron' %}
+{% image hero.value.background_image original as bg_image %}
+<section class="first-section overlay" style="background-image: url('{{ bg_image.url }}')">
+    <div class="container">
+        {% breadcrumbs %}
+        <div class="row align-items-center justify-content-center">
+            <h1>{{ hero.value.title}}</h1>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endwith %}
+<!--Tabs-->
+<section class="payment">
+    <div class="tabs">
+        <div class="tabs__wrap">
+            <div class="container">
+                <div class="row">
+                    <ul class="tabs__caption">
+                        <li class="active"><i class="nut-icon icons-vector12"></i> <span>Оплата заказа</span></li>
+                        <li><i class="nut-icon icons-lorry"></i> <span>Доставка партии</span></li>
+                        <li><i class="nut-icon icons-package"></i> <span>Возврат товара</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!--Payment-->
+                    <div class="tabs__content active">
+                        <div class="row">
+                            {% with payment_block=page.payment_info.0 %}
+                            {% if payment_block.block_type == 'info_section_block' %}
+                            {% image payment_block.value.image original as img %}
+                            <div class="col-md-5 col-12 align-self-center">
+                                <div class="tabs__content_block">
+                                    {{payment_block.value.description|richtext}}
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-12">
+                                <img src="{{img.url}}" class="tabs__content_img" alt="Payment Block Picture">
+                            </div>
+                            {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                    <!--Delivery-->
+                    <div class="tabs__content">
+                        <div class="row">
+                            {% with delivery_block=page.delivery_info.0 %}
+                            {% if delivery_block.block_type == 'info_section_block' %}
+                            {% image delivery_block.value.image original as img %}
+                            <div class="col-md-5 col-12 align-self-center">
+                                <div class="tabs__content_block">
+                                    {{delivery_block.value.description|richtext}}
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-12">
+                                <img src="{{img.url}}" class="tabs__content_img" alt="Delivery Block Picture">
+                            </div>
+                            {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                    <!--Return-->
+                    <div class="tabs__content">
+                        <div class="row">
+                            {% with return_block=page.return_info.0 %}
+                            {% if return_block.block_type == 'info_section_block' %}
+                            {% image return_block.value.image original as img %}
+                            <div class="col-md-5 col-12 align-self-center">
+                                <div class="tabs__content_block">
+                                    {{return_block.value.description|richtext}}
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-12">
+                                <img src="{{img.url}}" class="tabs__content_img" alt="Return Block Picture">
+                            </div>
+                            {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Statistics-->
+{% include "includes/statistics.html" %}
+<!--Video Hero-->
+{% with block=page.video_hero.0 %}
+{% if block.block_type == 'video_jumbotron' %}
+<div class="parallax" data-scrollax-parent="true">
+    <section class="goal overlay cover" data-scrollax="properties: { translateY: '30%' }">
+        {% if block.value.video %}
+        <video autoplay muted loop playsinline class="bg-video-hero">
+            <source src="{{ block.value.video.url }}" type="video/mp4">
+        </video>
+        {% endif %}
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <a href="{{ block.value.video.url }}" data-scrollax="properties: { 'translateY': '5%', 'opacity': 1 }">
+                    <h2>{{ block.value.title }}</h2>
+                    <span><i class="nut-icon icons-play-icon"></i></span>
+                    <div class="timer__descr">
+                        <i>{{ block.value.text_below_play_button|richtext }}</i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+{% endif %}
+{% endwith %}
+{% endblock %}

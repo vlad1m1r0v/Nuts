@@ -1,11 +1,11 @@
 from modeltranslation.translator import TranslationOptions
 from modeltranslation.decorators import register
 
-from .models import ProductCommonSettings
+from .models import ProductPage
 
 
-@register(ProductCommonSettings)
-class ProductCommonSettingsTR(TranslationOptions):
+@register(ProductPage)
+class ProductPageTR(TranslationOptions):
     fields = (
         "storage_conditions",
         "description_info",

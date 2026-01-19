@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     "customers",
     "shop",
     "products",
-    "terms_of_use",
+    "auth",
     "thanks",
     "wagtail.contrib.forms",
     "wagtail.contrib.settings",

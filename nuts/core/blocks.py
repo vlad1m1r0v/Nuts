@@ -15,7 +15,7 @@ class ImageJumbotronBlock(StructBlock):
     background_image = ImageChooserBlock()
     title = CharBlock(max_length=100)
     text = RichTextBlock(required=False)
-    show_top_image = BooleanBlock(default=True)
+    show_top_image = BooleanBlock(default=True, required=False)
 
     class Meta:
         icon = "image"

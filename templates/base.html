@@ -1,36 +1,79 @@
-{% load static wagtailcore_tags wagtailuserbar %}
-
+{% load core_tags i18n l10n django_vite wagtailcore_tags wagtailimages_tags %}
+{% get_current_language as language_code %}
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>
-            {% block title %}
-            {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
-            {% endblock %}
-            {% block title_suffix %}
-            {% wagtail_site as current_site %}
-            {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
-            {% endblock %}
-        </title>
-        {% if page.search_description %}
-        <meta name="description" content="{{ page.search_description }}" />
-        {% endif %}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{page.title}}</title>
+    <meta name="description" content="{{page.seo_title}}">
 
-        {# Force all links in the live preview panel to be opened in a new tab #}
-        {% if request.in_preview_panel %}
-        <base target="_blank">
-        {% endif %}
+    <!-- Responsive -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-        {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/nuts.css' %}">
+    <meta name="theme-color" content="#337D5A">
 
-        {% block extra_css %}
-        {# Override this in templates to add extra stylesheets #}
-        {% endblock %}
-    </head>
+    <link rel="shortcut icon" href="img/icon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="128x128" href="img/apple.png">
 
-    <body>
-    </body>
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:image:type" content="img/image.jpg">
+    <meta property="og:image:width" content="500">
+    <meta property="og:image:height" content="500">
+    <meta property="og:title" content="{{page.seo_title}}">
+    <meta property="og:description" content="{{page.search_description}}">
+
+    <!-- Touch -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+
+    {% vite_hmr_client %}
+    {% vite_asset 'src/js/styles.js' %}
+    <!--Leaflet-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+</head>
+
+<body class="page">
+
+{% include "includes/mobile_menu_header.html" %}
+<header class="top-header">
+    {% include "includes/promotion.html" %}
+    {% include "includes/header.html" %}
+    {% include "includes/mobile_promotion.html" %}
+    {% include "includes/header_menu.html" %}
+</header>
+
+{% include "includes/cart.html" %}
+
+{% block content %}
+{% endblock %}
+
+<footer class="footer__bottom footer__bottom_gray">
+    {% include "includes/contacts.html" %}
+    {% include "includes/bottom_menu.html" %}
+    {% include "includes/footer.html" %}
+</footer>
+<!--Leaflet-->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+{% vite_asset 'src/js/vendor/jquery.min.js' type="text/javascript" %}
+{% vite_asset 'src/js/vendor/jquery-ui-1.10.4.custom.min.js' type="text/javascript" %}
+{% vite_asset 'src/js/vendor/jquery.countTo.js' type="text/javascript" %}
+{% vite_asset 'src/js/vendor/swiper.min.js' type="text/javascript" %}
+{% vite_asset 'src/js/vendor/simple-lightbox.min.js' type="text/javascript" %}
+{% vite_asset 'src/js/vendor/scrollax.min.js' type="text/javascript" %}
+{% vite_asset 'src/js/vendor/picturefill.min.js' type="text/javascript" %}
+{% vite_asset 'src/js/vendor/stickyfill.min.js' type="text/javascript" %}
+{% vite_asset 'src/js/vendor/jquery.mCustomScrollbar.js' type="text/javascript" %}
+{% vite_asset 'src/js/vendor/jquery.basictable.min.js' type="text/javascript" %}
+{% vite_asset 'src/js/vendor/tooltipster.bundle.min.js' type="text/javascript" %}
+{% vite_asset 'src/js/common.js' type="text/javascript" %}
+</body>
 </html>
