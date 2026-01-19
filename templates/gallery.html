@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags core_tags %}
+{% block content %}
+<!--Video Hero-->
+{% with block=page.hero.0 %}
+{% if block.block_type == 'video_jumbotron' %}
+<section class="first-section overlay">
+    {% if block.value.video %}
+    <video autoplay muted loop playsinline class="bg-video-hero">
+        <source src="{{ block.value.video.url }}" type="video/mp4">
+    </video>
+    {% endif %}
+    <div class="container">
+        {% breadcrumbs %}
+        <div class="row align-items-center justify-content-center">
+            <a href="{{ block.value.video.url }}" target="_blank">
+                <h1>{{ block.value.title }}</h1>
+                {{ block.value.text_above_play_button|richtext }}
+                <span><i class="nut-icon icons-play-icon"></i></span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endwith %}
+<!--Content-->
+<section class="benefit gallery_section">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12">
+                <!--Title And Subtitle-->
+                <h2>{{page.title}}</h2>
+                <p>{{page.subtitle}}</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <!--Blocks-->
+            {% for block in page.content %}
+            <!--Video-->
+            {% if block.block_type == 'video' %}
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="wrap item_small">
+                    <a href="{{ block.value.url }}" target="_blank">
+                    <span class="benefit__item item_small benefit__item_video overlay">
+                    {% if block.value %}
+                    <video autoplay muted loop playsinline class="bg-video">
+                        <source src="{{ block.value.url }}" type="video/mp4">
+                    </video>
+                    {% endif %}
+                    </span>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+            <!--Image With Text-->
+            {% if block.block_type == 'image_with_text' %}
+            {% image block.value.image original as img %}
+            <div class="col-md-6 col-12">
+                <div class="wrap">
+                    <div class="benefit__item " style="background-image: url('{{img.url}}')">
+                    </div>
+                    <div class="benefit__item item_hover overlay_green overlay_green_bg">
+                        <h3>{{block.value.title}}</h3>
+                        {{block.value.description|richtext}}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!--Video Jumbotron-->
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="wrapper">
+                <a href="#" class="button button_transparent">Посмотреть еще</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

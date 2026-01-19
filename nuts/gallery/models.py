@@ -12,6 +12,7 @@ from .blocks import GalleryImageWithTextBlock
 
 
 class GalleryPage(Page):
+    template = "gallery.html"
     parent_page_types = ['home.HomePage']
     subpage_types = []
     max_count = 1

@@ -12,7 +12,7 @@
 html
 	overflow-x: hidden
 
-body 
+body
 	position: relative
 	width: 100%
 	background: $default-bg
@@ -24,27 +24,27 @@ body
 	line-height: auto
 	overflow-x: hidden
 
-img 
+img
 	border: 0
 	transition: all 0.3s
 
-a 
+a
 	color: $text
 	transition: all 0.3s
 	cursor: pointer
 
 a:focus,
-a:hover 
+a:hover
 	outline: none
 	text-decoration: none
-	color: $accent  
+	color: $accent
 
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 
+h6
 	letter-spacing: 0.01em
 
 h1
@@ -80,7 +80,7 @@ input[type="url"],
 input[type="search"],
 input[type="tel"],
 input[type="color"],
-.uneditable-input 
+.uneditable-input
 	border: 0.5px solid rgba(0, 0, 0, 0.15)
 	box-shadow: none
 	outline: 0 none
@@ -128,7 +128,7 @@ input[type="url"]:focus,
 input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
-.uneditable-input:focus 
+.uneditable-input:focus
 	border-color: $accent
 	box-shadow: none
 	outline: 0 none
@@ -149,7 +149,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 	margin-left: .2em
 	-webkit-font-smoothing: antialiased
 	-moz-osx-font-smoothing: grayscale
- 
+
 .icons-arrow-down:before
 	content: '\e801'
 .icons-bank-card:before
@@ -289,7 +289,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 		margin: 0 !important
 		position: absolute
 		top: 0
-		left: 20px 
+		left: 20px
 		color: #fff
 		// font-family: $m-font
 		font-style: normal	!important
@@ -324,10 +324,10 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 			background: #E1843E
 
 .button
-	height: auto	
-	min-width: 148px	
+	height: auto
+	min-width: 148px
 	max-width: 100%
-	border: 1px solid $accent		
+	border: 1px solid $accent
 	background-color: $accent
 	color: #fff
 	padding: 13px 22px
@@ -342,15 +342,15 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 	&:hover,
 	&:focus
 		color: $accent
-		border: 1px solid $accent		
+		border: 1px solid $accent
 		background-color: #fff
 
 .button_transparent
 	height: 52px
 	max-height: 100%
-	min-width: 148px	
+	min-width: 148px
 	max-width: 100%
-	border: 1px solid $accent		
+	border: 1px solid $accent
 	background-color: transparent
 	color: $accent
 	padding: 13px 22px
@@ -365,7 +365,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 	&:hover,
 	&:focus
 		color: #fff
-		border: 1px solid $accent		
+		border: 1px solid $accent
 		background-color: $accent
 
 .pr
@@ -578,8 +578,8 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 							a
 								i
 									padding-right: 5px
-				.lang-menu 
-					ul 
+				.lang-menu
+					ul
 						margin: 0
 						padding: 0
 						width: auto
@@ -587,7 +587,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 						display: none
 						border: 1px solid rgba(0, 0, 0, 0.08)
 						z-index: 99
-						li 
+						li
 							background: #fff
 							transition: all 0.3s
 							position: relative
@@ -599,12 +599,12 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 								background: rgba(0, 0, 0, 0.08)
 								left: 5px
 								z-index: 99
-							&:hover 
+							&:hover
 								background: #337D5A
 								color: #fff
 								a
 									color: #fff
-							a 
+							a
 								display: block
 								width: 100%
 								padding: 15px 15px
@@ -618,7 +618,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 							&:last-child
 								&:after
 									display: none
-					.title 
+					.title
 						display: inline-block
 						font-style: normal
 						font-weight: 500
@@ -631,19 +631,19 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 						position: relative
 						padding: 10px 15px
 						border: 1.5px solid rgba(245, 245, 245, 0.5)
-						&:after 
+						&:after
 							content: "\e825"
 							font-family: "nut"
 							display: block
-							font-size: 4px	
+							font-size: 4px
 							position: absolute
 							color: #93B474
 							top: 12px
 							right: 5px
-				.lang-menu.open 
+				.lang-menu.open
 					.title
 						border: 1.5px solid #337D5A
-						&:after 
+						&:after
 							transform: rotate(180deg)
 					ul
 						display: block
@@ -863,7 +863,22 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 	min-height: 600px
 	background-size: cover
 	background-repeat: no-repeat
-	background-position: center center 
+	background-position: center center
+	overflow: hidden
+
+	.bg-video-hero
+		position: absolute
+		top: 50%
+		left: 50%
+		min-width: 100%
+		min-height: 100%
+		width: auto
+		height: auto
+		z-index: 0
+		transform: translate(-50%, -50%)
+		object-fit: cover
+		pointer-events: none
+
 	.row
 		min-height: 600px
 		.wrap
@@ -954,7 +969,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 		h1
 			font-size: 250px
 			line-height: 250px
-			margin: 10px	
+			margin: 10px
 			text-transform: uppercase
 			background: url('../img/e0678ef1.jpg')
 			background-repeat: no-repeat
@@ -1110,7 +1125,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 		&_weight
 			display: flex
 			justify-content: space-between
-			padding: 10px 30px 20px 20px 
+			padding: 10px 30px 20px 20px
 			border-bottom: 1px solid rgba(0, 0, 0, 0.08)
 			.weight_item
 				display: flex
@@ -1200,7 +1215,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 			align-items: center
 			p
 				font-style: normal
-				font-weight: bold				
+				font-weight: bold
 				font-size: 17px
 				line-height: 20px
 				letter-spacing: 0.01em
@@ -1221,7 +1236,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 				padding: 0 8px
 			i
 				font-size: 12.5px
-				color: #8A8A8A 
+				color: #8A8A8A
 			&:hover
 				cursor: pointer
 		.production__filter_button
@@ -1329,7 +1344,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 		min-height: 525px
 		background-size: cover
 		background-repeat: no-repeat
-		background-position: 100% 
+		background-position: 100%
 		display: flex
 		justify-content: center
 		align-items: center
@@ -1371,7 +1386,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 		opacity: 0
 		top: 0
 	&__item.overlay
-		z-index: 3 
+		z-index: 3
 		opacity: 1
 		transition: .5s ease
 		// backface-visibility: hidden
@@ -1421,7 +1436,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 		min-height: 556px
 		background-size: cover
 		background-repeat: no-repeat
-		background-position: 100% 
+		background-position: 100%
 		display: flex
 		justify-content: flex-start
 		align-items: flex-start
@@ -1521,7 +1536,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 		opacity: 0
 		top: 0
 	.benefit-news__item.overlay
-		z-index: 3 
+		z-index: 3
 		opacity: 1
 		transition: .5s ease
 		// backface-visibility: hidden
@@ -1561,7 +1576,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 			object-fit: cover
 			object-position: 50% 50%
 		.wraper
-			padding: 0 
+			padding: 0
 			.item_data
 				font-family: $m-font
 				font-style: normal
@@ -1629,7 +1644,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 		min-height: 556px
 		background-size: cover
 		background-repeat: no-repeat
-		background-position: 100% 
+		background-position: 100%
 		display: flex
 		justify-content: flex-start
 		align-items: flex-start
@@ -1640,6 +1655,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 		display: flex
 		justify-content: center
 		align-items: center
+
 		h3
 			margin-bottom: 20px
 		p
@@ -1675,6 +1691,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 			content: '\e81b'
 			font-family: "nut"
 			position: absolute
+			overflow: hidden
 			top: 50%
 			left: 50%
 			margin-top: -31.5px
@@ -1693,6 +1710,22 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 			&:before
 				background: $accent
 				border: 2px solid $accent
+
+		.bg-video
+			position: absolute
+			top: 50%
+			left: 50%
+			transform: translate(-50%, -50%)
+			min-width: 100%
+			min-height: 100%
+			width: auto
+			height: auto
+			object-fit: cover
+			z-index: 0
+			pointer-events: none
+
+
+
 	.benefit__item
 		i
 			z-index: 1
@@ -1728,13 +1761,13 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 		opacity: 0
 		top: 0
 	.benefit__item.overlay
-		z-index: 3 
+		z-index: 3
 		opacity: 1
 		transition: .5s ease
 		// backface-visibility: hidden
 		position: relative
 
-.goal	
+.goal
 	position: relative
 	min-height: 740px
 	background-size: cover
@@ -2148,7 +2181,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 					content: '\e82b'
 					position: absolute
 					top: -5px
-					left: -27px	
+					left: -27px
 					font-size: 14px
 					font-family: "nut"
 					color: $accent
@@ -2158,7 +2191,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 						content: '\e82c'
 						position: absolute
 						top: -4px
-						left: -22px	
+						left: -22px
 						font-size: 14px
 						font-family: "nut"
 						color: $accent
@@ -2448,7 +2481,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 	transition: all 0.3s
 
 
-.select-styled 
+.select-styled
 	position: absolute
 	top: 0
 	right: 0
@@ -2473,7 +2506,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 		color: #93B474
 		top: 14px
 		right: 16px
-	&:hover 
+	&:hover
 		background: rgba(51, 125, 90, 0.1)
 
 .select-styled:active, .select-styled.active
@@ -2483,7 +2516,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 .select-styled:active:after, .select-styled.active:after
 	transform: rotate(180deg)
 
-.select-options 
+.select-options
 	display: none
 	position: absolute
 	top: 100%
@@ -2512,7 +2545,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 	&:after
 		content: ''
 		position: absolute
-		width: calc(100% - 20px) 
+		width: calc(100% - 20px)
 		height: 1px
 		background: rgba(0, 0, 0, 0.08)
 		left: 0
@@ -2596,7 +2629,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 		display: none
 		margin-top: 60px
 	.tabs__content.active
-		display: block	
+		display: block
 	.tabs__content_block
 		margin-bottom: 20px
 		.tabs__content_title
@@ -2696,7 +2729,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 					display: inline-block
 					width: 1em
 					margin-left: -1em
-	
+
 .no-bg
 	min-height: 100% !important
 	.breadcrumbs
@@ -2710,7 +2743,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 			color: #8A8A8A
 
 .sticky
-	&:before, &:after 
+	&:before, &:after
 		content: ''
 		display: table
 
@@ -2795,7 +2828,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 			line-height: 26px
 			text-align: center
 			letter-spacing: 0.01em
-			margin: 0 30px 
+			margin: 0 30px
 			padding: 30px 0 20px
 			background: #FCFCFC
 		ul
@@ -2893,11 +2926,11 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 					color: #fff
 					i
 						font-size: 12px
-				&:first-child 
+				&:first-child
 					a
 						padding-left: 0
-						
-				
+
+
 
 // #sidebar
 // 	will-change: min-height
@@ -3028,7 +3061,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 		&_weight
 			display: flex
 			justify-content: space-between
-			padding: 10px 30px 20px 20px 
+			padding: 10px 30px 20px 20px
 			border-bottom: 1px solid rgba(0, 0, 0, 0.08)
 			.weight_item
 				display: flex
@@ -3469,7 +3502,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 	span
 		vertical-align: middle
 
-.inputfile 
+.inputfile
 	width: 0.1px
 	height: 0.1px
 	opacity: 0
@@ -3477,7 +3510,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 	position: absolute
 	z-index: -1
 
-.inputfile + label 
+.inputfile + label
 	font-size: 1.25em
 	font-weight: 700
 	color: white
@@ -3738,7 +3771,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 					letter-spacing: 0.01em
 					margin: 0
 				a
-					font-family: $m-font	
+					font-family: $m-font
 					font-style: normal
 					font-weight: 600
 					font-size: 14px
@@ -3901,7 +3934,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 			margin: 0 !important
 			position: absolute
 			top: 0
-			left: 16px 
+			left: 16px
 			color: #fff
 			// font-family: $m-font
 			font-family: Raleway
@@ -3952,13 +3985,13 @@ table
 			font-style: normal
 			font-weight: bold
 			font-size: 16px
-			line-height: 20px	
+			line-height: 20px
 			padding: 30px
 			position: relative
 			text-align: center
 			span
 				position: relative
-				&:after 
+				&:after
 					content: "\e825"
 					font-family: "nut"
 					display: block
@@ -4256,15 +4289,15 @@ button
 	min-height: 500px
 	background-size: cover
 	background-repeat: no-repeat
-	background-position: center center 
+	background-position: center center
 	.row
 		min-height: 500px
 		.wrap
 			z-index: 99
-			h1	
+			h1
 				font-weight: 800
 				font-size: 45px
-				line-height: 32px	
+				line-height: 32px
 				margin-bottom: 30px
 				text-align: center
 			p
