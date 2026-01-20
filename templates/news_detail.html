@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags core_tags %}
+{% block content %}
+<!--Breadcrumbs-->
+<section class="first-section no-bg">
+    <div class="container">
+        {% breadcrumbs %}
+    </div>
+</section>
+<div class="single-news">
+    <div class="container">
+        <div class="row">
+            <!--Title And Publication Date-->
+            <div class="col-lg-5">
+                <h1>{{page.title}}</h1>
+                <div class="single-news__data">
+                    {{page.publication_date|date:"d.m.Y"}}
+                </div>
+            </div>
+            <div class="col-lg-7"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-9 col-md-8 col-12">
+                <main class="main">
+                    <!--Main Media-->
+                    {% with block=page.main_media.0 %}
+                    <!--If Image-->
+                    {% if block.block_type == 'image' %}
+                    {% image block.value original as img %}
+                    <img src="{{img.url}}" alt="News Main Media Image">
+                    {% endif %}
+                    <!--If Video-->
+                    {% if block.block_type == 'video' %}
+                    <span class="news-video__container">
+                        <a href="{{ block.value.url }}" target="_blank">
+                            <video autoplay muted loop playsinline class="bg-video">
+                                <source src="{{ block.value.url }}" type="video/mp4">
+                            </video>
+                        </a>
+                    </span>
+                    {% endif %}
+                    {% endwith %}
+                    <!--News Content-->
+                    {% for block in page.body %}
+                    {% if block.block_type == "paragraph" %}
+                    {{ block.value|richtext }}
+                    {% endif %}
+                    {% if block.block_type == "image" %}
+                    {% image block.value original as img %}
+                    <img src="{{img.url}}" alt="News Main Media Image">
+                    {% endif %}
+                    {% endfor %}
+                </main>
+            </div>
+            <!--Latest publications-->
+            <div class="col-lg-3 col-md-4 d-none d-md-block col-12">
+                <aside class="aside">
+                    <div class="sidebar__inner sticky">
+                        <div class="aside__title">
+                            Последние публикации
+                        </div>
+                        <ul>
+                            {% for item in latest_news %}
+                            <li>
+                                <div class="aside__item">
+                                    <div class="aside__item_img">
+                                        {% with media=item.main_media.0 %}
+                                        {% if media.block_type == 'video' %}
+                                        <span class="news-video__container">
+                                            <a href="{% pageurl item %}">
+                                                <video autoplay muted loop playsinline class="bg-video">
+                                                    <source src="{{ media.value.url }}" type="video/mp4">
+                                                </video>
+                                            </a>
+                                        </span>
+                                        {% elif media.block_type == 'image' %}
+                                        {% image media.value original as side_img %}
+                                        <img src="{{ side_img.url }}" alt="{{ item.title }}">
+                                        {% endif %}
+                                        {% endwith %}
+                                    </div>
+                                    <div class="aside__item_data">
+                                        {{ item.publication_date|date:"d.m.Y" }}
+                                    </div>
+                                    <div class="aside__item_title">
+                                        {{ item.title }}
+                                    </div>
+                                    <a href="{% pageurl item %}">
+                                        Читать <i class="nut-icon icons-read-more"></i>
+                                    </a>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <!--Networks-->
+                        <div class="banner">
+                            <div class="banner__title">
+                                {{ settings.core.CompanySettings.company_name }}
+                            </div>
+                            <div class="banner__descr">
+                                Присоединяйтесь к нам в соц. сетях
+                            </div>
+                            <ul class="banner__social">
+                                <li>
+                                    <a href="{{ settings.core.ContactSettings.facebook_url }}">
+                                        <i class="nut-icon icons-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ settings.core.ContactSettings.instagram_url }}">
+                                        <i class="nut-icon icons-instagram"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ settings.core.ContactSettings.youtube_url }}">
+                                        <i class="nut-icon icons-youtube"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

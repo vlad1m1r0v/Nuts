@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import strip_tags
 
 from wagtail.blocks import RichTextBlock
 from wagtail.images.blocks import ImageChooserBlock
@@ -12,7 +13,7 @@ from core.blocks import VideoJumbotronBlock
 
 
 class NewsIndexPage(Page):
-    template = "news.html"
+    template = "news_index.html"
 
     parent_page_types = ['home.HomePage']
     subpage_types = ['news.NewsDetailPage']
@@ -38,6 +39,8 @@ class NewsIndexPage(Page):
 
 
 class NewsDetailPage(Page):
+    template = "news_detail.html"
+
     parent_page_types = ['news.NewsIndexPage']
 
     publication_date = models.DateField()
@@ -53,7 +56,7 @@ class NewsDetailPage(Page):
 
     body = StreamField(
         [
-            ('paragraph', RichTextBlock(features=['bold', 'italic', 'link'])),
+            ('paragraph', RichTextBlock()),
             ('image', ImageChooserBlock()),
         ],
         use_json_field=True
@@ -64,6 +67,27 @@ class NewsDetailPage(Page):
         FieldPanel('main_media'),
         FieldPanel('body'),
     ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request)
+
+        latest_news = NewsDetailPage.objects.live().public().not_page(self).order_by('-publication_date')[:5]
+        context['latest_news'] = latest_news
+
+        return context
+
+    def get_excerpt(self):
+        full_text = ""
+
+        for block in self.body:
+            if block.block_type == 'paragraph':
+                full_text += strip_tags(block.value.source) + " "
+
+        excerpt = full_text.strip()
+        if len(excerpt) > 200:
+            excerpt = excerpt[:197] + "..."
+
+        return excerpt
 
     class Meta:
         verbose_name = "News detail page"
