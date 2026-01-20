@@ -1,0 +1,58 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+{% for block in blocks %}
+<!--Video-->
+{% if block.block_type == 'video' %}
+<div class="col-lg-4 col-md-6 col-12">
+    <div class="wrap item_small">
+        <a href="{{ block.value.url }}" target="_blank">
+                <span class="benefit__item item_small benefit__item_video overlay">
+                    <video autoplay muted loop playsinline class="bg-video">
+                        <source src="{{ block.value.url }}" type="video/mp4">
+                    </video>
+                </span>
+        </a>
+    </div>
+</div>
+{% endif %}
+<!--Image With Text-->
+{% if block.block_type == 'image_with_text' %}
+{% image block.value.image original as img %}
+<div class="col-md-6 col-12">
+    <div class="wrap">
+        <div class="benefit__item " style="background-image: url('{{img.url}}')"></div>
+        <div class="benefit__item item_hover overlay_green overlay_green_bg">
+            <h3>{{block.value.title}}</h3>
+            {{block.value.description|richtext}}
+        </div>
+    </div>
+</div>
+{% endif %}
+<!--Video Jumbotron-->
+{% if block.block_type == 'video_jumbotron' %}
+<div class="col-lg-12 col-md-12 col-12">
+    <div class="wrap">
+        <a href="{{ block.value.video.url }}" class="benefit__item overlay benefit__item_video_text">
+            <video autoplay muted loop playsinline class="bg-video">
+                <source src="{{ block.value.video.url }}" type="video/mp4">
+            </video>
+            <span><i class="nut-icon icons-play-icon"></i></span>
+            <h3>{{block.value.title}}</h3>
+            {{block.value.text_below_play_button|richtext}}
+        </a>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+<!--See More-->
+{% if blocks.has_next %}
+<div id="target" class="row w-100 justify-content-center">
+    <div class="wrapper">
+        <button class="button button_transparent"
+                hx-get="{% pageurl page %}?page={{ blocks.next_page_number }}"
+                hx-target="#target"
+                hx-swap="outerHTML">
+            Посмотреть еще
+        </button>
+    </div>
+</div>
+{% endif %}

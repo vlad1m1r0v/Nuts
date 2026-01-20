@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.paginator import Paginator
+from django.template.response import TemplateResponse
 
 from wagtail.models import Page
 from wagtail.fields import StreamField
@@ -47,6 +49,29 @@ class GalleryPage(Page):
         FieldPanel('content'),
     ]
 
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request)
+
+        all_blocks = self.content
+
+        paginator = Paginator(all_blocks, 5)
+        page_number = request.GET.get('page', 1)
+        blocks_page = paginator.get_page(page_number)
+
+        context['blocks'] = blocks_page
+        return context
+
+    def serve(self, request, *args, **kwargs):
+        if request.headers.get('HX-Request'):
+            context = self.get_context(request)
+
+            return TemplateResponse(
+                request,
+                "includes/gallery/blocks.html",
+                context
+            )
+        # Звичайний запит
+        return super().serve(request)
 
     class Meta:
         verbose_name = "Gallery page"
