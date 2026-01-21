@@ -4,6 +4,17 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&display=swap&subset=latin-ext')
 
 /*=============  Custom css style  =============*/
+.benefit-news
+	.news__item
+		.news-video__container
+			.bg-video
+				height: 270px
+
+	.news-video__container
+		.bg-video
+			height: 526px
+
+
 .news-video__container
 	position: relative
 	display: block
@@ -48,11 +59,10 @@
 		border-color: $accent
 
 	.bg-video
+		top: 0
+		left: 0
 		width: 100%
-		height: auto
-		display: block
 		z-index: 0
-		aspect-ratio: 16 / 9
 		object-fit: cover
 
 .single-news
@@ -1763,6 +1773,19 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 		display: flex
 		justify-content: center
 		align-items: center
+
+		.bg-video
+			position: absolute
+			top: 50%
+			left: 50%
+			transform: translate(-50%, -50%)
+			min-width: 100%
+			min-height: 100%
+			width: auto
+			height: auto
+			object-fit: cover
+			z-index: 0
+			pointer-events: none
 
 		h3
 			margin-bottom: 20px

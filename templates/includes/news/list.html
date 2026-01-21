@@ -1,0 +1,99 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+{% for news in news_list %}
+<!--First News-->
+{% if forloop.counter0 == 0 and news_list.number == 1 %}
+<div class="col-lg-8 py-4">
+    {% with main_media=news.main_media.0 %}
+    {% if main_media.block_type == 'image' %}
+    {% image main_media.value original as img %}
+    <div class="benefit-news__img">
+        <img src="{{img.url}}" alt="News Main Media Image">
+    </div>
+    {% endif %}
+    {% if main_media.block_type == 'video' %}
+    <span class="news-video__container">
+        <a href="{{ main_media.value.url }}">
+            <video autoplay muted loop playsinline class="bg-video">
+                <source src="{{ main_media.value.url }}" type="video/mp4">
+            </video>
+        </a>
+    </span>
+    {% endif %}
+    {% endwith %}
+</div>
+<div class="col-lg-4 py-4">
+    <div class="news__item">
+        <div class="wraper">
+            <div class="item_data">
+                {{ news.publication_date|date:"d.m.Y" }}
+            </div>
+            <h3>{{ news.title }}</h3>
+            <p>{{ news.get_excerpt }}</p>
+            <a href="{% pageurl news %}">Читать <i class="nut-icon icons-read-more"></i></a>
+        </div>
+    </div>
+</div>
+<!--Rest Of News-->
+{% else %}
+<div class="col-lg-4 col-md-6 col-12 py-4">
+    <div class="news__item">
+        {% with main_media=news.main_media.0 %}
+        {% if main_media.block_type == 'image' %}
+        {% image main_media.value original as img %}
+        <span class="video_wrap">
+            <img src="{{img.url}}" alt="News Main Media Image">
+        </span>
+        {% endif %}
+        {% if main_media.block_type == 'video' %}
+        <span class="news-video__container">
+            <a href="{{ main_media.value.url }}">
+                <video autoplay muted loop playsinline class="bg-video">
+                    <source src="{{ main_media.value.url }}" type="video/mp4">
+                </video>
+            </a>
+        </span>
+        {% endif %}
+        {% endwith %}
+        <div class="wraper pr-5">
+            <div class="item_data">
+                {{ news.publication_date|date:"d.m.Y" }}
+            </div>
+            <h3>{{ news.title }}</h3>
+            <p>{{ news.get_excerpt }}</p>
+            <a href="{% pageurl news %}">Читать <i class="nut-icon icons-read-more"></i></a>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+<div id="target">
+    <!--Video Jumbotron-->
+    {% with hero=hero.0 %}
+    <div hx-preserve id="video-jumbotron" class="col-lg-12 col-md-12 col-12 py-4">
+        <div class="wrap">
+            <a href="{{ hero.value.video.url }}"
+               class="benefit-news__item overlay benefit-news__item_video_text">
+                <video autoplay muted loop playsinline class="bg-video">
+                    <source src="{{ hero.value.video.url }}" type="video/mp4">
+                </video>
+                <span><i class="nut-icon icons-play-icon"></i></span>
+                <h3>{{hero.value.title}}</h3>
+                {{hero.value.text_below_play_button|richtext}}
+            </a>
+        </div>
+    </div>
+    {% endwith %}
+    <!--Load More Button-->
+    {% if news_list.has_next %}
+    <div class="row">
+        <div class="wrapper">
+            <button class="button button_transparent"
+                    hx-get="{% pageurl page %}?page={{ news_list.next_page_number }}"
+                    hx-target="#target"
+                    hx-swap="outerHTML">
+                Посмотреть еще
+            </button>
+        </div>
+    </div>
+    {% endif %}
+</div>

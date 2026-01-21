@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags core_tags %}
+{% block content %}
+<!--Breadcrumbs-->
+<section class="first-section no-bg">
+    <div class="container">
+        {% breadcrumbs %}
+    </div>
+</section>
+<section class="benefit-news">
+    <div class="container">
+        <!--Title And Description-->
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12">
+                <h1>{{ page.title }}</h1>
+                <p>{{ page.description }}</p>
+            </div>
+        </div>
+        <!--Content-->
+        <div class="row justify-content-center align-items-center">
+            <!--List Of News-->
+            {% include "includes/news/list.html" %}
+        </div>
+    </div>
+</section>
+{% endblock %}
