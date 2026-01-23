@@ -9,6 +9,9 @@ from wagtailmedia.blocks import VideoChooserBlock
 
 from core.blocks import VideoJumbotronBlock, ImageJumbotronBlock
 
+from gallery.models import GalleryPage
+from news.models import NewsIndexPage, NewsDetailPage
+
 
 class AboutPage(Page):
     template = "about.html"
@@ -32,6 +35,7 @@ class AboutPage(Page):
         ('video', VideoChooserBlock())
     ], blank=True, use_json_field=True)
 
+    owner_name = models.CharField(max_length=100, null=True, blank=True)
     owner_photo = models.ForeignKey(
         Image,
         null=True,
@@ -41,7 +45,6 @@ class AboutPage(Page):
     )
     owner_cite = models.CharField(max_length=255, blank=True)
     owner_description = models.TextField(blank=True)
-    write_us = models.URLField(blank=True)
 
     company_history_title = models.CharField(max_length=255, blank=True)
     company_history_description = models.TextField(blank=True)
@@ -59,14 +62,23 @@ class AboutPage(Page):
         FieldPanel("description"),
         FieldPanel("hero"),
         FieldPanel("videos"),
+        FieldPanel("owner_name"),
         FieldPanel("owner_photo"),
         FieldPanel("owner_cite"),
         FieldPanel("owner_description"),
-        FieldPanel("write_us"),
         FieldPanel("company_history_title"),
         FieldPanel("company_history_description"),
         FieldPanel("image_hero"),
     ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request)
+
+        context["gallery_page"] = GalleryPage.objects.live().first()
+        context["news_page"] = NewsIndexPage.objects.live().first()
+        context["news_list"] = NewsDetailPage.objects.live().order_by('-publication_date')[:3]
+
+        return context
 
     class Meta:
         verbose_name = "About page"
