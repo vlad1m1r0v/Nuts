@@ -1,10 +1,245 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{page.title}}</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags core_tags %}
+{% block content %}
+<!--Video Hero-->
+{% with block=page.hero.0 %}
+{% if block.block_type == 'video_jumbotron' %}
+<section class="first-section overlay">
+    <div class="container">
+        {% if block.value.video %}
+        <video autoplay muted loop playsinline class="bg-video-hero">
+            <source src="{{ block.value.video.url }}" type="video/mp4">
+        </video>
+        {% endif %}
+        {% breadcrumbs %}
+        <div class="row align-items-center justify-content-center">
+            <a href="{{ block.value.video.url }}">
+                <h1>{{ block.value.title }}</h1>
+                <p>{{ block.value.text_above_play_button }}</p>
+                <span><i class="nut-icon icons-play-icon"></i></span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endwith %}
+<!--About Producer-->
+<section class="manufacturer">
+    <div class="container">
+        <div class="row align-items-center">
+            <!--Block Title And Description-->
+            <div class="col-md-5">
+                <h2>{{ page.title }}</h2>
+                <p>{{ page.description|richtext }}</p>
+            </div>
+            <!--Video Carousel-->
+            <div class="col-md-7">
+                <div class="manufacturer-container swiper-container">
+                    <div class="swiper-wrapper">
+                        {% for block in page.videos %}
+                        <div class="swiper-slide">
+                            <div class="manufacturer__item manufacturer__item_video gallery-video__container">
+                                <a href="{{ block.value.url }}">
+                                    <video autoplay muted loop playsinline class="bg-video">
+                                        <source src="{{ block.value.url }}" type="video/mp4">
+                                    </video>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!--Arrows-->
+                    <div class="wrap">
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Owner And History-->
+<section class="history gray_section">
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-lg-7 col-12">
+                <div class="history__blockquote">
+                    <div class="row no-gutters">
+                        <div class="col-md-5">
+                            {% image page.owner_photo original as img %}
+                            <img src="{{img.url}}" alt="Owner Photo">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="blockquote_block">
+                                <h3>{{ page.owner_name }}</h3>
+                                <p>{{ page.owner_description }}</p>
+                                <blockquote>
+                                    {{ page.owner_cite }}
+                                </blockquote>
+                                <a
+                                        href="mailto:{{settings.core.ContactSettings.email}}"
+                                        class="button button_transparent"
+                                >
+                                    Написать нам
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-12">
+                <div class="history__content">
+                    <h3>{{ page.company_history_title }}</h3>
+                    <p>{{page.company_history_description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Statistics-->
+{% include "includes/statistics.html" %}
+<!--Gallery-->
+<section class="benefit gray_section gallery_section">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12">
+                <h2>{{ gallery_page.title }}</h2>
+                <p>{{ gallery_page.subtitle }}</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            {% for block in gallery_page.content|slice:":5" %}
+            <!--Video-->
+            {% if block.block_type == 'video' %}
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="wrap item_small">
+                    <a href="{{ block.value.url }}" target="_blank">
+                <span class="benefit__item item_small benefit__item_video overlay">
+                    <video autoplay muted loop playsinline class="bg-video">
+                        <source src="{{ block.value.url }}" type="video/mp4">
+                    </video>
+                </span>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+            <!--Image With Text-->
+            {% if block.block_type == 'image_with_text' %}
+            {% image block.value.image original as img %}
+            <div class="col-md-6 col-12">
+                <div class="wrap">
+                    <div class="benefit__item " style="background-image: url('{{img.url}}')"></div>
+                    <div class="benefit__item item_hover overlay_green overlay_green_bg">
+                        <h3>{{block.value.title}}</h3>
+                        {{block.value.description|richtext}}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <!--Video Jumbotron-->
+            {% if block.block_type == 'video_jumbotron' %}
+            <div class="col-lg-12 col-md-12 col-12">
+                <div class="wrap">
+                    <a href="{{ block.value.video.url }}" class="benefit__item overlay benefit__item_video_text">
+                        <video autoplay muted loop playsinline class="bg-video">
+                            <source src="{{ block.value.video.url }}" type="video/mp4">
+                        </video>
+                        <span><i class="nut-icon icons-play-icon"></i></span>
+                        <h3>{{block.value.title}}</h3>
+                        {{block.value.text_below_play_button|richtext}}
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="wrapper">
+                <a href="{% pageurl gallery_page %}" class="button button_transparent">Смотреть всю галерею</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Image Hero-->
+{% with hero=page.image_hero.0 %}
+{% image hero.value.background_image original as bg_image %}
+<div class="parallax" data-scrollax-parent="true">
+    <section class="eco overlay" style="background-image: url('{{ bg_image.url }}')"
+             data-scrollax="properties: { translateY: '30%' }">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <a href="#" data-scrollax="properties: { 'translateY': '5%', 'opacity': 1 }">
+                    <i class="nut-icon icons-eco"></i>
+                    <h2>{{ hero.value.title }}</h2>
+                    <p>{{ hero.value.text }}</p>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+<!--News-->
+<section class="news gray_section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-12">
+                <h2>{{ news_page.title }}</h2>
+                <p class="news__descr">{{ news_page.description }}</p>
 
-</body>
-</html>
+            </div>
+            <div class="col-md-6 col-12 d-flex justify-content-end">
+                <div class="wrap">
+                    <div class="navigation"></div>
+                </div>
+            </div>
+            <div class="col-12">
+                <!-- Swiper -->
+                <div class="news-container swiper-container">
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-wrapper">
+                    {% for news in news_list %}
+                    <div class="swiper-slide">
+                        <div class="news__item">
+                            {% with main_media=news.main_media.0 %}
+                            {% if main_media.block_type == 'image' %}
+                            {% image main_media.value original as img %}
+                            <span class="video_wrap">
+                                <img src="{{img.url}}" alt="News Main Media Image">
+                            </span>
+                            {% endif %}
+                            {% if main_media.block_type == 'video' %}
+                            <span class="news-video__container">
+                                <a href="{{ main_media.value.url }}">
+                                    <video autoplay muted loop playsinline class="bg-video">
+                                        <source src="{{ main_media.value.url }}" type="video/mp4">
+                                    </video>
+                                </a>
+                            </span>
+                            {% endif %}
+                            {% endwith %}
+                            <div class="wraper pr-5">
+                                <div class="item_data">
+                                    {{ news.publication_date|date:"d.m.Y" }}
+                                </div>
+                                <h3>{{ news.title }}</h3>
+                                <p>{{ news.get_excerpt }}</p>
+                                <a href="{% pageurl news %}">Читать <i class="nut-icon icons-read-more"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="wrapper">
+            <a href="{% pageurl news_page %}" class="button button_transparent">Смотреть все новости</a>
+        </div>
+    </div>
+    </div>
+</section>
+
+{% endwith %}
+{% endblock %}

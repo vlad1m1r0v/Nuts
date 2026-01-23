@@ -4,18 +4,21 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&display=swap&subset=latin-ext')
 
 /*=============  Custom css style  =============*/
-.benefit-news
-	.news__item
-		.news-video__container
-			.bg-video
-				height: 270px
+@mixin video-background
+	position: absolute
+	top: 50%
+	left: 50%
+	min-width: 100%
+	min-height: 100%
+	width: auto
+	height: auto
+	z-index: 0
+	transform: translate(-50%, -50%)
+	object-fit: cover
+	pointer-events: none
 
-	.news-video__container
-		.bg-video
-			height: 526px
 
-
-.news-video__container
+%video-container-base
 	position: relative
 	display: block
 	width: 100%
@@ -65,10 +68,65 @@
 		z-index: 0
 		object-fit: cover
 
-.single-news
-	.main
-		p + img
-			padding-top: 20px
+
+.gallery_section .benefit__item_video_text .bg-video,
+.gallery_section .benefit__item_video .bg-video,
+.goal .bg-video-hero,
+.benefit-news .benefit-news__item_video_text .bg-video,
+.first-section .bg-video-hero
+	@include video-background
+
+.news-video__container
+	@extend %video-container-base
+
+
+.benefit-news
+	.news__item .news-video__container .bg-video
+		height: 270px
+
+	.news-video__container .bg-video
+		height: 526px
+
+
+.news .swiper-container .news__item .news-video__container .bg-video
+	min-height: 270px
+	height: 270px
+
+.single-news .main p + img
+	padding-top: 20px
+
+.manufacturer h2 ~ p
+	margin: 0 0 20px 0
+	font-weight: 600
+	font-size: 16px
+	letter-spacing: 0.01em
+
+
+.manufacturer
+	&-container
+		position: relative
+		height: 472px
+		overflow: hidden
+
+	.gallery-video__container
+		@extend %video-container-base
+		height: 472px
+		z-index: 5
+
+		.bg-video
+			width: auto
+
+	.wrap
+		height: 58px
+		width: 141px
+		background: $accent
+		position: absolute
+		bottom: 0
+		left: 0
+		z-index: 100
+
+		.swiper-button-prev, .swiper-button-next
+			outline: none
 
 /*========  Frontend student css style  ========*/
 
@@ -1098,19 +1156,6 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 	background-position: center center
 	overflow: hidden
 
-	.bg-video-hero
-		position: absolute
-		top: 50%
-		left: 50%
-		min-width: 100%
-		min-height: 100%
-		width: auto
-		height: auto
-		z-index: 0
-		transform: translate(-50%, -50%)
-		object-fit: cover
-		pointer-events: none
-
 	.row
 		min-height: 600px
 
@@ -1774,19 +1819,6 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 		justify-content: center
 		align-items: center
 
-		.bg-video
-			position: absolute
-			top: 50%
-			left: 50%
-			transform: translate(-50%, -50%)
-			min-width: 100%
-			min-height: 100%
-			width: auto
-			height: auto
-			object-fit: cover
-			z-index: 0
-			pointer-events: none
-
 		h3
 			margin-bottom: 20px
 
@@ -2027,19 +2059,6 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 		justify-content: center
 		align-items: center
 
-		.bg-video
-			position: absolute
-			top: 50%
-			left: 50%
-			min-width: 100%
-			min-height: 100%
-			width: auto
-			height: auto
-			z-index: 0
-			transform: translate(-50%, -50%)
-			object-fit: cover
-			pointer-events: none
-
 		h3
 			margin-bottom: 20px
 
@@ -2102,19 +2121,6 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 				background: $accent
 				border: 2px solid $accent
 
-		.bg-video
-			position: absolute
-			top: 50%
-			left: 50%
-			transform: translate(-50%, -50%)
-			min-width: 100%
-			min-height: 100%
-			width: auto
-			height: auto
-			object-fit: cover
-			z-index: 0
-			pointer-events: none
-
 
 	.benefit__item
 		i
@@ -2167,19 +2173,6 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 	background-size: cover
 	background-repeat: no-repeat
 	background-position: center center
-
-	.bg-video-hero
-		position: absolute
-		top: 50%
-		left: 50%
-		min-width: 100%
-		min-height: 100%
-		width: auto
-		height: auto
-		z-index: 0
-		transform: translate(-50%, -50%)
-		object-fit: cover
-		pointer-events: none
 
 	.row
 		min-height: 740px
@@ -2288,7 +2281,7 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 
 	&__blockquote
 		.blockquote_block
-		padding: 40px 30px
+			padding: 40px 30px
 
 		h3
 			font-style: normal
@@ -2414,48 +2407,49 @@ i[class^="icons-"]:before, i[class*=" icons-"]:before
 		height: 472px
 
 		.swiper-slide
-			img
-				height: 472px
-				object-fit: cover
-				object-position: 50% 50%
-				width: 100%
 
-			&:hover
-				cursor: pointer
+	img
+		height: 472px
+		object-fit: cover
+		object-position: 50% 50%
+		width: 100%
 
-			span
-				width: 61px
-				height: 61px
-				text-align: center
-				display: block
-				border: 2px solid #FFFFFF
-				border-radius: 10em
-				text-align: center
-				margin: 0 auto
-				transition: background 0.3s
-				position: absolute
-				top: 50%
-				left: 50%
-				margin-left: -30.5px
-				margin-top: -30.5px
+	&:hover
+		cursor: pointer
 
-				i
-					color: #fff
-					font-size: 56px
-					line-height: 53px
+	span
+		width: 61px
+		height: 61px
+		text-align: center
+		display: block
+		border: 2px solid #FFFFFF
+		border-radius: 10em
+		text-align: center
+		margin: 0 auto
+		transition: background 0.3s
+		position: absolute
+		top: 50%
+		left: 50%
+		margin-left: -30.5px
+		margin-top: -30.5px
 
-					&:before
-						margin-left: -2px
-						margin-top: 2px
-						margin-right: 0
-						line-height: inherit
+		i
+			color: #fff
+			font-size: 56px
+			line-height: 53px
 
-			&:hover,
-			&:focus
-				span
-					border: 2px solid $accent
-					border-radius: 10em
-					background: $accent
+			&:before
+				margin-left: -2px
+				margin-top: 2px
+				margin-right: 0
+				line-height: inherit
+
+	&:hover,
+	&:focus
+		span
+			border: 2px solid $accent
+			border-radius: 10em
+			background: $accent
 
 	.wrap
 		height: 58px

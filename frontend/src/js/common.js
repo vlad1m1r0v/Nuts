@@ -221,6 +221,8 @@ jQuery(document).ready(function ($) {
         slidesPerView: 3,
         spaceBetween: 30,
         loop: true,
+        observer: true,
+        observeParents: true,
         // pagination: {
         //   el: '.swiper-pagination',
         //   type: 'fraction',
@@ -264,10 +266,9 @@ jQuery(document).ready(function ($) {
         spaceBetween: 30,
         loop: true,
         speed: 400,
+        observer: true,
+        observeParents: true,
         // pagination: {
-        //   el: '.swiper-pagination',
-        //   type: 'fraction',
-        // },
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
