@@ -4,9 +4,11 @@ from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 
 from core.validators import ukrainian_phone_validator, validate_file_size
-from locations.models import Country, Region
-from users.validators import full_name_validator
 
+from locations.models import Country, Region
+
+from users.validators import full_name_validator
+from users.models import BusinessProfile
 
 class BaseRegistrationForm(forms.Form):
     # Contacts
@@ -98,7 +100,7 @@ class BaseRegistrationForm(forms.Form):
     )
     # Agreed to terms
     agreed_to_terms = forms.BooleanField(
-        widget=forms.CheckboxInput(attrs={"class": "checkbox-custom", "id": "checkbox-2"}),
+        widget=forms.CheckboxInput(attrs={"class": "checkbox-custom", "id": "individual_terms"}),
         label="Согласие с условиями",
         error_messages={
             "required": "Согласие с условиями поле обязательное для заполнения."
@@ -107,7 +109,7 @@ class BaseRegistrationForm(forms.Form):
     # Avatar
     avatar = forms.ImageField(
         widget=forms.FileInput(attrs={
-            "id": "file2",
+            "id": "individual_avatar_file",
             "class": "inputfile"
         }),
         label="Аватар",
@@ -154,3 +156,174 @@ class IndividualRegistrationForm(BaseRegistrationForm):
         required=False,
         label="Являюсь ФОП"
     )
+
+
+class BusinessRegistrationForm(BaseRegistrationForm):
+    # Avatar
+    avatar = forms.ImageField(
+        widget=forms.FileInput(attrs={
+            "id": "business_avatar_file",
+            "class": "inputfile"
+        }),
+        label="Аватар",
+        validators=[
+            FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'webp']),
+            validate_file_size
+        ],
+        error_messages={
+            'required': 'Аватар поле обязательное для заполнения.',
+            'invalid_image': 'Загруженный файл не является изображением или поврежден.',
+        }
+    )
+    # Agreed to terms
+    agreed_to_terms = forms.BooleanField(
+        widget=forms.CheckboxInput(attrs={"class": "checkbox-custom", "id": "business_terms"}),
+        label="Согласие с условиями",
+        error_messages={
+            "required": "Согласие с условиями поле обязательное для заполнения."
+        }
+    )
+
+
+    business_type = forms.ChoiceField(
+        choices=[('ur', 'Юридическое лицо'), ('fop', 'ФОП')],
+        widget=forms.RadioSelect(attrs={'class': 'radio-custom'}),
+        initial='ur',
+        label="Тип бизнеса"
+    )
+
+    okpo = forms.CharField(
+        required=False,
+        max_length=32,
+        label="ОКПО",
+        widget=forms.TextInput(attrs={"placeholder": "ОКПО"}),
+        error_messages={"max_length": "ОКПО поле может местить максимум 32 символа."}
+    )
+    edrpo = forms.CharField(
+        required=False,
+        max_length=32,
+        label="ЕДРПО",
+        widget=forms.TextInput(attrs={"placeholder": "ЕДРПО"}),
+        error_messages={"max_length": "ЕДРПО поле может местить максимум 32 символа."}
+    )
+
+    legal_country = forms.ModelChoiceField(
+        queryset=Country.objects.all(),
+        required=False,
+        label="Страна (юр.)",
+        empty_label="Страна"
+    )
+    legal_region = forms.ModelChoiceField(
+        queryset=Region.objects.all(),
+        required=False,
+        label="Область (юр.)",
+        empty_label="Область"
+    )
+    legal_city = forms.CharField(
+        required=False,
+        min_length=3,
+        max_length=30,
+        label="Город (юр.)",
+        widget=forms.TextInput(attrs={"placeholder": "Город*"}),
+        error_messages={
+            "max_length": "Город (юр.) поле может местить максимум 30 символов.",
+            "min_length": "Город (юр.) поле должно местить минимум 3 символа."
+        }
+    )
+    legal_address_line = forms.CharField(
+        required=False,
+        min_length=10,
+        max_length=100,
+        label="Адрес (юр.)",
+        widget=forms.TextInput(attrs={"placeholder": "Адрес"}),
+        error_messages={
+            "max_length": "Адрес (юр.) поле может местить максимум 100 символов.",
+            "min_length": "Адрес (юр.) поле должно местить минимум 10 символов."
+        }
+    )
+    legal_index = forms.CharField(
+        required=False,
+        min_length=5,
+        max_length=10,
+        label="Индекс (юр.)",
+        widget=forms.TextInput(attrs={"placeholder": "Индекс"}),
+        error_messages={
+            "max_length": "Индекс (юр.) поле может местить максимум 10 символов.",
+            "min_length": "Индекс (юр.) поле должно местить минимум 5 символов."
+        }
+    )
+
+    fop_country = forms.ModelChoiceField(
+        queryset=Country.objects.all(),
+        required=False,
+        label="Страна (деятельности)",
+        empty_label="Страна"
+    )
+    fop_region = forms.ModelChoiceField(
+        queryset=Region.objects.all(),
+        required=False,
+        label="Область (деятельности)",
+        empty_label="Область"
+    )
+    fop_city = forms.CharField(
+        required=False,
+        min_length=3,
+        max_length=30,
+        label="Город (деятельности)",
+        widget=forms.TextInput(attrs={"placeholder": "Город*"}),
+        error_messages={
+            "max_length": "Город (деятельности) поле может местить максимум 30 символов.",
+            "min_length": "Город (деятельности) поле должно местить минимум 3 символа."
+        }
+    )
+    fop_address_line = forms.CharField(
+        required=False,
+        min_length=10,
+        max_length=100,
+        label="Адрес (деятельности)",
+        widget=forms.TextInput(attrs={"placeholder": "Адрес"}),
+        error_messages={
+            "max_length": "Адрес (деятельности) поле может местить максимум 100 символов.",
+            "min_length": "Адрес (деятельности) поле должно местить минимум 10 символов."
+        }
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        b_type = cleaned_data.get('business_type')
+
+        if b_type == BusinessProfile.BusinessType.LEGAL_ENTITY:
+            self._validate_required_fields(cleaned_data, [
+                ('okpo', 'ОКПО'),
+                ('legal_country', 'Страна (юр.)'),
+                ('legal_region', 'Область (юр.)'),
+                ('legal_city', 'Город (юр.)')
+            ])
+
+            l_country = cleaned_data.get('legal_country')
+            l_region = cleaned_data.get('legal_region')
+            if l_country and l_region and l_region.country_id != l_country.pk:
+                self.add_error('legal_region', "Область (юр.) поле: Выбранная область не принадлежит указанной стране.")
+
+        elif b_type == BusinessProfile.BusinessType.FOP:
+            self._validate_required_fields(cleaned_data, [
+                ('edrpo', 'ЕДРПО'),
+                ('fop_country', 'Страна (деятельности)'),
+                ('fop_region', 'Область (деятельности)'),
+                ('fop_city', 'Город (деятельности)')
+            ])
+
+            f_country = cleaned_data.get('fop_country')
+            f_region = cleaned_data.get('fop_region')
+            if f_country and f_region and f_region.country_id != f_country.pk:
+                self.add_error('fop_region',
+                               "Область (деятельности) поле: Выбранная область не принадлежит указанной стране.")
+
+        return cleaned_data
+
+    def _validate_required_fields(self, cleaned_data, fields_with_labels):
+        for field_name, label in fields_with_labels:
+            if not cleaned_data.get(field_name):
+                self.add_error(field_name, f"{label} поле обязательное для заполнения.")
+
+

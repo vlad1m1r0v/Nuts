@@ -2,7 +2,10 @@ from wagtail.models import Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 
-from auth.forms import IndividualRegistrationForm
+from auth.forms import (
+    IndividualRegistrationForm,
+    BusinessRegistrationForm
+)
 
 
 class RegisterPage(Page):
@@ -16,6 +19,7 @@ class RegisterPage(Page):
         context = super().get_context(request)
 
         context["individual_registration_form"] = IndividualRegistrationForm()
+        context["business_registration_form"] = BusinessRegistrationForm()
         context["terms_page"] = TermsOfUsePage.objects.live().public().first()
 
         return context
