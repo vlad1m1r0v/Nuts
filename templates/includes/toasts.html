@@ -1,0 +1,7 @@
+<script>
+    {% if messages %}
+        {% for message in messages %}
+            toastr["{{ message.tags }}".toLowerCase()]("{{message}}")
+        {% endfor %}
+    {% endif %}
+</script>

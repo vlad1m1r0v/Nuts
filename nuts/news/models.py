@@ -15,7 +15,7 @@ from core.blocks import VideoJumbotronBlock
 
 
 class NewsIndexPage(Page):
-    template = "news_index.html"
+    template = "news/news_index.html"
 
     parent_page_types = ['home.HomePage']
     subpage_types = ['news.NewsDetailPage']
@@ -66,7 +66,7 @@ class NewsIndexPage(Page):
 
 
 class NewsDetailPage(Page):
-    template = "news_detail.html"
+    template = "news/news_detail.html"
 
     parent_page_types = ['news.NewsIndexPage']
 

@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+{% load core_tags %}
+{% block content %}
+<!--Breadcrumbs-->
+<section class="first-section no-bg">
+    <div class="container">
+        {% breadcrumbs %}
+    </div>
+</section>
+<!--Forms-->
+<section class="registration">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>{{ page.title }}</h1>
+            </div>
+            <div class="col-12">
+                <div class="form__title">
+                    1. Контактные данные
+                </div>
+            </div>
+            <div class="tabs">
+                <div class="row">
+                    <div class="col-lg-5 col-md-6">
+                        <div class="tabs__wrap">
+                            <ul class="tabs__caption">
+                                <li class="active">
+                                    Физическое лицо
+                                </li>
+                                <li>
+                                    Юридическое лицо
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-6"></div>
+                </div>
+                <!--Individual-->
+                <div class="tabs__content active">
+                    {% with individual_registration_form as form %}
+                    <form action="{% url 'custom_auth:individual-registration' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-5 col-md-6">
+                                {{ form.full_name }}
+                                {{ form.email }}
+                                {{ form.phone }}
+                                <div class="form__title">
+                                    2. Адрес
+                                </div>
+                                {{ form.country }}
+                                {{ form.region }}
+                                {{ form.city }}
+                                {{ form.address_line }}
+                                <div class="form__title">
+                                    3. Пароль
+                                </div>
+                                {{ form.password }}
+                                {{ form.password_confirm }}
+                            </div>
+                            <div class="col-lg-5 col-md-6 offset-lg-1">
+                                <div class="wrapper">
+                                    <div class="file__wrap">
+                                        {{ form.avatar }}
+                                        <label for="file2"><span>Загрузить фото</span></label>
+                                    </div>
+                                    <div class="checkbox__wrap">
+                                        {{ form.is_fop }}
+                                        <label for="checkbox-1" class="checkbox-custom-label">
+                                            <span>Являюсь ФОП</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-6">
+                                <div class="checkbox__wrap">
+                                    {{ form.agreed_to_terms }}
+                                    <label for="checkbox-2" class="checkbox-custom-label">
+                                        <span>
+                                            Я согласен с <a href="{{terms_page.url}}">Условиями регистрации</a>
+                                        </span>
+                                    </label>
+                                </div>
+                                <button class="button" type="submit">Продолжить</button>
+                            </div>
+                            <div class="col-lg-7 col-md-6"></div>
+                        </div>
+                    </form>
+                    {% endwith %}
+                </div>
+                <!--Legal Entity-->
+                <div class="tabs__content">
+                    <form action="#">
+                        <div class="row">
+                            <div class="col-lg-5 col-md-6">
+                                <input type="text" required="required" placeholder="ФИО*">
+                                <input type="email" required="required" placeholder="Email*">
+                                <input type="tel" required="required" placeholder="Телефон*">
+                                <div class="form__title">
+                                    2. Адрес
+                                </div>
+                                <select>
+                                    <option value="hide">Страна</option>
+                                    <option value="lorem">lorem</option>
+                                    <option value="lorem">lorem</option>
+                                    <option value="lorem">lorem</option>
+                                    <option value="lorem">lorem</option>
+                                    <option value="lorem">lorem</option>
+                                    <option value="lorem">lorem</option>
+                                </select>
+                                <select>
+                                    <option value="hide">Область</option>
+                                    <option value="lorem">lorem</option>
+                                    <option value="lorem">lorem</option>
+                                    <option value="lorem">lorem</option>
+                                    <option value="lorem">lorem</option>
+                                    <option value="lorem">lorem</option>
+                                    <option value="lorem">lorem</option>
+                                </select>
+                                <input type="text" required="required" placeholder="Город*">
+                                <input type="text" placeholder="Адрес">
+                                <div class="form__title">
+                                    3. Пароль
+                                </div>
+                                <input type="password" required="required" placeholder="Пароль*">
+                                <input type="password" required="required" placeholder="Подтвердите пароль*">
+                            </div>
+                            <div class="col-lg-5 col-md-6 offset-lg-1">
+                                <div class="wrapper">
+                                    <div class="file__wrap">
+                                        <input type="file" name="file" id="file" class="inputfile"/>
+                                        <label for="file"><span>Загрузить фото</span></label>
+                                    </div>
+                                    <div class="radio__wrap">
+                                        <input id="radio-1" class="radio-custom" name="radio-group" value="ur"
+                                               type="radio" checked>
+                                        <label for="radio-1" class="radio-custom-label"><span>Юр. лицо</span></label>
+                                        <input id="radio-2" class="radio-custom" name="radio-group" value="fop"
+                                               type="radio">
+                                        <label for="radio-2" class="radio-custom-label"><span>ФОП</span></label>
+                                    </div>
+                                    <div class="box-wrap">
+                                        <!--Legal Entity-->
+                                        <div class="ur box">
+                                            <div class="form__title">
+                                                1. Реквизиты
+                                            </div>
+                                            <input type="text" placeholder="ОКПО">
+                                            <div class="form__title">
+                                                2. Юридический адрес
+                                            </div>
+                                            <select>
+                                                <option value="hide">Страна</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                            </select>
+                                            <select>
+                                                <option value="hide">Область</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                            </select>
+                                            <input type="text" required="required" placeholder="Город*">
+                                            <input type="text" placeholder="Адрес">
+                                            <input type="text" placeholder="Индекс">
+                                        </div>
+                                        <!--FOP-->
+                                        <div class="fop box">
+                                            <div class="form__title">
+                                                1. Реквизиты
+                                            </div>
+                                            <input type="text" placeholder="ЕДРПО">
+                                            <div class="form__title">
+                                                2. Адрес ФОП
+                                            </div>
+                                            <select>
+                                                <option value="hide">Страна</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                            </select>
+                                            <select>
+                                                <option value="hide">Область</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                                <option value="lorem">lorem</option>
+                                            </select>
+                                            <input type="text" required="required" placeholder="Город*">
+                                            <input type="text" placeholder="Адрес">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-6">
+                                <div class="checkbox__wrap">
+                                    <input id="checkbox-4" class="checkbox-custom" name="checkbox-1" type="checkbox">
+                                    <label for="checkbox-4" class="checkbox-custom-label"><span>Я согласен с <a
+                                            href="#">Условиями регистрации</a></span></label>
+                                </div>
+                                <button class="button" type="submit">Продолжить</button>
+                            </div>
+                            <div class="col-lg-7 col-md-6"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     "shop",
     "products",
     "auth",
+    "users",
+    "locations",
     "thanks",
     "wagtail.contrib.forms",
     "wagtail.contrib.settings",

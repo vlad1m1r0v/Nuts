@@ -9,6 +9,7 @@ export default defineConfig({
         manifest: true,
         rollupOptions: {
             input: {
+                // vendor js
                 jquery_js: path.resolve(__dirname, 'src/js/vendor/jquery.min.js'),
                 jquery_ui_js: path.resolve(__dirname, 'src/js/vendor/jquery-ui-1.10.4.custom.min.js'),
                 count_to_js: path.resolve(__dirname, 'src/js/vendor/jquery.countTo.js'),
@@ -20,7 +21,10 @@ export default defineConfig({
                 m_custom_scrollbar_js: path.resolve(__dirname, 'src/js/vendor/jquery.mCustomScrollbar.js'),
                 basictable_js: path.resolve(__dirname, 'src/js/vendor/jquery.basictable.min.js'),
                 tooltipser_js: path.resolve(__dirname, 'src/js/vendor/tooltipster.bundle.min.js'),
+                toastr_js: path.resolve(__dirname, 'src/js/vendor/toastr.min.js'),
+                // common js
                 common_js: path.resolve(__dirname, 'src/js/common.js'),
+                // styles
                 styles_js: path.resolve(__dirname, 'src/js/styles.js'),
             },
         },
