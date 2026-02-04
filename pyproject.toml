@@ -14,6 +14,9 @@ dependencies = [
     "psycopg2-binary (>=2.9.11,<3.0.0)",
     "wagtail-modeltranslation (>=0.16.0,<0.17.0)",
     "django-vite (>=3.1.0,<4.0.0)",
+    "django-extensions (>=4.1,<5.0)",
+    "django-anymail[mailjet] (>=14.0,<15.0)",
+    "six (>=1.17.0,<2.0.0)",
 ]
 
 

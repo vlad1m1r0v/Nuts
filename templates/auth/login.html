@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load core_tags %}
+{% block content %}
+<!--Breadcrumbs-->
+<section class="first-section no-bg">
+    <div class="container">
+        {% breadcrumbs %}
+    </div>
+</section>
+<!--Form-->
+<section class="registration">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6">
+                <h1 class="text-center py-4">Войти в личный кабинет</h1>
+                {% with customer_login_form as form %}
+                <form method="POST" action="{% url 'custom_auth:login' %}">
+                    {% csrf_token %}
+                    {{ form.email }}
+                    {{ form.password }}
+                    <div class="mini_link">
+                        <a href="#">Забыли пароль?</a>
+                    </div>
+                    <button class="button" type="submit">Войти</button>
+                    <div class="mini_link">
+                        <a href="{{ registration_page.url }}">Регистрация</a>
+                    </div>
+                </form>
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     "wagtailmedia",
     "modelcluster",
     "taggit",
+    "anymail",
+    "django_extensions",
     "django_filters",
     "django_vite",
     "django.contrib.admin",
@@ -126,6 +128,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'auth.authentication.CustomerAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
@@ -174,6 +181,16 @@ DJANGO_VITE = {
         "dev_mode": True
     }
 }
+
+ANYMAIL = {
+    "MAILJET_API_KEY": os.getenv("MAILJET_API_KEY"),
+    "MAILJET_SECRET_KEY": os.getenv("MAILJET_SECRET_KEY"),
+    "MAILJET_API_URL": "https://api.mailjet.com/v3.1/"
+}
+
+EMAIL_BACKEND = "anymail.backends.mailjet.EmailBackend"
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+
 # Default storage settings
 # See https://docs.djangoproject.com/en/6.0/ref/settings/#std-setting-STORAGES
 STORAGES = {

@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
@@ -8,7 +9,8 @@ from core.validators import ukrainian_phone_validator, validate_file_size
 from locations.models import Country, Region
 
 from users.validators import full_name_validator
-from users.models import BusinessProfile
+from users.models import BusinessProfile, CustomerProfile
+
 
 class BaseRegistrationForm(forms.Form):
     # Contacts
@@ -123,6 +125,18 @@ class BaseRegistrationForm(forms.Form):
         }
     )
 
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise ValidationError("E-Mail поле: Пользователь с таким электронным адресом уже зарегистрирован.")
+        return email
+
+    def clean_phone(self):
+        phone = self.cleaned_data.get('phone')
+        if CustomerProfile.objects.filter(phone=phone).exists():
+            raise ValidationError("Телефон поле: Пользователь с таким номером телефона уже зарегистрирован.")
+        return phone
+
     def clean_password(self):
         password = self.cleaned_data.get('password')
         try:
@@ -183,7 +197,6 @@ class BusinessRegistrationForm(BaseRegistrationForm):
             "required": "Согласие с условиями поле обязательное для заполнения."
         }
     )
-
 
     business_type = forms.ChoiceField(
         choices=[('ur', 'Юридическое лицо'), ('fop', 'ФОП')],
@@ -327,3 +340,101 @@ class BusinessRegistrationForm(BaseRegistrationForm):
                 self.add_error(field_name, f"{label} поле обязательное для заполнения.")
 
 
+class CustomerLoginForm(forms.Form):
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={"placeholder": "E-Mail*"}),
+        label="E-Mail",
+        error_messages={
+            "required": "E-Mail поле обязательное для заполнения.",
+            "invalid": "E-Mail не валидний."
+        }
+    )
+
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            "placeholder": "Пароль*"
+        }),
+        label="Пароль",
+        error_messages={
+            "required": "Пароль поле обязательное для заполнения."
+        }
+    )
+
+    def clean_password(self):
+        password = self.cleaned_data.get('password')
+        try:
+            validate_password(password)
+        except ValidationError:
+            raise ValidationError(
+                "Ваш пароль не соответствует требованиям безопасности.")
+        return password
+
+
+class CustomerForgotPasswordForm(forms.Form):
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={"placeholder": "E-Mail*"}),
+        label="E-Mail",
+        error_messages={
+            "required": "E-Mail поле обязательное для заполнения.",
+            "invalid": "E-Mail не валидний."
+        }
+    )
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+
+        try:
+            user = User.objects.get(
+                email=email,
+                is_active=True,
+                is_staff=False,
+                is_superuser=False
+            )
+
+            if not hasattr(user, 'customer_profile'):
+                raise ValidationError("У пользователя нет личного кабинета.")
+        except User.DoesNotExist:
+            raise ValidationError("Пользователь с данным E-Mail не обнаружен.")
+
+        return email
+
+
+class CustomerResetPasswordForm(forms.Form):
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            "placeholder": "Пароль*"
+        }),
+        label="Пароль",
+        error_messages={
+            "required": "Пароль поле обязательное для заполнения."
+        }
+    )
+    password_confirm = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            "placeholder": "Подтвердите пароль*"
+        }),
+        label="Подтвердите пароль",
+        error_messages={
+            "required": "Подтвердите пароль поле обязательное для заполнения."
+        }
+    )
+
+    def clean_password(self):
+        password = self.cleaned_data.get('password')
+        try:
+            validate_password(password)
+        except ValidationError:
+            raise ValidationError(
+                "Ваш пароль не соответствует требованиям безопасности.")
+        return password
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        password = cleaned_data.get("password")
+        password_confirm = cleaned_data.get("password_confirm")
+
+        if all([password, password_confirm]) and password != password_confirm:
+            raise ValidationError("Пароли не совпадают.")
+
+        return cleaned_data

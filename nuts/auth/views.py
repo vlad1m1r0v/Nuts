@@ -1,17 +1,30 @@
 import logging
 
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 from django.db import transaction
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views import View
 from django.contrib import messages
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 
 from auth.forms import (
     IndividualRegistrationForm,
-    BusinessRegistrationForm
+    BusinessRegistrationForm,
+    CustomerLoginForm,
+    CustomerForgotPasswordForm
 )
-from auth.models import RegisterPage
+from auth.models import (
+    RegisterPage,
+    LoginPage,
+    ForgotPasswordPage,
+    RecoverPasswordPage,
+    CustomerResetPasswordForm
+)
+from auth.tokens import account_activation_token
 
 from locations.models import Address
 
@@ -48,12 +61,10 @@ class IndividualRegistrationView(View):
             with transaction.atomic():
                 data = form.cleaned_data
 
-                password = make_password(data['password'])
-
                 user = User.objects.create_user(
                     username=data['full_name'],
                     email=data['email'],
-                    password=password,
+                    password=data['password'],
                     is_staff=False,
                     is_superuser=False,
                     is_active=True
@@ -74,6 +85,8 @@ class IndividualRegistrationView(View):
                     agreed_to_terms=data['agreed_to_terms'],
                     is_fop=data.get('is_fop', False)
                 )
+
+            login(request, user, backend="auth.authentication.CustomerAuthBackend")
 
             messages.success(request, "Регистрация прошла успешно. Теперь вы можете войти.")
             return redirect(home_url)
@@ -161,6 +174,8 @@ class BusinessRegistrationView(View):
                         edrpo_code=data['edrpo']
                     )
 
+            login(request, user, backend="auth.authentication.CustomerAuthBackend")
+
             messages.success(request, "Бизнес-аккаунт успешно зарегистрирован.")
             return redirect(home_url)
 
@@ -168,3 +183,116 @@ class BusinessRegistrationView(View):
             logger.error(e)
             messages.error(request, "Произошла внутренняя ошибка сервера. Попробуйте позже.")
             return redirect(register_url)
+
+
+class CustomerLoginView(View):
+    def post(self, request, *args, **kwargs):
+        login_page = LoginPage.objects.live().public().first()
+        login_url = login_page.get_url(request)
+
+        home_page = HomePage.objects.live().public().first()
+        home_url = home_page.get_url(request)
+
+        form = CustomerLoginForm(request.POST)
+
+        if not form.is_valid():
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, error)
+            return redirect(login_url)
+
+        data = form.cleaned_data
+
+        user = authenticate(
+            request,
+            username=data['email'],
+            password=data['password']
+        )
+
+        if user is not None:
+            login(request, user, backend="auth.authentication.CustomerAuthBackend")
+            messages.success(request, f"Вход выполнен успешно.")
+            return redirect(home_url)
+        else:
+            messages.error(request, "Неверный E-Mail или пароль.")
+            return redirect(login_url)
+
+
+class CustomerForgotPasswordView(View):
+    def post(self, request, *args, **kwargs):
+        forgot_password_page = ForgotPasswordPage.objects.live().public().first()
+        forgot_url = forgot_password_page.get_url(request)
+
+        recover_password_page = RecoverPasswordPage.objects.live().public().first()
+        recover_password_url = recover_password_page.get_url(request)
+
+        form = CustomerForgotPasswordForm(request.POST)
+
+        if not form.is_valid():
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, error)
+            return redirect(forgot_url)
+
+        data = form.cleaned_data
+
+        user = User.objects.get(email=data['email'])
+
+        uid = urlsafe_base64_encode(force_bytes(user.pk))
+        token = account_activation_token.make_token(user)
+        domain = request.get_host()
+        protocol = 'https' if request.is_secure() else 'http'
+        reset_link = f"{protocol}://{domain}{recover_password_url}?uid={uid}&token={token}"
+
+        message = EmailMessage(
+            to=[data["email"]],
+            subject="Восстановление пароля",
+            body=render_to_string(
+                template_name="auth/recover_password_email_message.html",
+                context={"reset_link": reset_link}
+            )
+        )
+
+        message.content_subtype = 'html'
+        message.send(fail_silently=False)
+
+        messages.success(request, "Вам на почту отправлена ссылка на сброс пароля.")
+
+        return redirect(forgot_url)
+
+
+class CustomerResetPasswordView(View):
+    def post(self, request, *args, **kwargs):
+        uidb64 = request.GET.get('uid')
+        token = request.GET.get('token')
+
+        login_page = LoginPage.objects.live().public().first()
+        login_url = login_page.get_url(request)
+        referer_url = request.META.get('HTTP_REFERER')
+
+        form = CustomerResetPasswordForm(request.POST)
+
+        if not form.is_valid():
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, error)
+
+            return redirect(referer_url)
+
+        try:
+            uid = force_str(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+
+            if account_activation_token.check_token(user, token):
+                user.set_password(form.cleaned_data['password'])
+                user.save()
+
+                messages.success(request, "Ваш пароль был успешно изменен. Теперь вы можете войти.")
+                return redirect(login_url)
+            else:
+                messages.error(request, "Срок действия ссылки истек или она неверна.")
+                return redirect(request.META.get('HTTP_REFERER'))
+
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            messages.error(request, "Произошла ошибка при идентификации пользователя.")
+            return redirect(referer_url)
