@@ -7,7 +7,7 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views import View
 from django.contrib import messages
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 
@@ -296,3 +296,14 @@ class CustomerResetPasswordView(View):
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             messages.error(request, "Произошла ошибка при идентификации пользователя.")
             return redirect(referer_url)
+
+
+class CustomerLogoutView(View):
+    def post(self, request, *args, **kwargs):
+        login_page = LoginPage.objects.live().public().first()
+        login_url = login_page.get_url(request)
+
+        logout(request)
+        messages.success(request, "Вы успешно вышли из своего аккаунта.")
+
+        return redirect(login_url)

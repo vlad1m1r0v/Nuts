@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load core_tags profiles_tags %}
+{% block content %}
+<section class="first-section no-bg">
+    <div class="container">
+        {% breadcrumbs %}
+    </div>
+</section>
+<section class="accaunt">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <h1>Учетная запись</h1>
+            </div>
+            <div class="col-lg-9 col-md-6">
+                <div class="accaunt__manager">
+                    <ul>
+                        <li><p>Ваш личный менеджер {{ settings.core.ContactSettings.manager_name }}</p></li>
+                        <li><i class="nut-icon icons-phone"></i>
+                            <a href="tel:{{ settings.core.ContactSettings.manager_phone|clean_phone }}">
+                                {{ settings.core.ContactSettings.manager_phone }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                {% profile_menu_links %}
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    {% block profile_content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

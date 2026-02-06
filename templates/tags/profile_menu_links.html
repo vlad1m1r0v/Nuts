@@ -1,0 +1,52 @@
+<nav class="navigation">
+    <p>Мои заказы</p>
+    <ul>
+        {% if orders_history_page %}
+        <li>
+            <a href="{{ orders_history_page.url }}"
+               class="{% if current_page.id == orders_history_page.id %}active{% endif %}">
+               {{ orders_history_page.title }}
+            </a>
+        </li>
+        {% endif %}
+
+        {% if transactions_history_page %}
+        <li>
+            <a href="{{ transactions_history_page.url }}"
+               class="{% if current_page.id == transactions_history_page.id %}active{% endif %}">
+               {{ transactions_history_page.title }}
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+
+    <p>Моя учетная занись</p>
+    <ul>
+        {% if contact_information_page %}
+        <li>
+            <a href="{{ contact_information_page.url }}"
+               class="{% if current_page.id == contact_information_page.id %}active{% endif %}">
+               {{ contact_information_page.title }}
+            </a>
+        </li>
+        {% endif %}
+
+        {% if change_password_page %}
+        <li>
+            <a href="{{ change_password_page.url }}"
+               class="{% if current_page.id == change_password_page.id %}active{% endif %}">
+                {{ change_password_page.title }}
+            </a>
+        </li>
+        {% endif %}
+
+        {% if address_page %}
+        <li>
+            <a href="{{ address_page.url }}"
+               class="{% if current_page.id == address_page.id %}active{% endif %}">
+               {{ address_page.title }}
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>

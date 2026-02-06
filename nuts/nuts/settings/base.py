@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "users",
     "locations",
     "thanks",
+    "profiles",
     "wagtail.contrib.forms",
     "wagtail.contrib.settings",
     "wagtail.contrib.redirects",

@@ -49,6 +49,7 @@ class LoginPage(Page):
         context = super().get_context(request)
 
         context["customer_login_form"] = CustomerLoginForm()
+        context["forgot_page"] = ForgotPasswordPage.objects.live().public().first()
         context["registration_page"] = RegisterPage.objects.live().public().first()
 
         return context

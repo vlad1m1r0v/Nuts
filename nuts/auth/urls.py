@@ -5,7 +5,8 @@ from auth.views import (
     BusinessRegistrationView,
     CustomerLoginView,
     CustomerForgotPasswordView,
-    CustomerResetPasswordView
+    CustomerResetPasswordView,
+    CustomerLogoutView
 )
 
 app_name = 'custom_auth'
@@ -35,5 +36,10 @@ urlpatterns = [
         route="reset-password/",
         view=CustomerResetPasswordView.as_view(),
         name="reset-password"
+    ),
+    path(
+        route="logout/",
+        view=CustomerLogoutView.as_view(),
+        name="logout"
     )
 ]
