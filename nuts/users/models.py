@@ -6,6 +6,7 @@ from locations.models import Address
 
 class CustomerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='customer_profile', verbose_name="Пользователь")
+    company_name = models.CharField(max_length=60, verbose_name="Компания", null=True, blank=True)
     avatar = models.ImageField(upload_to="avatars/", null=True, blank=True, verbose_name="Аватар")
     full_name = models.CharField(max_length=60, verbose_name="ФИО")
     phone = models.CharField(unique=True, verbose_name="Номер телефона", validators=[ukrainian_phone_validator])

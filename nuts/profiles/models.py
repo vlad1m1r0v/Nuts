@@ -6,6 +6,10 @@ from wagtail.images.models import Image
 
 from auth.mixins import CustomerProfileRequiredMixin
 
+from profiles.forms import (
+    IndividualContactInformationForm,
+    LegalEntityContactInformationForm
+)
 
 class ProfilePage(CustomerProfileRequiredMixin, Page):
     parent_page_types = ['home.HomePage']
@@ -51,6 +55,31 @@ class ContactInformationPage(CustomerProfileRequiredMixin, Page):
     max_count = 1
 
     template = "profile/contact_information.html"
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request)
+        user = request.user
+        profile = user.customer_profile
+
+        is_business = hasattr(profile, 'business_profile')
+
+        initial_data = {
+            'email': user.email,
+            'phone': profile.phone,
+            'full_name': profile.full_name,
+        }
+
+        if is_business:
+            initial_data['company_name'] = profile.company_name
+            form = LegalEntityContactInformationForm(initial=initial_data, user=user)
+        else:
+            form = IndividualContactInformationForm(initial=initial_data, user=user)
+
+        context["form"] = form
+        context["is_business"] = is_business
+        return context
+
+
 
     class Meta:
         verbose_name = "Contact information page"
