@@ -8,8 +8,12 @@ from auth.mixins import CustomerProfileRequiredMixin
 
 from profiles.forms import (
     IndividualContactInformationForm,
-    LegalEntityContactInformationForm
+    LegalEntityContactInformationForm,
+    BusinessAddressForm,
+    IndividualAddressForm
 )
+from users.models import BusinessProfile
+
 
 class ProfilePage(CustomerProfileRequiredMixin, Page):
     parent_page_types = ['home.HomePage']
@@ -49,6 +53,7 @@ class TransactionsHistoryPage(CustomerProfileRequiredMixin, Page):
     class Meta:
         verbose_name = "Transactions history page"
 
+
 class ContactInformationPage(CustomerProfileRequiredMixin, Page):
     parent_page_types = ['profiles.ProfilePage']
     subpage_types = []
@@ -79,8 +84,6 @@ class ContactInformationPage(CustomerProfileRequiredMixin, Page):
         context["is_business"] = is_business
         return context
 
-
-
     class Meta:
         verbose_name = "Contact information page"
 
@@ -103,7 +106,7 @@ class AddressPage(CustomerProfileRequiredMixin, Page):
 
     template = "profile/address.html"
 
-    side_image_photo =  models.ForeignKey(
+    side_image_photo = models.ForeignKey(
         Image,
         null=True,
         blank=True,
@@ -119,6 +122,48 @@ class AddressPage(CustomerProfileRequiredMixin, Page):
         FieldPanel("side_image_description")
     ]
 
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request)
+        profile = request.user.customer_profile
+        is_business = hasattr(profile, 'business_profile')
+
+        initial_data = {
+            'country': profile.contact_address.region.country,
+            'region': profile.contact_address.region,
+            'city': profile.contact_address.city,
+            'street_address': profile.contact_address.street_address,
+        }
+
+        if is_business:
+            biz = profile.business_profile
+            context['biz_type'] = biz.business_type
+
+            if biz.business_type == BusinessProfile.BusinessType.LEGAL_ENTITY:
+                details = getattr(biz, 'legal_details', None)
+                if details:
+                    initial_data['okpo'] = details.okpo_code
+                    b_addr = details.legal_address
+            else:
+                details = getattr(biz, 'fop_details', None)
+                if details:
+                    initial_data['edrpo'] = details.edrpo_code
+                    b_addr = details.activity_address
+
+            if b_addr:
+                initial_data.update({
+                    'legal_country': b_addr.region.country,
+                    'legal_region': b_addr.region,
+                    'legal_city': b_addr.city,
+                    'legal_address_line': b_addr.street_address,
+                    'legal_index': b_addr.postal_code,
+                })
+            form = BusinessAddressForm(initial=initial_data, user=request.user)
+        else:
+            form = IndividualAddressForm(initial=initial_data, user=request.user)
+
+        context['form'] = form
+        context['is_business'] = is_business
+        return context
+
     class Meta:
         verbose_name = "Address page"
-

@@ -1,7 +1,8 @@
 from django.urls import path
 
 from profiles.views import (
-    UpdateContactInformationView
+    UpdateContactInformationView,
+    UpdateAddressInformationView
 )
 
 app_name = 'profiles'
@@ -12,4 +13,9 @@ urlpatterns = [
         view=UpdateContactInformationView.as_view(),
         name="contact-information"
     ),
+    path(
+        route="address-information/",
+        view=UpdateAddressInformationView.as_view(),
+        name="address-information"
+    )
 ]
