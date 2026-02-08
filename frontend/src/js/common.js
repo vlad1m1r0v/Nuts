@@ -347,7 +347,12 @@ jQuery(document).ready(function ($) {
         $this.after('<div class="select-styled"></div>');
 
         var $styledSelect = $this.next("div.select-styled");
-        $styledSelect.text($this.children("option").eq(0).text());
+
+        var $selectedOption = $this.children("option:selected").length
+            ? $this.children("option:selected")
+            : $this.children("option").eq(0);
+
+        $styledSelect.text($selectedOption.text());
 
         var $list = $("<ul />", {
             class: "select-options",

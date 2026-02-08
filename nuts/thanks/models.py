@@ -12,6 +12,8 @@ class ThanksPage(Page):
     subpage_types = []
     max_count = 1
 
+    template="thanks.html"
+
     hero = StreamField(
         [
             ('image_jumbotron', ImageJumbotronBlock()),

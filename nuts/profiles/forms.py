@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 
@@ -330,3 +331,56 @@ class BusinessAddressForm(BaseAddressForm):
 
         b_addr.save()
         details.save()
+
+
+class ChangePasswordForm(forms.Form):
+    old_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "Текущий пароль*"}),
+        label="Текущий пароль",
+        error_messages={"required": "Введите текущий пароль."}
+    )
+    new_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "Новый пароль*"}),
+        label="Новый пароль",
+        error_messages={"required": "Введите новый пароль."}
+    )
+    confirm_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "Подтвердить пароль*"}),
+        label="Подтвердите пароль",
+        error_messages={"required": "Подтвердите новый пароль."}
+    )
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+
+    def clean_old_password(self):
+        old_password = self.cleaned_data.get("old_password")
+        if not self.user.check_password(old_password):
+            raise ValidationError("Текущий пароль введён неверно.")
+        return old_password
+
+    def clean_new_password(self):
+        new_password = self.cleaned_data.get('new_password')
+
+        try:
+            validate_password(new_password)
+        except ValidationError:
+            raise ValidationError(
+                "Ваш пароль не соответствует требованиям безопасности."
+            )
+        return new_password
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        new_p = cleaned_data.get("new_password")
+        conf_p = cleaned_data.get("confirm_password")
+
+        if new_p and conf_p and new_p != conf_p:
+            raise ValidationError("Новые пароли не совпадают.")
+
+        if new_p and cleaned_data.get("old_password") == new_p:
+            raise ValidationError("Новый пароль не должен совпадать со старым.")
+
+        return cleaned_data

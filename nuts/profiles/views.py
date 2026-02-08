@@ -1,13 +1,15 @@
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
 from django.db import transaction
 from django.shortcuts import redirect
-from django.contrib import messages
 from django.views import View
 
 from profiles.forms import (
     LegalEntityContactInformationForm,
     IndividualContactInformationForm,
     BusinessAddressForm,
-    IndividualAddressForm
+    IndividualAddressForm,
+    ChangePasswordForm
 )
 
 
@@ -49,6 +51,28 @@ class UpdateAddressInformationView(View):
             except Exception as e:
                 messages.error(request, f"Произошла ошибка при сохранении: {str(e)}")
 
+            return redirect(request.META.get('HTTP_REFERER', '/'))
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, error)
+
+            return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+class UpdatePasswordView(View):
+    def post(self, request):
+        form = ChangePasswordForm(request.POST, user=request.user)
+
+        if form.is_valid():
+            user = request.user
+            new_password = form.cleaned_data.get("new_password")
+            user.set_password(new_password)
+            user.save()
+
+            update_session_auth_hash(request, user)
+
+            messages.success(request, "Ваш пароль успешно изменен.")
             return redirect(request.META.get('HTTP_REFERER', '/'))
         else:
             for field, errors in form.errors.items():

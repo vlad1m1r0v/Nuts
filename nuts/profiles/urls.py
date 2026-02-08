@@ -2,7 +2,8 @@ from django.urls import path
 
 from profiles.views import (
     UpdateContactInformationView,
-    UpdateAddressInformationView
+    UpdateAddressInformationView,
+    UpdatePasswordView
 )
 
 app_name = 'profiles'
@@ -17,5 +18,10 @@ urlpatterns = [
         route="address-information/",
         view=UpdateAddressInformationView.as_view(),
         name="address-information"
+    ),
+    path(
+        route="change-password/",
+        view=UpdatePasswordView.as_view(),
+        name="change-password"
     )
 ]

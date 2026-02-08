@@ -10,7 +10,8 @@ from profiles.forms import (
     IndividualContactInformationForm,
     LegalEntityContactInformationForm,
     BusinessAddressForm,
-    IndividualAddressForm
+    IndividualAddressForm,
+    ChangePasswordForm
 )
 from users.models import BusinessProfile
 
@@ -95,6 +96,13 @@ class ChangePasswordPage(CustomerProfileRequiredMixin, Page):
 
     template = "profile/password.html"
 
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request)
+
+        context["change_password_form"] = ChangePasswordForm()
+
+        return context
+
     class Meta:
         verbose_name = "Change password page"
 
@@ -167,3 +175,6 @@ class AddressPage(CustomerProfileRequiredMixin, Page):
 
     class Meta:
         verbose_name = "Address page"
+
+
+

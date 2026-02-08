@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "locations",
     "thanks",
     "profiles",
+    "not_found",
     "wagtail.contrib.forms",
     "wagtail.contrib.settings",
     "wagtail.contrib.redirects",
