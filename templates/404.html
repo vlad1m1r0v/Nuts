@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags %}
+{% block content %}
+<section class="first-section first-section__error no-bg">
+    <div class="container">
+        <div class="row justify-content-center align-content-center">
+            <div class="col-lg-8">
+                <div class="wrap">
+                    <h1
+                        {% image self.background_image_photo original as img %}
+                        style="background: url('{{img.url}}')"
+                    >
+                        {{ self.hero_text }}
+                    </h1>
+                    <p>{{ self.subtitle }}</p>
+                    <a href="{{home_page.url}}" class="button_transparent with_arrow">
+                        <i class="nut-icon icons-left-arrow"></i>
+                        <b>{{ self.button_text }}</b>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
