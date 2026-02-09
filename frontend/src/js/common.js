@@ -19,6 +19,23 @@ jQuery(document).ready(function ($) {
     const marker = L.marker([longitude, latitude]).addTo(map);
 });
 
+$(document).ready(function () {
+    const $targets = $('section.timer, footer.footer__bottom');
+
+    $targets.each(function () {
+        const $this = $(this);
+        const $prevElement = $this.prev();
+        if ($prevElement.length && !$prevElement.hasClass('gray_section')) {
+            if ($this.hasClass('footer__bottom')) {
+                $this.addClass('footer__bottom_gray');
+                $this.find('div#contacts').addClass('gray_section');
+            } else {
+                $this.addClass('gray_section');
+            }
+        }
+    });
+});
+
 (function ($) {
     // :: PreventDefault a Click
     $("a[href='#']").on("click", function ($) {

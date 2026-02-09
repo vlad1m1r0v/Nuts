@@ -7,6 +7,5 @@ class ShopPageTR(TranslationOptions):
     fields = (
         'hero',
         'nut_title',
-        'nut_description',
-        'gallery'
+        'nut_description'
     )

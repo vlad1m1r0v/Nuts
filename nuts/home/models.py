@@ -1,10 +1,15 @@
 from django.db import models
+from wagtail.images.models import Image
 
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import StreamField
 
 from core.blocks import VideoJumbotronBlock, ImageJumbotronBlock
+
+from about.models import AboutPage
+
+from news.models import NewsIndexPage, NewsDetailPage
 
 class HomePage(Page):
     parent_page_types = []
@@ -46,14 +51,35 @@ class HomePage(Page):
         blank=True,
     )
 
+    walnut_image = models.ForeignKey(
+        Image,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+"
+    )
     walnut_utility_description = models.TextField(
         blank=True,
     )
 
+    hazelnut_image = models.ForeignKey(
+        Image,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+"
+    )
     hazelnut_utility_description = models.TextField(
         blank=True,
     )
 
+    rosehip_image = models.ForeignKey(
+        Image,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+"
+    )
     rosehip_utility_description = models.TextField(
         blank=True,
     )
@@ -67,6 +93,15 @@ class HomePage(Page):
         use_json_field=True
     )
 
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request)
+
+        context["about_page"] = AboutPage.objects.live().public().first()
+        context["news_page"] = NewsIndexPage.objects.live().first()
+        context["news_list"] = NewsDetailPage.objects.live().order_by('-publication_date')[:3]
+
+        return context
+
     content_panels = Page.content_panels + [
         FieldPanel('video_hero'),
 
@@ -78,8 +113,13 @@ class HomePage(Page):
         FieldPanel('product_utility_title'),
         FieldPanel('product_utility_description'),
 
+        FieldPanel('walnut_image'),
         FieldPanel('walnut_utility_description'),
+
+        FieldPanel('hazelnut_image'),
         FieldPanel('hazelnut_utility_description'),
+
+        FieldPanel('rosehip_image'),
         FieldPanel('rosehip_utility_description'),
 
         FieldPanel('image_hero'),

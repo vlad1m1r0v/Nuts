@@ -1,4 +1,7 @@
+import re
+
 from django.db import models
+from django.utils.text import Truncator
 
 from wagtail.models import Page
 from wagtail.fields import StreamField
@@ -79,6 +82,22 @@ class AboutPage(Page):
         context["news_list"] = NewsDetailPage.objects.live().order_by('-publication_date')[:3]
 
         return context
+
+    def short_description(self):
+        if not self.description:
+            return ""
+
+        limit = 300
+
+        if len(self.description) <= limit:
+            return self.description
+
+        match = re.match(r'^(.{300,Short?}.*?(\.|$))', self.description, re.DOTALL)
+
+        if match:
+            return match.group(1).strip()
+
+        return Truncator(self.description).chars(limit + 50)
 
     class Meta:
         verbose_name = "About page"
