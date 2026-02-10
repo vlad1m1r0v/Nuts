@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 from pathlib import Path
@@ -14,9 +15,11 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY")
 
 INSTALLED_APPS = [
+    # wagtail model translation
     "wagtail_modeltranslation",
     "wagtail_modeltranslation.makemigrations",
     "wagtail_modeltranslation.migrate",
+    # apps
     "home",
     "search",
     "core",
@@ -33,6 +36,7 @@ INSTALLED_APPS = [
     "thanks",
     "profiles",
     "not_found",
+    # wagtail
     "wagtail.contrib.forms",
     "wagtail.contrib.settings",
     "wagtail.contrib.redirects",
@@ -48,10 +52,17 @@ INSTALLED_APPS = [
     "wagtailmedia",
     "modelcluster",
     "taggit",
+    # external libraries
     "anymail",
     "django_extensions",
     "django_filters",
     "django_vite",
+    # unfold
+    "unfold",
+    "unfold.contrib.filters",
+    # modeltranslation
+    "modeltranslation",
+    # django admin
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -229,3 +240,29 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 # if untrusted users are allowed to upload files -
 # see https://docs.wagtail.org/en/stable/advanced_topics/deploying.html#user-uploaded-files
 WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
+
+UNFOLD = {
+    "SIDEBAR": {
+        "show_search": False,
+        "show_all_applications": False,
+        "navigation": [
+            {
+                "title": "Товары",
+                "separator": True,
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": "Товары",
+                        "icon": "inventory_2",
+                        "link": reverse_lazy("admin:products_product_changelist"),
+                    },
+                    {
+                        "title": "Особености товаров",
+                        "icon": "cake_add",
+                        "link": reverse_lazy("admin:products_productfeature_changelist"),
+                    },
+                ],
+            },
+        ],
+    }
+}

@@ -418,6 +418,21 @@ django = ">=4.2"
 test = ["pytest-django (>=4.0,<5.0)", "pytest-pythonpath (>=0.7,<1.0)"]
 
 [[package]]
+name = "django-unfold"
+version = "0.78.1"
+description = "Modern Django admin theme"
+optional = false
+python-versions = "<4.0,>=3.10"
+groups = ["main"]
+files = [
+    {file = "django_unfold-0.78.1-py3-none-any.whl", hash = "sha256:6b557030d3ad6c8275ecacb69260b03a7ed3de972cb2e60ef2dea6d3363d515c"},
+    {file = "django_unfold-0.78.1.tar.gz", hash = "sha256:1de8537f0037b48e84d72b30229259060140ac84fc30d79eb69b5c9de6c5e51d"},
+]
+
+[package.dependencies]
+django = ">=4.2"
+
+[[package]]
 name = "django-vite"
 version = "3.1.0"
 description = "Integration of Vite in a Django project."
@@ -1038,4 +1053,4 @@ wand = ["Wand (>=0.6,<1.0)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13,<4"
-content-hash = "2d80dd3495c1d83fc64e415e63897a534ec8969d0ae64cb2902f73c93011960d"
+content-hash = "66d3a396f10092ca8fcf1a22a7fa1dc2e8c58d4faf1753ef43eb7429013e94c7"
