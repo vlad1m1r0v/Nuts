@@ -19,72 +19,31 @@
         <div class="row align-items-center justify-content-center">
             <div class="col-12">
                 <div class="production__filter">
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="row align-items-center">
-                                <div class="col-lg-3">
-                                    <div class="production__filter_title">
-                                        <p>Фильтр</p>
-                                        <i class="nut-icon icons-settings"></i>
-                                    </div>
-                                </div>
-                                <div class="col-lg-5">
-                                    <select>
-                                        <option value="hide">Вкус</option>
-                                        <option value="lorem">lorem</option>
-                                        <option value="lorem">lorem</option>
-                                        <option value="lorem">lorem</option>
-                                        <option value="lorem">lorem</option>
-                                        <option value="lorem">lorem</option>
-                                        <option value="lorem">lorem</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-4">
-                                    <select>
-                                        <option value="hide">Масса</option>
-                                        <option value="lorem">lorem</option>
-                                        <option value="lorem">lorem</option>
-                                        <option value="lorem">lorem</option>
-                                        <option value="lorem">lorem</option>
-                                        <option value="lorem">lorem</option>
-                                        <option value="lorem">lorem</option>
-                                    </select>
-                                </div>
-                            </div>
+                    <form
+                            id="filter-form"
+                            hx-get="{% url 'shop:catalog' %}"
+                            hx-target="#product-grid"
+                    >
+                        {% csrf_token %}
+                        <div id="filter-form-inner">
                         </div>
-                        <div class="col-lg-5 align-self-center">
-                            <div class="row">
-                                <div class="col-lg-5 align-self-center">
-                                    <div class="production__filter_price">
-											<span>
-													Стоимость
-											</span>
-                                        <i class="nut-icon icons-arrow-down"></i>
-                                        <i class="nut-icon icons-right-top accent"></i>
-                                    </div>
-                                </div>
-                                <div class="col-lg-7">
-                                    <div class="production__filter_button">
-                                        <a href="#" class="button">Применить</a>
-                                        <a href="#" class="button_close"><i
-                                                class="nut-icon icons-close-button"></i><span> Сбросить</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
         <!--Products-->
-        <div class="row justify-content-center">
+        <div
+                class="row justify-content-center"
+                id="product-grid"
+                hx-get="{% url 'shop:catalog' %}"
+                hx-trigger="load"
+                hx-include="#filter-form"
+        >
         </div>
         <!--Load More Button-->
-        <div class="row">
-            <div class="wrapper">
-                <a href="#" class="button button_transparent">Загрузить еще</a>
-            </div>
+        <div id="load-more-wrapper">
         </div>
+    </div>
     </div>
 </section>
 <!--Manufacturer Block-->

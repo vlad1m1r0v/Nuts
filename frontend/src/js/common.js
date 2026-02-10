@@ -311,39 +311,30 @@ $(document).ready(function () {
     });
 
     //initialize swiper when document ready
-    var swiper = new Swiper(".products-container", {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop: true,
-        speed: 400,
-        // pagination: {
-        //   el: '.swiper-pagination',
-        //   type: 'fraction',
-        // },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-        autoplay: 10000000,
-        zoom: true,
-        // autoplayDisableOnInteraction: false,
-        // noSwiping: true,
-        noSwiping: false,
-        breakpoints: {
-            1024: {
+    function initProductSwipers() {
+        $('.products-container').not('.swiper-container-initialized').each(function () {
+            new Swiper(this, {
                 slidesPerView: 1,
                 spaceBetween: 30,
-            },
-            920: {
-                slidesPerView: 1,
-                spaceBetween: 30,
-            },
-            578: {
-                slidesPerView: 1,
-                spaceBetween: 10,
-            },
-        },
-    });
+                loop: true,
+                speed: 400,
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                autoplay: false,
+                zoom: true,
+                noSwiping: false,
+                observer: true,
+                observeParents: true,
+                breakpoints: {
+                    1024: {slidesPerView: 1, spaceBetween: 30},
+                    920: {slidesPerView: 1, spaceBetween: 30},
+                    578: {slidesPerView: 1, spaceBetween: 10},
+                },
+            });
+        });
+    }
 
     // задаем класс и data по дукументации плагина скролла
 
@@ -353,58 +344,100 @@ $(document).ready(function () {
     $(".manufacturer .wrapper").mCustomScrollbar({
         theme: "dark",
     });
+
     // select
 
-    $("select").each(function () {
-        var $this = $(this),
-            numberOfOptions = $(this).children("option").length;
+    function initCustomSelects() {
+        // Шукаємо тільки ті селекти, які ще НЕ мають класу 'select-hidden'
+        // Це запобігає подвійній ініціалізації
+        $("select").not(".select-hidden").each(function () {
+            var $this = $(this),
+                numberOfOptions = $(this).children("option").length;
 
-        $this.addClass("select-hidden");
-        $this.wrap('<div class="select"></div>');
-        $this.after('<div class="select-styled"></div>');
+            $this.addClass("select-hidden");
+            $this.wrap('<div class="select"></div>');
+            $this.after('<div class="select-styled"></div>');
 
-        var $styledSelect = $this.next("div.select-styled");
+            var $styledSelect = $this.next("div.select-styled");
 
-        var $selectedOption = $this.children("option:selected").length
-            ? $this.children("option:selected")
-            : $this.children("option").eq(0);
+            var $selectedOption = $this.children("option:selected").length
+                ? $this.children("option:selected")
+                : $this.children("option").eq(0);
 
-        $styledSelect.text($selectedOption.text());
+            $styledSelect.text($selectedOption.text());
 
-        var $list = $("<ul />", {
-            class: "select-options",
-        }).insertAfter($styledSelect);
+            var $list = $("<ul />", {
+                class: "select-options",
+            }).insertAfter($styledSelect);
 
-        for (var i = 0; i < numberOfOptions; i++) {
-            $("<li />", {
-                text: $this.children("option").eq(i).text(),
-                rel: $this.children("option").eq(i).val(),
-            }).appendTo($list);
-        }
+            for (var i = 0; i < numberOfOptions; i++) {
+                $("<li />", {
+                    text: $this.children("option").eq(i).text(),
+                    rel: $this.children("option").eq(i).val(),
+                }).appendTo($list);
+            }
 
-        var $listItems = $list.children("li");
+            var $listItems = $list.children("li");
 
-        $styledSelect.click(function (e) {
-            e.stopPropagation();
-            $("div.select-styled.active")
-                .not(this)
-                .each(function () {
-                    $(this).removeClass("active").next("ul.select-options").hide();
-                });
-            $(this).toggleClass("active").next("ul.select-options").toggle();
+            $styledSelect.click(function (e) {
+                e.stopPropagation();
+                $("div.select-styled.active")
+                    .not(this)
+                    .each(function () {
+                        $(this).removeClass("active").next("ul.select-options").hide();
+                    });
+                $(this).toggleClass("active").next("ul.select-options").toggle();
+            });
+
+            $listItems.click(function (e) {
+                e.stopPropagation();
+                $styledSelect.text($(this).text()).removeClass("active");
+                $this.val($(this).attr("rel"));
+
+                // КРИТИЧНО для HTMX: тригеримо подію change, щоб HTMX побачив зміну
+                $this.get(0).dispatchEvent(new Event('change', {bubbles: true}));
+
+                $list.hide();
+            });
+
+            $(document).click(function () {
+                $styledSelect.removeClass("active");
+                $list.hide();
+            });
         });
+    }
 
-        $listItems.click(function (e) {
-            e.stopPropagation();
-            $styledSelect.text($(this).text()).removeClass("active");
-            $this.val($(this).attr("rel"));
-            $list.hide();
-            //console.log($this.val());
-        });
+    $(document).ready(function () {
+        initCustomSelects();
+        initProductSwipers();
+    });
 
-        $(document).click(function () {
-            $styledSelect.removeClass("active");
-            $list.hide();
+    function initSorting() {
+        $('.ordering-icon').off('click').on('click', function () {
+            const $this = $(this);
+            const $form = $('#filter-form');
+            const $sortInput = $form.find('input[name="sort_price"]');
+            const $icons = $('.ordering-icon');
+
+            if ($this.hasClass('accent')) {
+                $sortInput.val('');
+                $this.removeClass('accent');
+            } else {
+                $icons.removeClass('accent');
+                $this.addClass('accent');
+
+                if ($this.hasClass('icons-arrow-down')) {
+                    $sortInput.val('desc');
+                } else if ($this.hasClass('icons-right-top')) {
+                    $sortInput.val('asc');
+                }
+            }
         });
+    }
+
+    document.body.addEventListener('htmx:afterSettle', function (evt) {
+        initCustomSelects();
+        initSorting();
+        initProductSwipers();
     });
 })(jQuery);

@@ -7,6 +7,8 @@ from wagtail.images.blocks import ImageChooserBlock
 
 from core.blocks import ImageJumbotronBlock
 
+from shop.forms import ProductFilterForm
+
 class ShopPage(Page):
     template = "shop.html"
 
@@ -40,6 +42,13 @@ class ShopPage(Page):
         FieldPanel('nut_description'),
         FieldPanel('gallery')
     ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request)
+
+        context["filter_form"] = ProductFilterForm()
+
+        return context
 
     class Meta:
         verbose_name = "Shop page"
