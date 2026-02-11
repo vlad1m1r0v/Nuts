@@ -1,0 +1,80 @@
+{% if is_htmx %}
+<span id="cart-counter" hx-swap-oob="innerHTML">
+    {{ cart.cart_items_count|default:0 }}
+</span>
+{% endif %}
+<div class="wrap" id="cart-content">
+    {% if cart and cart.items.all %}
+    {% for item in cart.items.all %}
+    <div class="popup__cart_item">
+        <div class="row align-items-center no-gutters item_row">
+            <div class="col-md-5 col-12">
+                <div class="item_title">
+                    <p>{{ item.product.name }}</p>
+                </div>
+            </div>
+            <div class="col-md-7 col-12">
+                <div class="row align-items-center no-gutters">
+                    <div class="col-6">
+                        <div class="item_quantity">
+                            <button type="button" class="quantity_minus"
+                                    hx-post="{% url 'cart:update-item' item.id 'minus' %}"
+                                    hx-target="#cart-content"
+                                    hx-swap="outerHTML"
+                                    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                            >
+                                <i class="nut-icon icons-qty-left"></i>
+                            </button>
+                            <input type="text" name="quantity" value="{{ item.quantity }}" readonly
+                                   class="quantity_input">
+                            <button type="button" class="quantity_plus"
+                                    hx-post="{% url 'cart:update-item' item.id 'plus' %}"
+                                    hx-target="#cart-content"
+                                    hx-swap="outerHTML"
+                                    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                            >
+                                <i class="nut-icon icons-qty-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="item_sum">
+                            <p>{{ item.item_total|floatformat:0 }} <span>грн.</span></p>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="item_close">
+                            <a href="#"
+                               hx-post="{% url 'cart:update-item' item.id 'remove' %}"
+                               hx-target="#cart-content"
+                               hx-swap="outerHTML"
+                               hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                            >
+                                <i class="nut-icon icons-close-button"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="popup__cart_sum">
+        <div class="sum_item">
+            <div class="sum_item_title"><p>Всего </p></div>
+            <div class="sum_item_new">
+                <p>{{ cart.cart_total|floatformat:0 }} <i>грн.</i></p>
+            </div>
+        </div>
+        <div class="sum_item">
+            <div class="sum_item_button">
+                <a href="#" class="button">Перейти в корзину</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="popup__cart_clean">
+        <p>Ваша корзина пуста</p>
+    </div>
+    {% endif %}
+</div>

@@ -13,7 +13,7 @@ class ShopPage(Page):
     template = "shop.html"
 
     parent_page_types = ['home.HomePage']
-    subpage_types = []
+    subpage_types = ['products.ProductPage']
     max_count = 1
 
     hero = StreamField(

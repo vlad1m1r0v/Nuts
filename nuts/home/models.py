@@ -9,7 +9,12 @@ from core.blocks import VideoJumbotronBlock, ImageJumbotronBlock
 
 from about.models import AboutPage
 
+from products.models import Product, ProductPage
+
+from shop.models import ShopPage
+
 from news.models import NewsIndexPage, NewsDetailPage
+
 
 class HomePage(Page):
     parent_page_types = []
@@ -98,7 +103,10 @@ class HomePage(Page):
 
         context["about_page"] = AboutPage.objects.live().public().first()
         context["news_page"] = NewsIndexPage.objects.live().first()
+        context["product_page"] = ProductPage.objects.live().first()
         context["news_list"] = NewsDetailPage.objects.live().order_by('-publication_date')[:3]
+        context["products"] = Product.objects.all().prefetch_related('images', 'features')[:1]
+        context["shop_page"] = ShopPage.objects.live().first()
 
         return context
 

@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "thanks",
     "profiles",
     "not_found",
+    "cart",
     # wagtail
     "wagtail.contrib.forms",
     "wagtail.contrib.settings",
@@ -102,6 +103,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "wagtail.contrib.settings.context_processors.settings",
+                'cart.context_processors.cart_processor'
             ],
         },
     },

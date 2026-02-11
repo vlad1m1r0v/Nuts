@@ -2,7 +2,7 @@ from django.views import View
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.db.models import Case, When, F, DecimalField
-from products.models import Product
+from products.models import Product, ProductPage
 
 from .forms import ProductFilterForm
 
@@ -45,9 +45,12 @@ class ShopCatalogView(View):
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
+        product_page = ProductPage.objects.live().first()
+
         context = {
             'products': page_obj,
             'page_obj': page_obj,
+            'product_page': product_page,
             'filter_form': form
         }
 

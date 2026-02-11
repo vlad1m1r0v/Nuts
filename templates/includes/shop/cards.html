@@ -1,5 +1,5 @@
 <!--Product Cards-->
-{% load django_vite %}
+{% load wagtailcore_tags django_vite %}
 {% for product in products %}
 <div class="col-lg-4 col-md-6 col-12">
     <div class="wrap">
@@ -20,7 +20,7 @@
                 <div class="swiper-wrapper">
                     {% for item in product.images.all %}
                     <div class="swiper-slide">
-                        <a href="#"><img src="{{ item.image.url }}" alt="{{ product.name }}"/></a>
+                        <a href="{% pageurl product_page  %}?product_id={{ product.id }}"><img src="{{ item.image.url }}" alt="{{ product.name }}"/></a>
                     </div>
                     {% endfor %}
                 </div>
@@ -80,7 +80,7 @@
                     </div>
                     <div class="sum_item">
                         <div class="sum_item_button">
-                            <a href="#" class="button">Купить</a>
+                            <a href="{% pageurl product_page %}?product_id={{ product.id }}" class="button">Купить</a>
                         </div>
                     </div>
                 </div>

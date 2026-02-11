@@ -16,6 +16,7 @@ urlpatterns = [
     path("auth/", include("auth.urls")),
     path("profiles/", include("profiles.urls")),
     path("shop/", include("shop.urls")),
+    path("cart/", include("cart.urls"))
 ]
 
 

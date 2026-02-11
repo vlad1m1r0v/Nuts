@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
@@ -11,6 +12,8 @@ class ProductPage(Page):
     parent_page_types = ['shop.ShopPage']
     subpage_types = []
     max_count = 1
+
+    template="product.html"
 
     storage_conditions = models.TextField(blank=True, null=True)
 
@@ -41,6 +44,26 @@ class ProductPage(Page):
         FieldPanel("payment_info"),
         FieldPanel("delivery_info")
     ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+
+        product_id = request.GET.get('product_id')
+
+        if not product_id:
+            messages.error(request, "Не указан идентфикатор товара.")
+            return context
+
+        try:
+            product = Product.objects.prefetch_related('images', 'features').get(pk=product_id)
+            context['product'] = product
+            return context
+
+        except Product.DoesNotExist:
+            messages.error(request, "Товар с указаным идентификатором не обнаружен.")
+            return context
+
+
 
     class Meta:
         verbose_name = "Product page"
@@ -124,7 +147,7 @@ class Product(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"{self.sku} - {self.name}"
+        return self.name
 
 
 class ProductImage(models.Model):
