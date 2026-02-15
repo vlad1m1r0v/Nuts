@@ -28,6 +28,8 @@ from auth.tokens import account_activation_token
 
 from locations.models import Address
 
+from cart.utils import merge_carts
+
 from users.models import (
     CustomerProfile,
     BusinessProfile,
@@ -76,7 +78,7 @@ class IndividualRegistrationView(View):
                     street_address=data.get('address_line', None)
                 )
 
-                CustomerProfile.objects.create(
+                customer_profile = CustomerProfile.objects.create(
                     user=user,
                     contact_address=contact_address,
                     avatar=data.get('avatar'),
@@ -86,7 +88,11 @@ class IndividualRegistrationView(View):
                     is_fop=data.get('is_fop', False)
                 )
 
+            session_key = request.session.session_key
+
             login(request, user, backend="auth.authentication.CustomerAuthBackend")
+
+            merge_carts(customer_profile=customer_profile, anonymous_session_key=session_key)
 
             messages.success(request, "Регистрация прошла успешно. Теперь вы можете войти.")
             return redirect(home_url)
@@ -174,7 +180,11 @@ class BusinessRegistrationView(View):
                         edrpo_code=data['edrpo']
                     )
 
+            session_key = request.session.session_key
+
             login(request, user, backend="auth.authentication.CustomerAuthBackend")
+
+            merge_carts(customer_profile=customer, anonymous_session_key=session_key)
 
             messages.success(request, "Бизнес-аккаунт успешно зарегистрирован.")
             return redirect(home_url)
@@ -210,7 +220,14 @@ class CustomerLoginView(View):
         )
 
         if user is not None:
+            session_key = request.session.session_key
+
             login(request, user, backend="auth.authentication.CustomerAuthBackend")
+
+            merge_carts(
+                customer_profile=CustomerProfile.objects.get(user=user),
+                anonymous_session_key=session_key
+            )
             messages.success(request, f"Вход выполнен успешно.")
             return redirect(home_url)
         else:

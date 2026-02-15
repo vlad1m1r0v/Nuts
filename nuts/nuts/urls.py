@@ -13,12 +13,7 @@ urlpatterns = [
     path("unfold/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
-    path("auth/", include("auth.urls")),
-    path("profiles/", include("profiles.urls")),
-    path("shop/", include("shop.urls")),
-    path("cart/", include("cart.urls"))
 ]
-
 
 if settings.DEBUG:
     from django.conf.urls.static import static
@@ -28,6 +23,10 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns = urlpatterns + i18n_patterns(
+    path("auth/", include("auth.urls")),
+    path("profiles/", include("profiles.urls")),
+    path("shop/", include("shop.urls")),
+    path("cart/", include("cart.urls")),
     path("search/", search_views.search, name="search"),
     path("", include(wagtail_urls)),
 )

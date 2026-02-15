@@ -13,7 +13,7 @@ class ProductPage(Page):
     subpage_types = []
     max_count = 1
 
-    template="product.html"
+    template = "product.html"
 
     storage_conditions = models.TextField(blank=True, null=True)
 
@@ -62,8 +62,6 @@ class ProductPage(Page):
         except Product.DoesNotExist:
             messages.error(request, "Товар с указаным идентификатором не обнаружен.")
             return context
-
-
 
     class Meta:
         verbose_name = "Product page"

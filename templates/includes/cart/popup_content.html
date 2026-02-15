@@ -1,8 +1,4 @@
-{% if is_htmx %}
-<span id="cart-counter" hx-swap-oob="innerHTML">
-    {{ cart.cart_items_count|default:0 }}
-</span>
-{% endif %}
+{% load wagtailcore_tags %}
 <div class="wrap" id="cart-content">
     {% if cart and cart.items.all %}
     {% for item in cart.items.all %}
@@ -17,20 +13,21 @@
                 <div class="row align-items-center no-gutters">
                     <div class="col-6">
                         <div class="item_quantity">
-                            <button type="button" class="quantity_minus"
+                            <button
+                                    type="button" class="quantity_minus"
                                     hx-post="{% url 'cart:update-item' item.id 'minus' %}"
-                                    hx-target="#cart-content"
-                                    hx-swap="outerHTML"
+                                    hx-swap="none"
                                     hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
                             >
                                 <i class="nut-icon icons-qty-left"></i>
                             </button>
+                            </button>
                             <input type="text" name="quantity" value="{{ item.quantity }}" readonly
                                    class="quantity_input">
-                            <button type="button" class="quantity_plus"
+                            <button
+                                    type="button" class="quantity_plus"
                                     hx-post="{% url 'cart:update-item' item.id 'plus' %}"
-                                    hx-target="#cart-content"
-                                    hx-swap="outerHTML"
+                                    hx-swap="none"
                                     hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
                             >
                                 <i class="nut-icon icons-qty-right"></i>
@@ -44,11 +41,11 @@
                     </div>
                     <div class="col-1">
                         <div class="item_close">
-                            <a href="#"
-                               hx-post="{% url 'cart:update-item' item.id 'remove' %}"
-                               hx-target="#cart-content"
-                               hx-swap="outerHTML"
-                               hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                            <a
+                                    href="#"
+                                    hx-post="{% url 'cart:update-item' item.id 'remove' %}"
+                                    hx-swap="none"
+                                    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
                             >
                                 <i class="nut-icon icons-close-button"></i>
                             </a>
@@ -68,7 +65,7 @@
         </div>
         <div class="sum_item">
             <div class="sum_item_button">
-                <a href="#" class="button">Перейти в корзину</a>
+                <a href="{% pageurl cart_page %}" class="button">Перейти в корзину</a>
             </div>
         </div>
     </div>

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "profiles",
     "not_found",
     "cart",
+    "orders",
     # wagtail
     "wagtail.contrib.forms",
     "wagtail.contrib.settings",

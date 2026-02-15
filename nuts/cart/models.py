@@ -1,10 +1,19 @@
-from typing import TYPE_CHECKING
-
 from django.db import models
 from django.core.validators import MinValueValidator
 
+from wagtail.models import Page
 
 from cart.managers import CartManager
+
+class CartPage(Page):
+    parent_page_types = ['home.HomePage']
+    subpage_types = []
+    max_count = 1
+
+    template="cart.html"
+
+    class Meta:
+        verbose_name = "Cart page"
 
 
 class Cart(models.Model):

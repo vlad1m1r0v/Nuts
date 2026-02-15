@@ -1,9 +1,14 @@
+from django.http import HttpResponse
 from django.views import View
 from django.shortcuts import render
 
 from products.models import Product
 
 from cart.models import Cart, CartItem
+
+from shop.models import ShopPage
+
+from auth.models import RegisterPage, LoginPage
 
 
 class CartAddItemView(View):
@@ -32,14 +37,9 @@ class CartAddItemView(View):
             item.quantity = 1
             item.save()
 
-        updated_cart = Cart.objects.get_cart_with_totals(request)
-
-        is_htmx = request.headers.get('HX-Request') == 'true'
-
-        return render(request, "includes/cart/content.html", {
-            "cart": updated_cart,
-            "is_htmx": is_htmx
-        })
+        response = HttpResponse()
+        response['HX-Trigger'] = 'cartUpdated'
+        return response
 
 
 class CartUpdateItemView(View):
@@ -60,10 +60,37 @@ class CartUpdateItemView(View):
         elif action == 'remove':
             item.delete()
 
-        updated_cart = Cart.objects.get_cart_with_totals(request)
-        is_htmx = request.headers.get('HX-Request') == 'true'
+        response = HttpResponse()
+        response['HX-Trigger'] = 'cartUpdated'
+        return response
 
-        return render(request, "includes/cart/content.html", {
-            "cart": updated_cart,
-            "is_htmx": is_htmx
-        })
+
+class CartPopupView(View):
+    def get(self, request):
+        cart = Cart.objects.get_cart_with_totals(request)
+        return render(request, "includes/cart/popup_content.html", {"cart": cart})
+
+
+class CartCounterView(View):
+    def get(self, request):
+        cart = Cart.objects.get_cart_with_totals(request)
+        count = getattr(cart, 'cart_items_count', 0) or 0
+        return HttpResponse(str(count))
+
+
+class CartTableView(View):
+    def get(self, request):
+        cart = Cart.objects.get_cart_with_totals(request)
+        shop_page = ShopPage.objects.live().first()
+        login_page = LoginPage.objects.live().first()
+        register_page = RegisterPage.objects.live().first()
+        return render(
+            request,
+            "includes/cart/table.html",
+            {
+                "cart": cart,
+                "shop_page": shop_page,
+                "login_page": login_page,
+                "register_page": register_page
+            }
+        )

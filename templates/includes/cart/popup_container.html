@@ -1,0 +1,11 @@
+<div class="container pr">
+    <div
+            class="popup__cart"
+            hx-get="{% url 'cart:popup' %}"
+            hx-trigger="cartUpdated from:body"
+    >
+        <div>
+            {% include "includes/cart/content.html" %}
+        </div>
+    </div>
+</div>
