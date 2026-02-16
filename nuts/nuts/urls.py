@@ -27,6 +27,7 @@ urlpatterns = urlpatterns + i18n_patterns(
     path("profiles/", include("profiles.urls")),
     path("shop/", include("shop.urls")),
     path("cart/", include("cart.urls")),
+    path("orders/", include("orders.urls")),
     path("search/", search_views.search, name="search"),
     path("", include(wagtail_urls)),
 )

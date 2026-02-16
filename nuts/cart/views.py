@@ -10,6 +10,7 @@ from shop.models import ShopPage
 
 from auth.models import RegisterPage, LoginPage
 
+from orders.models import OrderCheckoutPage
 
 class CartAddItemView(View):
     def post(self, request, product_id):
@@ -81,9 +82,12 @@ class CartCounterView(View):
 class CartTableView(View):
     def get(self, request):
         cart = Cart.objects.get_cart_with_totals(request)
+
         shop_page = ShopPage.objects.live().first()
         login_page = LoginPage.objects.live().first()
         register_page = RegisterPage.objects.live().first()
+        checkout_page = OrderCheckoutPage.objects.live().first()
+
         return render(
             request,
             "includes/cart/table.html",
@@ -91,6 +95,7 @@ class CartTableView(View):
                 "cart": cart,
                 "shop_page": shop_page,
                 "login_page": login_page,
-                "register_page": register_page
+                "register_page": register_page,
+                "checkout_page": checkout_page
             }
         )

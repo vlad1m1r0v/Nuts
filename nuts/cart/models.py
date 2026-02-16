@@ -7,7 +7,7 @@ from cart.managers import CartManager
 
 class CartPage(Page):
     parent_page_types = ['home.HomePage']
-    subpage_types = []
+    subpage_types = ['orders.OrderCheckoutPage']
     max_count = 1
 
     template="cart.html"
