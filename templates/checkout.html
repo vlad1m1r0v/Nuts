@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags core_tags %}
+{% block content %}
+<!--Breadcrumbs-->
+<section class="first-section no-bg">
+    <div class="container">
+        {% breadcrumbs %}
+    </div>
+</section>
+<section class="accaunt ">
+    <div class="container">
+        <form class="order_checkout__form" action="{% url 'orders:create' %}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <h1>{{page.title}}</h1>
+                </div>
+                <div class="col-lg-8 col-md-6">
+                    <div class="accaunt__manager">
+                        <ul>
+                            <li><p>Ваш личный менеджер {{ settings.core.ContactSettings.manager_name }}</p></li>
+                            <li><i class="nut-icon icons-phone"></i>
+                                <a href="tel:{{ settings.core.ContactSettings.manager_phone|clean_phone }}">
+                                    {{ settings.core.ContactSettings.manager_phone }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--Table-->
+                <div class="col-12">
+                    <table id="table">
+                        <thead>
+                        <tr>
+                            <th><span>Товар</span></th>
+                            <th><span>Кол - во</span></th>
+                            <th><span>Цена за товар</span></th>
+                            <th><span>Итоговая стоимость</span></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{ formset.management_form }}
+
+                        {% for item_form in formset %}
+                        <tr class="order_item__row">
+                            <td>
+                                {{ item_form.id }}
+                                {{ item_form.product }}
+                                {{ item_form.price }}
+                                {{ item_form.initial.product.name }}
+                            </td>
+                            <td>
+                                <div class="item_quantity">
+                                    <button type="button" class="quantity_minus">
+                                        <i class="nut-icon icons-qty-left"></i>
+                                    </button>
+                                    {{ item_form.quantity }}
+                                    <button type="button" class="quantity_plus">
+                                        <i class="nut-icon icons-qty-right"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td><span class="order_item__row__price">{{ item_form.initial.price|floatformat:0 }}</span> грн.</td>
+                            <td>
+                                <span class="item_total order_item__row__total_price">
+                                    {% widthratio item_form.initial.price 1 item_form.initial.quantity %} грн.
+                                </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!--Total Price-->
+                <div class="col-12">
+                    <div class="after_table">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="popup__cart_sum">
+                                    <div class="sum_item">
+                                        <div class="sum_item_title">
+                                            <p>Всего </p>
+                                        </div>
+                                        <div class="sum_item_new">
+                                            <p><span class="order__total_price">{{ cart.cart_total|floatformat:0 }}</span> <i>грн.</i></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Order Details-->
+                <div class="col-12">
+                    <div class="checkout_form">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <!--Contacts-->
+                                <div class="form__title">
+                                    1. Контактные данные
+                                </div>
+                                {% if request.user.customer_profile.business_profile %}
+                                {{ form.company_name }}
+                                {{ form.contact_person }}
+                                {% else %}
+                                {{ form.full_name }}
+                                {% endif %}
+                                {{ form.email }}
+                                {{ form.phone }}
+                                <!--Delivery Method-->
+                                <div class="form__title">2. Способ доставки</div>
+                                <fieldset id="group1" class="radio__wrapper radio__wrapper_click">
+                                    {% for choice in form.delivery_method %}
+                                    <input
+                                            id="radio-{{ forloop.counter }}"
+                                            class="radio-custom"
+                                            name="{{ form.delivery_method.name }}"
+                                            value="{{ choice.data.value }}"
+                                            type="radio"
+                                            {% if choice.data.selected %}checked{% endif %}
+                                    >
+
+                                    <label
+                                            for="radio-{{ forloop.counter }}"
+                                            class="radio-custom-label {% if forloop.last %}radio-custom_last{% endif %}"
+                                    >
+                                        <span>{{ choice.choice_label }}</span>
+                                        {% if choice.data.value == 'COURIER' %}
+                                        <span class="sticker"><i class="nut-icon icons-novinka"></i><span class="p">БЕСПЛАТНО</span></span>
+                                        {% endif %}
+                                    </label>
+
+
+                                    {% if choice.data.value == 'NOVA_POSHTA' %}
+                                    <div class="NOVA_POSHTA box" {% if not choice.data.selected %} style="display: none" {% endif %}>
+                                        {{ form.delivery_country }}
+                                        {{ form.delivery_region }}
+                                    </div>
+                                    {% endif %}
+
+                                    {% if choice.data.value == 'COURIER' %}
+                                    <div class="COURIER box" {% if not choice.data.selected %} style="display: none" {% endif %}>
+                                        {{ form.delivery_address }}
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </fieldset>
+                                <!--Payment method-->
+                                <div class="form__title">
+                                    3. Способ оплаты
+                                </div>
+                                <fieldset id="group2" class="radio__wrapper radio__wrapper_second">
+                                    {% for choice in form.payment_method %}
+                                    <input id="radio-{{ forloop.counter|add:3 }}"
+                                           class="radio-custom"
+                                           name="{{ form.payment_method.name }}"
+                                           value="{{ choice.data.value }}"
+                                           type="radio"
+                                           {% if choice.data.selected %}checked{% endif %}>
+
+                                    <label for="radio-{{ forloop.counter|add:3 }}" class="radio-custom-label">
+                                        <span>{{ choice.choice_label }}</span>
+                                    </label>
+                                    {% endfor %}
+                                </fieldset>
+                                <button class="button float-left" type="submit">Продолжить</button>
+                            </div>
+                            <div class="col-lg-7">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

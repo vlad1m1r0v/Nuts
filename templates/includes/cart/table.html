@@ -1,0 +1,96 @@
+{% load wagtailcore_tags core_tags %}
+<!--Table-->
+<div class="col-12">
+    {% if cart and cart.items.all %}
+    <table id="table">
+        <thead>
+        <tr>
+            <th><span>Товар</span></th>
+            <th><span>Кол - во</span></th>
+            <th><span>Цена за товар</span></th>
+            <th><span>Итоговая стоимость</span></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart.items.all %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>
+                <div class="item_quantity">
+                    <button
+                            type="button" class="quantity_minus"
+                            hx-post="{% url 'cart:update-item' item.id 'minus' %}"
+                            hx-swap="none"
+                            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                    >
+                        <i class="nut-icon icons-qty-left"></i>
+                    </button>
+                    <input type="text" name="quantity" value="{{ item.quantity }}" readonly class="quantity_input">
+                    <button
+                            type="button" class="quantity_plus"
+                            hx-post="{% url 'cart:update-item' item.id 'plus' %}"
+                            hx-swap="none"
+                            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                    >
+                        <i class="nut-icon icons-qty-right"></i>
+                    </button>
+                </div>
+            </td>
+            <td>{{ item.actual_price|floatformat:0 }} грн.</td>
+            <td>{{ item.item_total|floatformat:0 }} грн.</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="text-center popup__cart_clean">
+        <p>Ваша корзина пуста</p>
+    </div>
+    {% endif %}
+</div>
+<!-- Shop And Checkout Page Links-->
+<div class="col-12">
+    <div class="after_table">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="{% pageurl shop_page %}" class="button_transparent with_arrow">
+                    <i class="nut-icon icons-left-arrow"></i>
+                    <b>Продолжить покупки</b>
+                </a>
+            </div>
+            {% if cart and cart.items.all %}
+            <div class="col-md-6">
+                <div class="popup__cart_sum">
+                    <div class="sum_item">
+                        <div class="sum_item_title"><p>Всего </p></div>
+                        <div class="sum_item_new">
+                            <p>{{ cart.cart_total|floatformat:0 }} <i>грн.</i></p>
+                        </div>
+                    </div>
+                    {% if request.user.is_authenticated and request.user.customer_profile %}
+                    <div class="sum_item">
+                        <div class="sum_item_button">
+                            <a href="{% pageurl checkout_page %}" class="button">Оформить заказ</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</div>
+<!--Auth Page Links-->
+{% if not request.user.is_authenticated or  not request.user.customer_profile %}
+<div class="col-12">
+    <div class="no_log-in">
+        <h2>Для оформления заказа необходимо</h2>
+        <div class="no_log-in_link">
+            <a href="{% pageurl login_page %}">Авторизоваться</a>
+            <span>или</span>
+            <a href="{% pageurl register_page %}">Зарегистрироваться</a>
+        </div>
+    </div>
+</div>
+{% endif %}

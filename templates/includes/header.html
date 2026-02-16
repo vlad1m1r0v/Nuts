@@ -80,7 +80,12 @@
                             </ul>
                             <a href="#" class="logo_number">
                                 <i class="nut-icon icons-number"></i>
-                                <span class="quantity" id="cart-counter">{{ cart.cart_items_count|default:0 }}</span>
+                                <span class="quantity"
+                                      hx-get="{% url 'cart:counter' %}"
+                                      hx-trigger="cartUpdated from:body"
+                                      hx-swap="innerHTML">
+                                    {{ cart.cart_items_count|default:0 }}
+                                </span>
                             </a>
                         </div>
                     </div>

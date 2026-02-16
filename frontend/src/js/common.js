@@ -440,4 +440,42 @@ $(document).ready(function () {
         initSorting();
         initProductSwipers();
     });
+
+    $(document).ready(function () {
+        function calculateOrderTotalPrice() {
+            let orderTotalPrice = 0;
+
+            $('.order_item__row__total_price').each(function () {
+                const totalText = $(this).text().replace(/[^0-9]/g, '');
+                const totalValue = parseInt(totalText);
+                orderTotalPrice += totalValue;
+            });
+
+            $('.order__total_price').text(orderTotalPrice);
+        }
+
+        $('.order_checkout__form .quantity_plus, .order_checkout__form .quantity_minus').on('click', function (e) {
+            e.preventDefault();
+
+            const row = $(this).closest('.order_item__row');
+            const input = row.find('.order_item__row__quantity');
+
+
+            const pricePerUnit = parseInt(row.find('.order_item__row__price').text());
+            let currentQuantity = parseInt(input.val());
+
+            if ($(this).hasClass('quantity_plus')) {
+                currentQuantity++;
+            } else if (currentQuantity > 1) {
+                currentQuantity--;
+            }
+
+            input.val(currentQuantity);
+
+            const newRowTotal = currentQuantity * pricePerUnit;
+            row.find('.order_item__row__total_price').text(newRowTotal + ' грн.');
+
+            calculateOrderTotalPrice();
+        });
+    });
 })(jQuery);
