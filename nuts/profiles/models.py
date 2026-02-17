@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import F
+from django.db.models.aggregates import Sum
 
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
@@ -13,7 +15,10 @@ from profiles.forms import (
     IndividualAddressForm,
     ChangePasswordForm
 )
+
 from users.models import BusinessProfile
+
+from orders.models import Order
 
 
 class ProfilePage(CustomerProfileRequiredMixin, Page):
@@ -35,13 +40,58 @@ class ProfilePage(CustomerProfileRequiredMixin, Page):
 
 class OrdersHistoryPage(CustomerProfileRequiredMixin, Page):
     parent_page_types = ['profiles.ProfilePage']
-    subpage_types = []
+    subpage_types = ['profiles.OrderDetailPage']
     max_count = 1
 
     template = "profile/orders_history.html"
 
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request)
+
+        orders = Order.objects.filter(customer=request.user.customer_profile).annotate(
+            total_items_qty=Sum('items__quantity'),
+            total_price=Sum(F('items__quantity') * F('items__price'))
+        )
+
+        context["orders"] = orders
+        context["order_detail_page"] = OrderDetailPage.objects.live().first()
+
+        return context
+
     class Meta:
         verbose_name = "Orders history page"
+
+
+class OrderDetailPage(CustomerProfileRequiredMixin, Page):
+    parent_page_types = ['profiles.OrdersHistoryPage']
+    subpage_types = []
+    max_count = 1
+
+    template = "profile/order_detail.html"
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+
+        order_id = request.GET.get('order_id')
+
+        order = (
+            Order.objects
+            .prefetch_related('items__product')
+            .get(id=order_id, customer=request.user.customer_profile)
+        )
+
+        order_items = order.items.annotate(
+            item_total=F('quantity') * F('price')
+        )
+
+        context["order"] = order
+        context["order_items"] = order_items
+        context["total_sum"] = order_items.aggregate(total=Sum('item_total'))['total']
+
+        return context
+
+    class Meta:
+        verbose_name = "Order detail page"
 
 
 class TransactionsHistoryPage(CustomerProfileRequiredMixin, Page):
@@ -175,6 +225,3 @@ class AddressPage(CustomerProfileRequiredMixin, Page):
 
     class Meta:
         verbose_name = "Address page"
-
-
-

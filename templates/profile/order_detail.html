@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load core_tags profiles_tags %}
+{% block content %}
+<!--Breadcrumbs-->
+<section class="first-section no-bg">
+    <div class="container">
+        {% breadcrumbs %}
+    </div>
+</section>
+<!--Table-->
+<section class="accaunt accaunt__order">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <h1>Заказ №{{order.id}}</h1>
+            </div>
+            <div class="col-lg-9 col-md-6">
+                <div class="accaunt__manager">
+                    <ul>
+                        <li><p>Ваш личный менеджер {{ settings.core.ContactSettings.manager_name }}</p></li>
+                        <li><i class="nut-icon icons-phone"></i>
+                            <a href="tel:{{ settings.core.ContactSettings.manager_phone|clean_phone }}">
+                                {{ settings.core.ContactSettings.manager_phone }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12">
+                <table id="table">
+                    <thead>
+                    <tr>
+                        <th><span>Товар</span></th>
+                        <th><span>Кол - во</span></th>
+                        <th><span>Цена за товар</span></th>
+                        <th><span>Итоговая стоимость</span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in order_items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>
+                            <div class="item_quantity">
+                                <input
+                                        readonly
+                                        type="text"
+                                        name="quantity"
+                                        value="{{ item.quantity }}"
+                                        class="quantity_input"
+                                        style="cursor: not-allowed"
+
+                                >
+                            </div>
+                        </td>
+                        <td>{{ item.price|floatformat:0 }} грн.</td>
+                        <td>{{ item.item_total|floatformat:0 }} грн.</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12">
+                <div class="after_table">
+                    <div class="row">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="popup__cart_sum">
+                                <div class="sum_item">
+                                    <div class="sum_item_title">
+                                        <p>Всего </p>
+                                    </div>
+                                    <div class="sum_item_new">
+                                        <p>{{ total_sum|floatformat:0 }} <i>грн.</i></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

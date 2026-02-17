@@ -1,3 +1,35 @@
 {% extends "profile/base.html" %}
+{% load wagtailcore_tags %}
 {% block profile_content %}
+<div class="col-12">
+    <table id="table">
+        <thead>
+        <tr>
+            <th><span>№ Заказа</span></th>
+            <th><span>Дата</span></th>
+            <th><span>Кол - во товаров</span></th>
+            <th><span>Статус</span></th>
+            <th><span>Стоимость</span></th>
+            <th><span>Функции</span></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.created_at|date:"d.m.Y" }}</td>
+            <td>{{ order.total_items_qty|default:0 }}</td>
+            <td>{{ order.get_status_display }}</td>
+            <td>{{ order.total_price|floatformat:0|default:0 }} грн.</td>
+            <td>
+                <div class="icons_wrap">
+                    <a href="{% pageurl order_detail_page %}?order_id={{order.id}}" class="tooltip" title="Просмотреть заказ"><i class="nut-icon icons-view"></i></a>
+                    <a href="#" class="tooltip order__copy_button" title="Копировать"><i class="nut-icon icons-copy"></i></a>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

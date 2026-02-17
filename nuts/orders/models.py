@@ -51,8 +51,9 @@ class OrderCheckoutPage(CustomerProfileRequiredMixin, Page):
 class Order(models.Model):
     class OrderStatus(models.TextChoices):
         NEW = 'NEW', 'Новый'
-        PAID = 'PAID', 'Оплачен'
         PROCESSING = 'PROCESSING', 'В обработке'
+        PAID = 'PAID', 'Оплачен'
+        FAILED = 'FAILED', 'Провален'
         SHIPPED = 'SHIPPED', 'Отправлен'
         COMPLETED = 'COMPLETED', 'Завершен'
         CANCELED = 'CANCELED', 'Отменен'

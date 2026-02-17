@@ -5,7 +5,7 @@ from django.db import transaction
 
 from cart.models import Cart
 
-from home.models import HomePage
+from thanks.models import ThanksPage
 
 from orders.models import OrderCheckoutPage
 from orders.forms import OrderCreateForm, OrderItemFormSet
@@ -15,8 +15,8 @@ class OrderCreateView(View):
         checkout_page = OrderCheckoutPage.objects.live().first()
         checkout_page_url = checkout_page.get_url(request)
 
-        home_page = HomePage.objects.live().first()
-        home_page_url = home_page.get_url(request)
+        thanks_page = ThanksPage.objects.live().first()
+        thanks_page_url = thanks_page.get_url(request)
 
         cart = Cart.objects.get_cart_with_totals(request)
         profile = getattr(request.user, 'customer_profile', None)
@@ -45,7 +45,7 @@ class OrderCreateView(View):
                     cart.delete()
 
                     messages.success(request, f"Заказ успешно оформлен.")
-                    return redirect(home_page_url)
+                    return redirect(thanks_page_url)
 
             except Exception as e:
                 messages.error(request, f"Произошла ошибка при сохранении заказа: {str(e)}")

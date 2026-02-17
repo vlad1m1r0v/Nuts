@@ -478,4 +478,34 @@ $(document).ready(function () {
             calculateOrderTotalPrice();
         });
     });
+
+    $(document).ready(function () {
+    $('.order__copy_button').on('click', async function (e) {
+        e.preventDefault();
+
+        const $btn = $(this);
+        const $row = $btn.closest('tr');
+        const $table = $btn.closest('table');
+
+        const headers = [];
+        $table.find('thead th').each(function () {
+            let headerText = $(this).text().trim();
+            if (headerText) {
+                headers.push(headerText);
+            }
+        });
+
+        const copyParts = [];
+        $row.find('td').each(function (index) {
+            if (index < headers.length - 1) {
+                let value = $(this).text().trim();
+                copyParts.push(headers[index] + ': ' + value);
+            }
+        });
+
+        const textToCopy = copyParts.join('\t');
+
+        await navigator.clipboard.writeText(textToCopy);
+    })
+});
 })(jQuery);
