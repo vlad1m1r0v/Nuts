@@ -33,14 +33,15 @@ import taggit.admin
 admin.site.unregister(Tag)
 
 # register Product
-from django.utils.html import format_html
+from django import forms
+from django.template.loader import render_to_string
 from django.db.models import Case, When, F, DecimalField
 
 from django_filters.constants import EMPTY_VALUES
 
 from unfold.admin import ModelAdmin, TabularInline
+from unfold.widgets import UnfoldAdminSelect2MultipleWidget
 from unfold.contrib.filters.admin import (
-    FieldTextFilter,
     MultipleDropdownFilter,
     RangeNumericFilter,
     RangeNumericListFilter
@@ -107,13 +108,31 @@ class ProductPriceFilter(RangeNumericListFilter):
 
         return queryset
 
+
+class ProductAdminForm(forms.ModelForm):
+    features = forms.ModelMultipleChoiceField(
+        queryset=ProductFeature.objects.all(),
+        widget=UnfoldAdminSelect2MultipleWidget(),
+        required=True,
+        label="Особенности",
+    )
+
+    class Meta:
+        model = Product
+        fields = "__all__"
+
+
 @admin.register(Product)
 class ProductModelAdmin(ModelAdmin, TabbedTranslationAdmin):
+    form = ProductAdminForm
+
     inlines = [ProductImageInline]
 
     show_facets = admin.ShowFacets.NEVER
 
     sortable_by = ()
+
+    search_fields = ["name"]
 
     list_display = [
         "display_image",
@@ -128,11 +147,11 @@ class ProductModelAdmin(ModelAdmin, TabbedTranslationAdmin):
     list_filter_submit = True
 
     list_filter = [
-        ("name", FieldTextFilter),
         ProductFeaturesFilter,
         ProductPriceFilter,
         ("weight", RangeNumericFilter)
     ]
+
 
     def get_queryset(self, request):
         return super().get_queryset(request).prefetch_related("images", "features")
@@ -140,45 +159,38 @@ class ProductModelAdmin(ModelAdmin, TabbedTranslationAdmin):
     @admin.display(description="Фото")
     def display_image(self, obj):
         first_image = obj.images.first()
-        if first_image:
-            return format_html(
-                '<img src="{}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;" />',
-                first_image.image.url
-            )
-        return format_html(
-            '<div style="width: 50px; height: 50px; background: #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 10px;">No pic</div>'
+        return render_to_string(
+            template_name="unfold/product/image_field.html",
+            context={"first_image": first_image}
         )
 
     @admin.display(description="Особенности")
     def display_features(self, obj):
         features = obj.features.all()
-        return ", ".join([f.name for f in features]) if features else "-"
+        return render_to_string(
+            template_name="unfold/product/features_field.html",
+            context={"features": features}
+        )
 
     @admin.display(description="Актуальная цена", ordering="price")
     def display_price(self, obj):
-        if obj.discounted_price:
-            return format_html(
-                '<span style="color: #10b981; font-weight: bold;">{} ₴</span> '
-                '<span style="text-decoration: line-through; color: #9ca3af; font-size: 0.85em;">{} ₴</span>',
-                obj.discounted_price, obj.price
-            )
-        return f"{obj.price} ₴"
+        return render_to_string(
+            template_name="unfold/product/price_field.html",
+            context={"obj": obj}
+        )
 
     @admin.display(description="Новинка", boolean=False)
     def display_is_new(self, obj):
-        if obj.is_new:
-            return format_html(
-                '<span class="bg-primary-600 text-white px-2 py-1 rounded-md text-xs font-bold uppercase">Новинка</span>'
-            )
-        return "-"
+        return render_to_string(
+            template_name="unfold/product/is_new_field.html",
+            context={"obj": obj}
+        )
 
 
 @admin.register(ProductFeature)
 class ProductFeatureModelAdmin(ModelAdmin, TabbedTranslationAdmin):
     list_filter_submit = True
 
-    show_facets = admin.ShowFacets.NEVER
+    search_fields = ["name"]
 
-    list_filter = [
-        ("name", FieldTextFilter),
-    ]
+    show_facets = admin.ShowFacets.NEVER

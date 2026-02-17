@@ -8,6 +8,8 @@ from wagtail.images.models import Image
 
 from auth.mixins import CustomerProfileRequiredMixin
 
+from payment_transactions.models import PaymentTransaction
+
 from profiles.forms import (
     IndividualContactInformationForm,
     LegalEntityContactInformationForm,
@@ -100,6 +102,18 @@ class TransactionsHistoryPage(CustomerProfileRequiredMixin, Page):
     max_count = 1
 
     template = "profile/transactions_history.html"
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+
+        transactions = PaymentTransaction.objects.filter(
+            order__customer=request.user.customer_profile
+        ).select_related('order')
+
+        context["transactions"] = transactions
+        context["order_detail_page"] = OrderDetailPage.objects.live().first()
+
+        return context
 
     class Meta:
         verbose_name = "Transactions history page"

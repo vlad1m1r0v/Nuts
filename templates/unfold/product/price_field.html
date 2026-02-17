@@ -1,0 +1,6 @@
+{% if obj.discounted_price %}
+<span style="color: #10b981; font-weight: bold;">{{ obj.discounted_price|floatformat:0 }} ₴</span>
+<span style="text-decoration: line-through; color: #9ca3af; font-size: 0.85em;">{{ obj.price|floatformat:0 }} ₴</span>
+{% else %}
+{{ obj.price|floatformat:0 }} ₴
+{% endif %}

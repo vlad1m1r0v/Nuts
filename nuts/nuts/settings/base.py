@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "not_found",
     "cart",
     "orders",
+    "payment_transactions",
     # wagtail
     "wagtail.contrib.forms",
     "wagtail.contrib.settings",
@@ -268,4 +269,14 @@ UNFOLD = {
             },
         ],
     }
+}
+
+CELERY_BROKER_URL = env("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND")
+
+CELERY_BEAT_SCHEDULE = {
+    'simulate-orders-every-10-seconds': {
+        'task': 'orders.tasks.simulate_order_processing',
+        'schedule': 10.0,
+    },
 }

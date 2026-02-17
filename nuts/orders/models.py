@@ -52,8 +52,8 @@ class Order(models.Model):
     class OrderStatus(models.TextChoices):
         NEW = 'NEW', 'Новый'
         PROCESSING = 'PROCESSING', 'В обработке'
-        PAID = 'PAID', 'Оплачен'
         FAILED = 'FAILED', 'Провален'
+        PAID = 'PAID', 'Оплачен'
         SHIPPED = 'SHIPPED', 'Отправлен'
         COMPLETED = 'COMPLETED', 'Завершен'
         CANCELED = 'CANCELED', 'Отменен'

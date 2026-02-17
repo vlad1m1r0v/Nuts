@@ -1,3 +1,41 @@
 {% extends "profile/base.html" %}
 {% block profile_content %}
+<div class="col-12">
+    <!--Table-->
+    <table id="table">
+        <thead>
+            <tr>
+                <th><span>Добавлено</span></th>
+                <th><span>Статус</span></th>
+                <th><span>Сумма</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tx in transactions %}
+                <tr>
+                    <td>{{ tx.created_at|date:"d.m.Y" }}</td>
+                    <td>{{ tx.get_status_display }}</td>
+                    <td>
+                        <div class="icons_wrap">
+                            <span>{{ tx.amount|floatformat:0 }} грн.</span>
+                            {% if order_detail_page %}
+                                <a href="{{ order_detail_page.url }}?order_id={{ tx.order.id }}"
+                                   class="tooltip"
+                                   title="Просмотреть заказ">
+                                    <i class="nut-icon icons-view"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!--No transactions Message-->
+    {% if not transactions %}
+        <div class="table__message">У вас не было транзакций!</div>
+    {% endif %}
+</div>
 {% endblock %}
