@@ -1,10 +1,10 @@
-{% load django_vite core_tags wagtailimages_tags %}
+{% load django_vite core_tags wagtailimages_tags i18n %}
 <div class="top-header__logo">
     <div class="container">
         <div class="row">
             <div class="col-2 d-lg-none">
                 <div class="mobile-menu-button d-lg-none d-block">
-                    <img src="{% vite_asset_url 'src/img/menu.svg' %}" alt="Menu Icon">
+                    <img src="{% vite_asset_url 'src/img/menu.svg' %}" alt="{% trans 'Menu Icon' %}">
                 </div>
             </div>
             <div class="col-xl-4 col-lg-3 col-8 align-self-center">
@@ -67,12 +67,12 @@
                             </ul>
                             <ul class="logo_button_mobile d-lg-none d-flex">
                                 <li>
-                                    <a href="#" class="button">Заказать звонок</a>
+                                    <a href="#" class="button">{% trans "Заказать звонок" %}</a>
                                 </li>
                             </ul>
                             <ul class="logo_button d-lg-flex d-none">
                                 <li>
-                                    <a href="#" class="button">Заказать звонок</a>
+                                    <a href="#" class="button">{% trans "Заказать звонок" %}</a>
                                 </li>
                                 <li>
                                     <p>{{ settings.core.CompanySettings.header_text|wordwrap:20|linebreaksbr }}</p>

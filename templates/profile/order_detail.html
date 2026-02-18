@@ -1,23 +1,21 @@
 {% extends "base.html" %}
-{% load core_tags profiles_tags %}
+{% load core_tags profiles_tags i18n %}
 {% block content %}
-<!--Breadcrumbs-->
 <section class="first-section no-bg">
     <div class="container">
         {% breadcrumbs %}
     </div>
 </section>
-<!--Table-->
 <section class="accaunt accaunt__order">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-6">
-                <h1>Заказ №{{order.id}}</h1>
+                <h1>{% trans "Заказ №" %}{{order.id}}</h1>
             </div>
             <div class="col-lg-9 col-md-6">
                 <div class="accaunt__manager">
                     <ul>
-                        <li><p>Ваш личный менеджер {{ settings.core.ContactSettings.manager_name }}</p></li>
+                        <li><p>{% trans "Ваш личный менеджер" %} {{ settings.core.ContactSettings.manager_name }}</p></li>
                         <li><i class="nut-icon icons-phone"></i>
                             <a href="tel:{{ settings.core.ContactSettings.manager_phone|clean_phone }}">
                                 {{ settings.core.ContactSettings.manager_phone }}
@@ -30,10 +28,10 @@
                 <table id="table">
                     <thead>
                     <tr>
-                        <th><span>Товар</span></th>
-                        <th><span>Кол - во</span></th>
-                        <th><span>Цена за товар</span></th>
-                        <th><span>Итоговая стоимость</span></th>
+                        <th><span>{% trans "Товар" %}</span></th>
+                        <th><span>{% trans "Кол - во" %}</span></th>
+                        <th><span>{% trans "Цена за товар" %}</span></th>
+                        <th><span>{% trans "Итоговая стоимость" %}</span></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -53,8 +51,8 @@
                                 >
                             </div>
                         </td>
-                        <td>{{ item.price|floatformat:0 }} грн.</td>
-                        <td>{{ item.item_total|floatformat:0 }} грн.</td>
+                        <td>{{ item.price|floatformat:0 }} {% trans "грн." %}</td>
+                        <td>{{ item.item_total|floatformat:0 }} {% trans "грн." %}</td>
                     </tr>
                     {% endfor %}
                     </tbody>
@@ -69,10 +67,10 @@
                             <div class="popup__cart_sum">
                                 <div class="sum_item">
                                     <div class="sum_item_title">
-                                        <p>Всего </p>
+                                        <p>{% trans "Всего" %} </p>
                                     </div>
                                     <div class="sum_item_new">
-                                        <p>{{ total_sum|floatformat:0 }} <i>грн.</i></p>
+                                        <p>{{ total_sum|floatformat:0 }} <i>{% trans "грн." %}</i></p>
                                     </div>
                                 </div>
                             </div>

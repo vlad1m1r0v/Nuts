@@ -1,13 +1,14 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from orders.models import Order
 
 
 class PaymentTransaction(models.Model):
     class TransactionStatus(models.TextChoices):
-        NEW = 'NEW', 'Новая'
-        PROCESSING = 'PROCESSING','В обработке'
-        SUCCESSFUL = 'SUCCESSFUL', 'Успешно'
-        FAILED = 'FAILED', 'Ошибка'
+        NEW = 'NEW', _('Новая')
+        PROCESSING = 'PROCESSING', _('В обработке')
+        SUCCESSFUL = 'SUCCESSFUL', _('Успешно')
+        FAILED = 'FAILED', _('Ошибка')
 
     id = models.BigAutoField(primary_key=True)
 

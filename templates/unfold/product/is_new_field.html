@@ -1,5 +1,6 @@
+{% load i18n %}
 {% if obj.is_new %}
-<span class="bg-primary-600 text-white px-2 py-1 rounded-md text-xs font-bold uppercase">Новинка</span>
+<span class="bg-primary-600 text-white px-2 py-1 rounded-md text-xs font-bold uppercase">{% trans "Новинка" %}</span>
 {% else %}
 <span>-</span>
 {% endif %}

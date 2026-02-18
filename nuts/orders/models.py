@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from wagtail.models import Page
 
@@ -50,23 +51,23 @@ class OrderCheckoutPage(CustomerProfileRequiredMixin, Page):
 
 class Order(models.Model):
     class OrderStatus(models.TextChoices):
-        NEW = 'NEW', 'Новый'
-        PROCESSING = 'PROCESSING', 'В обработке'
-        FAILED = 'FAILED', 'Провален'
-        PAID = 'PAID', 'Оплачен'
-        SHIPPED = 'SHIPPED', 'Отправлен'
-        COMPLETED = 'COMPLETED', 'Завершен'
-        CANCELED = 'CANCELED', 'Отменен'
+        NEW = 'NEW', _('Новый')
+        PROCESSING = 'PROCESSING', _('В обработке')
+        FAILED = 'FAILED', _('Провален')
+        PAID = 'PAID', _('Оплачен')
+        SHIPPED = 'SHIPPED', _('Отправлен')
+        COMPLETED = 'COMPLETED', _('Завершен')
+        CANCELED = 'CANCELED', _('Отменен')
 
     class DeliveryMethod(models.TextChoices):
-        NOVA_POSHTA = 'NOVA_POSHTA', 'Новая Почта'
-        COURIER = 'COURIER', 'Курьер'
-        PICKUP = 'PICKUP', 'Самовывоз'
+        NOVA_POSHTA = 'NOVA_POSHTA', _('Новая Почта')
+        COURIER = 'COURIER', _('Курьер')
+        PICKUP = 'PICKUP', _('Самовывоз')
 
     class PaymentMethod(models.TextChoices):
-        LIQPAY = 'LIQPAY', 'Liqpay'
-        BANK_TRANSFER = 'BANK_TRANSFER', 'Банковский перевод'
-        CASH_ON_DELIVERY = 'CASH_ON_DELIVERY', 'Наложенный платеж'
+        LIQPAY = 'LIQPAY', _('Liqpay')
+        BANK_TRANSFER = 'BANK_TRANSFER', _('Банковский перевод')
+        CASH_ON_DELIVERY = 'CASH_ON_DELIVERY', _('Наложенный платеж')
 
     id = models.BigAutoField(primary_key=True)
 
@@ -83,7 +84,7 @@ class Order(models.Model):
     full_name = models.CharField('ФИО', max_length=255, null=True, blank=True)
     email = models.EmailField('E-Mail', default="example@domain.com")
     phone = models.CharField(
-        unique=True,
+        unique=False,
         verbose_name="Номер телефона",
         validators=[ukrainian_phone_validator],
         default="+38 (099) 999-99-99"

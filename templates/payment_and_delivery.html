@@ -1,7 +1,6 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags core_tags %}
+{% load wagtailcore_tags wagtailimages_tags core_tags i18n %}
 {% block content %}
-<!--Image Hero-->
 {% with hero=page.image_hero.0 %}
 {% if hero.block_type == 'image_jumbotron' %}
 {% image hero.value.background_image original as bg_image %}
@@ -15,16 +14,15 @@
 </section>
 {% endif %}
 {% endwith %}
-<!--Tabs-->
 <section class="payment">
     <div class="tabs">
         <div class="tabs__wrap">
             <div class="container">
                 <div class="row">
                     <ul class="tabs__caption">
-                        <li class="active"><i class="nut-icon icons-vector12"></i> <span>Оплата заказа</span></li>
-                        <li><i class="nut-icon icons-lorry"></i> <span>Доставка партии</span></li>
-                        <li><i class="nut-icon icons-package"></i> <span>Возврат товара</span></li>
+                        <li class="active"><i class="nut-icon icons-vector12"></i> <span>{% trans "Оплата заказа" %}</span></li>
+                        <li><i class="nut-icon icons-lorry"></i> <span>{% trans "Доставка партии" %}</span></li>
+                        <li><i class="nut-icon icons-package"></i> <span>{% trans "Возврат товара" %}</span></li>
                     </ul>
                 </div>
             </div>
@@ -32,7 +30,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <!--Payment-->
                     <div class="tabs__content active">
                         <div class="row">
                             {% with payment_block=page.payment_info.0 %}
@@ -44,13 +41,12 @@
                                 </div>
                             </div>
                             <div class="col-md-7 col-12">
-                                <img src="{{img.url}}" class="tabs__content_img" alt="Payment Block Picture">
+                                <img src="{{img.url}}" class="tabs__content_img" alt="{% trans 'Payment Block Picture' %}">
                             </div>
                             {% endif %}
                             {% endwith %}
                         </div>
                     </div>
-                    <!--Delivery-->
                     <div class="tabs__content">
                         <div class="row">
                             {% with delivery_block=page.delivery_info.0 %}
@@ -62,13 +58,12 @@
                                 </div>
                             </div>
                             <div class="col-md-7 col-12">
-                                <img src="{{img.url}}" class="tabs__content_img" alt="Delivery Block Picture">
+                                <img src="{{img.url}}" class="tabs__content_img" alt="{% trans 'Delivery Block Picture' %}">
                             </div>
                             {% endif %}
                             {% endwith %}
                         </div>
                     </div>
-                    <!--Return-->
                     <div class="tabs__content">
                         <div class="row">
                             {% with return_block=page.return_info.0 %}
@@ -80,7 +75,7 @@
                                 </div>
                             </div>
                             <div class="col-md-7 col-12">
-                                <img src="{{img.url}}" class="tabs__content_img" alt="Return Block Picture">
+                                <img src="{{img.url}}" class="tabs__content_img" alt="{% trans 'Return Block Picture' %}">
                             </div>
                             {% endif %}
                             {% endwith %}
@@ -91,9 +86,7 @@
         </div>
     </div>
 </section>
-<!--Statistics-->
 {% include "includes/statistics.html" %}
-<!--Video Hero-->
 {% with block=page.video_hero.0 %}
 {% if block.block_type == 'video_jumbotron' %}
 <div class="parallax" data-scrollax-parent="true">

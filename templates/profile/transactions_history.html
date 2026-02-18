@@ -1,13 +1,13 @@
 {% extends "profile/base.html" %}
+{% load i18n %}
 {% block profile_content %}
 <div class="col-12">
-    <!--Table-->
     <table id="table">
         <thead>
             <tr>
-                <th><span>Добавлено</span></th>
-                <th><span>Статус</span></th>
-                <th><span>Сумма</span></th>
+                <th><span>{% trans "Добавлено" %}</span></th>
+                <th><span>{% trans "Статус" %}</span></th>
+                <th><span>{% trans "Сумма" %}</span></th>
             </tr>
         </thead>
         <tbody>
@@ -17,11 +17,11 @@
                     <td>{{ tx.get_status_display }}</td>
                     <td>
                         <div class="icons_wrap">
-                            <span>{{ tx.amount|floatformat:0 }} грн.</span>
+                            <span>{{ tx.amount|floatformat:0 }} {% trans "грн." %}</span>
                             {% if order_detail_page %}
                                 <a href="{{ order_detail_page.url }}?order_id={{ tx.order.id }}"
                                    class="tooltip"
-                                   title="Просмотреть заказ">
+                                   title="{% trans 'Просмотреть заказ' %}">
                                     <i class="nut-icon icons-view"></i>
                                 </a>
                             {% endif %}
@@ -33,9 +33,8 @@
         </tbody>
     </table>
 
-    <!--No transactions Message-->
     {% if not transactions %}
-        <div class="table__message">У вас не было транзакций!</div>
+        <div class="table__message">{% trans "У вас не было транзакций!" %}</div>
     {% endif %}
 </div>
 {% endblock %}

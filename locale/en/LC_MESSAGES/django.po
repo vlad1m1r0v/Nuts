@@ -1,0 +1,1396 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-18 13:18+0000\n"
+"PO-Revision-Date: 2026-02-18 12:00+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: English <en@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: nuts/auth/forms.py:17 nuts/orders/forms.py:58 nuts/orders/forms.py:61
+#: nuts/profiles/forms.py:72
+msgid "ФИО*"
+msgstr "Full Name*"
+
+#: nuts/auth/forms.py:20
+msgid "ФИО"
+msgstr "Full Name"
+
+#: nuts/auth/forms.py:23 nuts/profiles/forms.py:78
+msgid "ФИО поле обязательное для заполнения."
+msgstr "Full Name is a required field."
+
+#: nuts/auth/forms.py:24
+msgid "ФИО поле может местить максимум 60 символов."
+msgstr "Full Name field can contain a maximum of 60 characters."
+
+#: nuts/auth/forms.py:25
+msgid "ФИО поле должно местить минимум 10 символов."
+msgstr "Full Name field must contain at least 10 characters."
+
+#: nuts/auth/forms.py:29 nuts/auth/forms.py:346 nuts/auth/forms.py:376
+#: nuts/orders/forms.py:70 nuts/orders/forms.py:71 nuts/profiles/forms.py:18
+msgid "E-Mail*"
+msgstr "E-Mail*"
+
+#: nuts/auth/forms.py:30 nuts/auth/forms.py:347 nuts/auth/forms.py:377
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: nuts/auth/forms.py:32 nuts/auth/forms.py:349 nuts/auth/forms.py:379
+#: nuts/profiles/forms.py:21
+msgid "E-Mail поле обязательное для заполнения."
+msgstr "E-Mail is a required field."
+
+#: nuts/auth/forms.py:33 nuts/auth/forms.py:350 nuts/auth/forms.py:380
+msgid "E-Mail не валидний."
+msgstr "Invalid E-Mail."
+
+#: nuts/auth/forms.py:37 nuts/profiles/forms.py:26
+msgid "Телефон*"
+msgstr "Phone*"
+
+#: nuts/auth/forms.py:38
+msgid "Телефон"
+msgstr "Phone"
+
+#: nuts/auth/forms.py:41 nuts/profiles/forms.py:29
+msgid "Телефон поле обязательное для заполнения."
+msgstr "Phone is a required field."
+
+#: nuts/auth/forms.py:47 nuts/auth/forms.py:48 nuts/auth/forms.py:226
+#: nuts/auth/forms.py:272 nuts/profiles/forms.py:150 nuts/profiles/forms.py:230
+msgid "Страна"
+msgstr "Country"
+
+#: nuts/auth/forms.py:50 nuts/profiles/forms.py:152
+msgid "Страна поле обязательное для заполнения."
+msgstr "Country is a required field."
+
+#: nuts/auth/forms.py:55 nuts/auth/forms.py:56 nuts/auth/forms.py:232
+#: nuts/auth/forms.py:278 nuts/profiles/forms.py:156 nuts/profiles/forms.py:236
+msgid "Область"
+msgstr "Region/State"
+
+#: nuts/auth/forms.py:58 nuts/profiles/forms.py:158
+msgid "Область поле обязательное для заполнения."
+msgstr "Region/State is a required field."
+
+#: nuts/auth/forms.py:62 nuts/auth/forms.py:239 nuts/auth/forms.py:285
+#: nuts/profiles/forms.py:161 nuts/profiles/forms.py:243
+msgid "Город*"
+msgstr "City*"
+
+#: nuts/auth/forms.py:65
+msgid "Город"
+msgstr "City"
+
+#: nuts/auth/forms.py:67 nuts/profiles/forms.py:166
+msgid "Город поле обязательное для заполнения."
+msgstr "City is a required field."
+
+#: nuts/auth/forms.py:68 nuts/profiles/forms.py:167 nuts/profiles/forms.py:245
+msgid "Город поле может местить максимум 30 символов."
+msgstr "City field can contain a maximum of 30 characters."
+
+#: nuts/auth/forms.py:69 nuts/profiles/forms.py:168 nuts/profiles/forms.py:246
+msgid "Город поле должно местить минимум 3 символа."
+msgstr "City field must contain at least 3 characters."
+
+#: nuts/auth/forms.py:73 nuts/auth/forms.py:76 nuts/auth/forms.py:250
+#: nuts/auth/forms.py:296 nuts/profiles/forms.py:254
+#: templates/profile/address.html:41
+msgid "Адрес"
+msgstr "Address"
+
+#: nuts/auth/forms.py:79 nuts/profiles/forms.py:178 nuts/profiles/forms.py:256
+msgid "Адрес поле может местить максимум 100 символов."
+msgstr "Address field can contain a maximum of 100 characters."
+
+#: nuts/auth/forms.py:80
+msgid "Адрес поле должно местить минимум 20 символов."
+msgstr "Address field must contain at least 20 characters."
+
+#: nuts/auth/forms.py:86 nuts/auth/forms.py:356 nuts/auth/forms.py:406
+msgid "Пароль*"
+msgstr "Password*"
+
+#: nuts/auth/forms.py:88 nuts/auth/forms.py:358 nuts/auth/forms.py:408
+msgid "Пароль"
+msgstr "Password"
+
+#: nuts/auth/forms.py:90 nuts/auth/forms.py:360 nuts/auth/forms.py:410
+msgid "Пароль поле обязательное для заполнения."
+msgstr "Password is a required field."
+
+#: nuts/auth/forms.py:95 nuts/auth/forms.py:415
+msgid "Подтвердите пароль*"
+msgstr "Confirm Password*"
+
+#: nuts/auth/forms.py:97 nuts/auth/forms.py:417
+msgid "Подтвердите пароль"
+msgstr "Confirm Password"
+
+#: nuts/auth/forms.py:99 nuts/auth/forms.py:419
+msgid "Подтвердите пароль поле обязательное для заполнения."
+msgstr "Confirm Password is a required field."
+
+#: nuts/auth/forms.py:105 nuts/auth/forms.py:194
+msgid "Согласие с условиями"
+msgstr "Agreement to Terms"
+
+#: nuts/auth/forms.py:107 nuts/auth/forms.py:196
+msgid "Согласие с условиями поле обязательное для заполнения."
+msgstr "Agreement to Terms is a required field."
+
+#: nuts/auth/forms.py:116 nuts/auth/forms.py:181
+msgid "Аватар"
+msgstr "Avatar"
+
+#: nuts/auth/forms.py:122 nuts/auth/forms.py:187
+msgid "Аватар поле обязательное для заполнения."
+msgstr "Avatar is a required field."
+
+#: nuts/auth/forms.py:123 nuts/auth/forms.py:188 nuts/profiles/forms.py:43
+msgid "Загруженный файл не является изображением или поврежден."
+msgstr "The uploaded file is not an image or is corrupted."
+
+#: nuts/auth/forms.py:130
+msgid ""
+"E-Mail поле: Пользователь с таким электронным адресом уже зарегистрирован."
+msgstr "E-Mail field: A user with this email address is already registered."
+
+#: nuts/auth/forms.py:136
+msgid ""
+"Телефон поле: Пользователь с таким номером телефона уже зарегистрирован."
+msgstr "Phone field: A user with this phone number is already registered."
+
+#: nuts/auth/forms.py:145 nuts/auth/forms.py:370 nuts/auth/forms.py:429
+#: nuts/profiles/forms.py:371
+msgid "Ваш пароль не соответствует требованиям безопасности."
+msgstr "Your password does not meet security requirements."
+
+#: nuts/auth/forms.py:155 nuts/orders/forms.py:167 nuts/profiles/forms.py:193
+#: nuts/profiles/forms.py:299
+msgid "Выбранная область не принадлежит указанной стране."
+msgstr "The selected region does not belong to the specified country."
+
+#: nuts/auth/forms.py:161 nuts/auth/forms.py:439
+msgid "Пароли не совпадают."
+msgstr "Passwords do not match."
+
+#: nuts/auth/forms.py:170 templates/auth/register.html:68
+msgid "Являюсь ФОП"
+msgstr "I am an Individual Entrepreneur (FOP)"
+
+#: nuts/auth/forms.py:201 nuts/users/models.py:28
+#: templates/auth/register.html:29
+msgid "Юридическое лицо"
+msgstr "Legal Entity"
+
+#: nuts/auth/forms.py:201 nuts/users/models.py:29
+msgid "ФОП"
+msgstr "FOP (Entrepreneur)"
+
+#: nuts/auth/forms.py:204
+msgid "Тип бизнеса"
+msgstr "Business Type"
+
+#: nuts/auth/forms.py:210 nuts/auth/forms.py:211 nuts/auth/forms.py:309
+#: nuts/profiles/forms.py:279
+msgid "ОКПО"
+msgstr "OKPO (Company Code)"
+
+#: nuts/auth/forms.py:212 nuts/profiles/forms.py:216
+msgid "ОКПО поле может местить максимум 32 символа."
+msgstr "OKPO field can contain a maximum of 32 characters."
+
+#: nuts/auth/forms.py:217 nuts/auth/forms.py:218 nuts/auth/forms.py:322
+msgid "ЕДРПО"
+msgstr "EDRPO (Registry Code)"
+
+#: nuts/auth/forms.py:219
+msgid "ЕДРПО поле может местить максимум 32 символа."
+msgstr "EDRPO field can contain a maximum of 32 characters."
+
+#: nuts/auth/forms.py:225 nuts/auth/forms.py:310 nuts/profiles/forms.py:280
+msgid "Страна (юр.)"
+msgstr "Country (Legal)"
+
+#: nuts/auth/forms.py:231 nuts/auth/forms.py:311 nuts/profiles/forms.py:281
+msgid "Область (юр.)"
+msgstr "Region (Legal)"
+
+#: nuts/auth/forms.py:238 nuts/auth/forms.py:312 nuts/profiles/forms.py:282
+msgid "Город (юр.)"
+msgstr "City (Legal)"
+
+#: nuts/auth/forms.py:241
+msgid "Город (юр.) поле может местить максимум 30 символов."
+msgstr "City (Legal) field can contain a maximum of 30 characters."
+
+#: nuts/auth/forms.py:242
+msgid "Город (юр.) поле должно местить минимум 3 символа."
+msgstr "City (Legal) field must contain at least 3 characters."
+
+#: nuts/auth/forms.py:249 nuts/profiles/forms.py:283
+msgid "Адрес (юр.)"
+msgstr "Address (Legal)"
+
+#: nuts/auth/forms.py:252
+msgid "Адрес (юр.) поле может местить максимум 100 символов."
+msgstr "Address (Legal) field can contain a maximum of 100 characters."
+
+#: nuts/auth/forms.py:253
+msgid "Адрес (юр.) поле должно местить минимум 10 символов."
+msgstr "Address (Legal) field must contain at least 10 characters."
+
+#: nuts/auth/forms.py:260 nuts/profiles/forms.py:284
+msgid "Индекс (юр.)"
+msgstr "Postal Code (Legal)"
+
+#: nuts/auth/forms.py:261 nuts/profiles/forms.py:265
+msgid "Индекс"
+msgstr "Postal Code"
+
+#: nuts/auth/forms.py:263
+msgid "Индекс (юр.) поле может местить максимум 10 символов."
+msgstr "Postal Code (Legal) field can contain a maximum of 10 characters."
+
+#: nuts/auth/forms.py:264
+msgid "Индекс (юр.) поле должно местить минимум 5 символов."
+msgstr "Postal Code (Legal) field must contain at least 5 characters."
+
+#: nuts/auth/forms.py:271 nuts/auth/forms.py:323 nuts/profiles/forms.py:289
+msgid "Страна (деятельности)"
+msgstr "Country (Business activity)"
+
+#: nuts/auth/forms.py:277 nuts/auth/forms.py:324 nuts/profiles/forms.py:290
+msgid "Область (деятельности)"
+msgstr "Region (Business activity)"
+
+#: nuts/auth/forms.py:284 nuts/auth/forms.py:325 nuts/profiles/forms.py:291
+msgid "Город (деятельности)"
+msgstr "City (Business activity)"
+
+#: nuts/auth/forms.py:287
+msgid "Город (деятельности) поле может местить максимум 30 символов."
+msgstr "City (Activity) field can contain a maximum of 30 characters."
+
+#: nuts/auth/forms.py:288
+msgid "Город (деятельности) поле должно местить минимум 3 символа."
+msgstr "City (Activity) field must contain at least 3 characters."
+
+#: nuts/auth/forms.py:295 nuts/profiles/forms.py:292
+msgid "Адрес (деятельности)"
+msgstr "Address (Business activity)"
+
+#: nuts/auth/forms.py:298
+msgid "Адрес (деятельности) поле может местить максимум 100 символов."
+msgstr "Address (Activity) field can contain a maximum of 100 characters."
+
+#: nuts/auth/forms.py:299
+msgid "Адрес (деятельности) поле должно местить минимум 10 символов."
+msgstr "Address (Activity) field must contain at least 10 characters."
+
+#: nuts/auth/forms.py:318
+msgid "Область (юр.) поле: Выбранная область не принадлежит указанной стране."
+msgstr ""
+"Region (Legal) field: The selected region does not belong to the specified "
+"country."
+
+#: nuts/auth/forms.py:332
+msgid ""
+"Область (деятельности) поле: Выбранная область не принадлежит указанной "
+"стране."
+msgstr ""
+"Region (Activity) field: The selected region does not belong to the "
+"specified country."
+
+#: nuts/auth/forms.py:340 nuts/profiles/forms.py:306
+#, python-format
+msgid "%(label)s поле обязательное для заполнения."
+msgstr "%(label)s is a required field."
+
+#: nuts/auth/forms.py:396
+msgid "У пользователя нет личного кабинета."
+msgstr "The user does not have a personal account."
+
+#: nuts/auth/forms.py:398
+msgid "Пользователь с данным E-Mail не обнаружен."
+msgstr "User with this E-Mail was not found."
+
+#: nuts/auth/mixins.py:19
+msgid "Для доступа к этой странице необходимо войти в аккаунт."
+msgstr "You must log in to access this page."
+
+#: nuts/auth/models.py:119 nuts/auth/models.py:127 nuts/auth/models.py:136
+msgid "Предоставленный токен доступа не валидный."
+msgstr "The provided access token is invalid."
+
+#: nuts/auth/views.py:98
+msgid "Регистрация прошла успешно. Теперь вы можете войти."
+msgstr "Registration successful. You can now log in."
+
+#: nuts/auth/views.py:102 nuts/auth/views.py:195
+msgid "Произошла внутренняя ошибка сервера. Попробуйте позже."
+msgstr "Internal server error occurred. Please try again later."
+
+#: nuts/auth/views.py:190
+msgid "Бизнес-аккаунт успешно зарегистрирован."
+msgstr "Business account successfully registered."
+
+#: nuts/auth/views.py:232
+msgid "Вход выполнен успешно."
+msgstr "Successfully logged in."
+
+#: nuts/auth/views.py:235
+msgid "Неверный E-Mail или пароль."
+msgstr "Invalid E-Mail or password."
+
+#: nuts/auth/views.py:267 templates/auth/forgot_password.html:13
+#: templates/auth/recover_password.html:13
+#: templates/auth/recover_password.html:17
+msgid "Восстановление пароля"
+msgstr "Password Recovery"
+
+#: nuts/auth/views.py:277
+msgid "Вам на почту отправлена ссылка на сброс пароля."
+msgstr "A password reset link has been sent to your email."
+
+#: nuts/auth/views.py:308
+msgid "Ваш пароль был успешно изменен. Теперь вы можете войти."
+msgstr "Your password has been successfully changed. You can now log in."
+
+#: nuts/auth/views.py:311
+msgid "Срок действия ссылки истек или она неверна."
+msgstr "The link has expired or is invalid."
+
+#: nuts/auth/views.py:315
+msgid "Произошла ошибка при идентификации пользователя."
+msgstr "An error occurred while identifying the user."
+
+#: nuts/auth/views.py:325
+msgid "Вы успешно вышли из своего аккаунта."
+msgstr "You have successfully logged out."
+
+#: nuts/core/validators.py:10
+msgid "Мобильный телефон должен быть в формате +38 (0XX) XXX-XX-XX."
+msgstr "Mobile phone must be in the format +38 (0XX) XXX-XX-XX."
+
+#: nuts/core/validators.py:17
+msgid "Файл слишком большой. Максимальный размер — 2 МБ."
+msgstr "File is too large. Maximum size is 2 MB."
+
+#: nuts/nuts/settings/base.py:167
+msgid "English"
+msgstr "English"
+
+#: nuts/nuts/settings/base.py:168
+msgid "Russian"
+msgstr "Russian"
+
+#: nuts/nuts/settings/base.py:169
+msgid "Ukrainian"
+msgstr "Ukrainian"
+
+#: nuts/orders/forms.py:34 nuts/orders/forms.py:35 nuts/profiles/forms.py:104
+msgid "Название компании*"
+msgstr "Company Name*"
+
+#: nuts/orders/forms.py:39
+msgid "Название компанни поле может местить максимум 255 символов."
+msgstr "Company Name field can contain a maximum of 255 characters."
+
+#: nuts/orders/forms.py:40
+msgid "Название компанни должно местить минимум 3 символа."
+msgstr "Company Name must contain at least 3 characters."
+
+#: nuts/orders/forms.py:46 nuts/orders/forms.py:49 nuts/profiles/forms.py:116
+msgid "Контактное лицо*"
+msgstr "Contact Person*"
+
+#: nuts/orders/forms.py:51
+msgid "Контактное лицо поле может местить максимум 255 символов."
+msgstr "Contact Person field can contain a maximum of 255 characters."
+
+#: nuts/orders/forms.py:52
+msgid "Контактное лицо должно местить минимум 3 символа."
+msgstr "Contact Person must contain at least 3 characters."
+
+#: nuts/orders/forms.py:63
+msgid "ФИО поле может местить максимум 255 символов."
+msgstr "Full Name field can contain a maximum of 255 characters."
+
+#: nuts/orders/forms.py:64
+msgid "ФИО должно местить минимум 3 символа."
+msgstr "Full Name must contain at least 3 characters."
+
+#: nuts/orders/forms.py:73
+msgid "Поле E-Mail обязательно для заполнени."
+msgstr "E-Mail field is required."
+
+#: nuts/orders/forms.py:74
+msgid "Введите корректный адрес электронной почты."
+msgstr "Please enter a valid email address."
+
+#: nuts/orders/forms.py:80 nuts/orders/forms.py:82
+msgid "Номер телефона*"
+msgstr "Phone Number*"
+
+#: nuts/orders/forms.py:84
+msgid "Номер телефона обязателен для заполнения."
+msgstr "Phone number is required."
+
+#: nuts/orders/forms.py:90
+msgid "Способ доставки"
+msgstr "Shipping Method"
+
+#: nuts/orders/forms.py:93
+msgid "Выберите способ доставки."
+msgstr "Select a shipping method."
+
+#: nuts/orders/forms.py:94
+msgid "Выбран недопустимый способ доставки."
+msgstr "Invalid shipping method selected."
+
+#: nuts/orders/forms.py:101
+msgid "Страна доставки"
+msgstr "Shipping Country"
+
+#: nuts/orders/forms.py:102
+msgid "Выберите страну"
+msgstr "Select Country"
+
+#: nuts/orders/forms.py:104
+msgid "Выбранная страна не существует в базе данных."
+msgstr "The selected country does not exist in our database."
+
+#: nuts/orders/forms.py:111
+msgid "Регион доставки"
+msgstr "Shipping Region"
+
+#: nuts/orders/forms.py:112
+msgid "Выберите область"
+msgstr "Select Region"
+
+#: nuts/orders/forms.py:114
+msgid "Выбранная область не существует в базе данных."
+msgstr "The selected region does not exist in our database."
+
+#: nuts/orders/forms.py:120
+msgid "Адрес доставки"
+msgstr "Shipping Address"
+
+#: nuts/orders/forms.py:121
+msgid "Адрес*"
+msgstr "Address*"
+
+#: nuts/orders/forms.py:123
+msgid "Адрес доставки слишком длинный."
+msgstr "Shipping address is too long."
+
+#: nuts/orders/forms.py:129
+msgid "Способ оплаты"
+msgstr "Payment Method"
+
+#: nuts/orders/forms.py:132
+msgid "Выберите способ оплаты."
+msgstr "Select a payment method."
+
+#: nuts/orders/forms.py:133
+msgid "Выбран недопустимый способ оплаты."
+msgstr "Invalid payment method selected."
+
+#: nuts/orders/forms.py:147
+msgid "Название компании обязательно для бизнес-аккаунтов."
+msgstr "Company name is required for business accounts."
+
+#: nuts/orders/forms.py:149
+msgid "Контактное лицо обязательно для бизнес-аккаунтов."
+msgstr "Contact person is required for business accounts."
+
+#: nuts/orders/forms.py:152
+msgid "ФИО обязательно для физических лиц."
+msgstr "Full Name is required for individuals."
+
+#: nuts/orders/forms.py:156
+msgid "Выберите страну для доставки Новой Почтой."
+msgstr "Select a country for Nova Poshta delivery."
+
+#: nuts/orders/forms.py:158
+msgid "Выберите область для доставки Новой Почтой."
+msgstr "Select a region for Nova Poshta delivery."
+
+#: nuts/orders/forms.py:162
+msgid "Укажите адрес для курьерской доставки по Одессе."
+msgstr "Specify the address for courier delivery in Odesa."
+
+#: nuts/orders/forms.py:216
+msgid "Количество не может быть меньше 1."
+msgstr "Quantity cannot be less than 1."
+
+#: nuts/orders/models.py:54
+msgid "Новый"
+msgstr "New"
+
+#: nuts/orders/models.py:55 nuts/payment_transactions/models.py:9
+msgid "В обработке"
+msgstr "Processing"
+
+#: nuts/orders/models.py:56
+msgid "Провален"
+msgstr "Failed"
+
+#: nuts/orders/models.py:57
+msgid "Оплачен"
+msgstr "Paid"
+
+#: nuts/orders/models.py:58
+msgid "Отправлен"
+msgstr "Shipped"
+
+#: nuts/orders/models.py:59
+msgid "Завершен"
+msgstr "Completed"
+
+#: nuts/orders/models.py:60
+msgid "Отменен"
+msgstr "Cancelled"
+
+#: nuts/orders/models.py:63
+msgid "Новая Почта"
+msgstr "Nova Poshta"
+
+#: nuts/orders/models.py:64
+msgid "Курьер"
+msgstr "Courier"
+
+#: nuts/orders/models.py:65
+msgid "Самовывоз"
+msgstr "Pickup"
+
+#: nuts/orders/models.py:68
+msgid "Liqpay"
+msgstr "Liqpay"
+
+#: nuts/orders/models.py:69
+msgid "Банковский перевод"
+msgstr "Bank Transfer"
+
+#: nuts/orders/models.py:70
+msgid "Наложенный платеж"
+msgstr "Cash on Delivery"
+
+#: nuts/orders/views.py:26
+msgid "Ваша корзина пуста."
+msgstr "Your cart is empty."
+
+#: nuts/orders/views.py:48
+msgid "Заказ успешно оформлен."
+msgstr "Order successfully placed."
+
+#: nuts/orders/views.py:52
+#, python-format
+msgid "Произошла ошибка при сохранении заказа: %(error)s"
+msgstr "Error occurred while saving the order: %(error)s"
+
+#: nuts/payment_transactions/models.py:8
+msgid "Новая"
+msgstr "New"
+
+#: nuts/payment_transactions/models.py:10
+msgid "Успешно"
+msgstr "Success"
+
+#: nuts/payment_transactions/models.py:11
+msgid "Ошибка"
+msgstr "Error"
+
+#: nuts/products/models.py:55
+msgid "Не указан идентфикатор товара."
+msgstr "Product ID is not specified."
+
+#: nuts/products/models.py:64
+msgid "Товар с указаным идентификатором не обнаружен."
+msgstr "Product with the specified ID was not found."
+
+#: nuts/profiles/forms.py:22
+msgid "E-Mail не валидный."
+msgstr "Invalid E-Mail."
+
+#: nuts/profiles/forms.py:57
+msgid "Пользователь с таким E-Mail уже зарегистрирован."
+msgstr "User with this E-Mail is already registered."
+
+#: nuts/profiles/forms.py:66
+msgid "Пользователь с таким номером телефона уже зарегистрирован."
+msgstr "User with this phone number is already registered."
+
+#: nuts/profiles/forms.py:79
+msgid "ФИО должно содержать минимум 10 символов."
+msgstr "Full Name must contain at least 10 characters."
+
+#: nuts/profiles/forms.py:80 nuts/profiles/forms.py:124
+msgid "ФИО не может превышать 60 символов."
+msgstr "Full Name cannot exceed 60 characters."
+
+#: nuts/profiles/forms.py:109
+msgid "Название компании обязательно для заполнения."
+msgstr "Company name is required."
+
+#: nuts/profiles/forms.py:110
+msgid "Название компании слишком короткое."
+msgstr "Company name is too short."
+
+#: nuts/profiles/forms.py:111
+msgid "Название компании не может превышать 60 символов."
+msgstr "Company name cannot exceed 60 characters."
+
+#: nuts/profiles/forms.py:122
+msgid "Укажите контактное лицо."
+msgstr "Specify a contact person."
+
+#: nuts/profiles/forms.py:123
+msgid "ФИО контактного лица слишком короткое."
+msgstr "Contact person's Full Name is too short."
+
+#: nuts/profiles/forms.py:172
+msgid "Адрес (улица, дом, кв.)*"
+msgstr "Address (street, bldg, apt.)*"
+
+#: nuts/profiles/forms.py:177
+msgid "Адрес поле обязательное для заполнения."
+msgstr "Address is a required field."
+
+#: nuts/profiles/forms.py:179 nuts/profiles/forms.py:257
+msgid "Адрес поле должно местить минимум 10 символов."
+msgstr "Address field must contain at least 10 characters."
+
+#: nuts/profiles/forms.py:223
+msgid "ЕДРПОУ поле может местить максимум 32 символа."
+msgstr "EDRPOU field can contain a maximum of 32 characters."
+
+#: nuts/profiles/forms.py:267
+msgid "Индекс поле может местить максимум 10 символов."
+msgstr "Postal code field can contain a maximum of 10 characters."
+
+#: nuts/profiles/forms.py:268
+msgid "Индекс поле должно местить минимум 5 символов."
+msgstr "Postal code field must contain at least 5 characters."
+
+#: nuts/profiles/forms.py:288
+msgid "ЕДРПОУ"
+msgstr "EDRPOU (Registry Code)"
+
+#: nuts/profiles/forms.py:293
+msgid "Индекс (деятельности)"
+msgstr "Postal Code (Business activity)"
+
+#: nuts/profiles/forms.py:339
+msgid "Текущий пароль*"
+msgstr "Current Password*"
+
+#: nuts/profiles/forms.py:341
+msgid "Введите текущий пароль."
+msgstr "Enter current password."
+
+#: nuts/profiles/forms.py:344
+msgid "Новый пароль*"
+msgstr "New Password*"
+
+#: nuts/profiles/forms.py:346
+msgid "Введите новый пароль."
+msgstr "Enter new password."
+
+#: nuts/profiles/forms.py:349
+msgid "Подтвердить пароль*"
+msgstr "Confirm Password*"
+
+#: nuts/profiles/forms.py:351
+msgid "Подтвердите новый пароль."
+msgstr "Confirm your new password."
+
+#: nuts/profiles/forms.py:361
+msgid "Текущий пароль введён неверно."
+msgstr "Current password entered is incorrect."
+
+#: nuts/profiles/forms.py:382
+msgid "Новые пароли не совпадают."
+msgstr "New passwords do not match."
+
+#: nuts/profiles/forms.py:385
+msgid "Новый пароль не должен совпадать со старым."
+msgstr "New password must not be the same as the old one."
+
+#: nuts/profiles/views.py:28
+msgid "Ваши контактные данные успешно обновлены."
+msgstr "Your contact details have been successfully updated."
+
+#: nuts/profiles/views.py:51
+msgid "Адрес и реквизиты успешно обновлены."
+msgstr "Address and requisites have been successfully updated."
+
+#: nuts/profiles/views.py:53
+#, python-format
+msgid "Произошла ошибка при сохранении: %(error)s"
+msgstr "Error occurred while saving: %(error)s"
+
+#: nuts/profiles/views.py:76
+msgid "Ваш пароль успешно изменен."
+msgstr "Your password has been successfully changed."
+
+#: nuts/shop/forms.py:9
+msgid "Вкус"
+msgstr "Flavor"
+
+#: nuts/shop/forms.py:14 templates/home.html:79
+#: templates/includes/shop/cards.html:48
+msgid "Масса"
+msgstr "Weight"
+
+#: nuts/shop/forms.py:15
+msgid "от 0 до 50 г"
+msgstr "0 to 50 g"
+
+#: nuts/shop/forms.py:16
+msgid "от 50 до 100 г"
+msgstr "50 to 100 g"
+
+#: nuts/shop/forms.py:17
+msgid "от 100 до 200 г"
+msgstr "100 to 200 g"
+
+#: nuts/shop/forms.py:18
+msgid "от 200 до 400 г"
+msgstr "200 to 400 g"
+
+#: nuts/shop/forms.py:19
+msgid "от 400 г"
+msgstr "over 400 g"
+
+#: nuts/shop/forms.py:28
+msgid "По возрастанию"
+msgstr "Ascending"
+
+#: nuts/shop/forms.py:29
+msgid "По убыванию"
+msgstr "Descending"
+
+#: nuts/users/validators.py:11
+msgid "Введите корректное ФИО (2 или 3 слова, без спецсимволов)"
+msgstr "Enter a valid Full Name (2 or 3 words, no special characters)"
+
+#: templates/about.html:66
+msgid "Owner Photo"
+msgstr "Owner Photo"
+
+#: templates/about.html:79 templates/customers.html:73
+#: templates/customers.html:99 templates/customers.html:125
+#: templates/customers.html:151 templates/customers.html:177
+msgid "Написать нам"
+msgstr "Contact Us"
+
+#: templates/about.html:151
+msgid "Смотреть всю галерею"
+msgstr "View full gallery"
+
+#: templates/about.html:198 templates/home.html:305
+#: templates/includes/news/list.html:9 templates/includes/news/list.html:42
+#: templates/news/news_detail.html:26 templates/news/news_detail.html:44
+msgid "News Main Media Image"
+msgstr "News Main Media Image"
+
+#: templates/about.html:217 templates/home.html:324
+#: templates/includes/news/list.html:31 templates/includes/news/list.html:61
+#: templates/news/news_detail.html:82
+msgid "Читать"
+msgstr "Read"
+
+#: templates/about.html:228 templates/home.html:335
+msgid "Смотреть все новости"
+msgstr "View all news"
+
+#: templates/auth/forgot_password.html:17 templates/auth/login.html:20
+msgid "Забыли пароль?"
+msgstr "Forgot password?"
+
+#: templates/auth/forgot_password.html:19
+msgid ""
+"Введите Email Вашего аккаунта, Вам будет выслана ссылка для восстановления "
+"пароля."
+msgstr ""
+"Enter your account Email, and we will send you a password recovery link."
+
+#: templates/auth/forgot_password.html:25
+msgid "Отправить ссылку"
+msgstr "Send Link"
+
+#: templates/auth/login.html:13
+msgid "Войти в личный кабинет"
+msgstr "Log in to Personal Account"
+
+#: templates/auth/login.html:22
+msgid "Войти"
+msgstr "Login"
+
+#: templates/auth/login.html:24 templates/tags/auth_links.html:19
+msgid "Регистрация"
+msgstr "Registration"
+
+#: templates/auth/recover_password.html:19
+msgid "Введите новый пароль для E-Mail"
+msgstr "Enter new password for E-Mail"
+
+#: templates/auth/recover_password.html:26
+msgid "Сменить пароль"
+msgstr "Change Password"
+
+#: templates/auth/recover_password_email_message.html:13
+#: templates/auth/recover_password_email_message.html:67
+msgid "Сброс пароля"
+msgstr "Password Reset"
+
+#: templates/auth/recover_password_email_message.html:65
+msgid "Орехи Причерноморья"
+msgstr "Black Sea Nuts"
+
+#: templates/auth/recover_password_email_message.html:69
+msgid ""
+"Вы получили это письмо, потому что Вы отправили запрос на сброс пароля для "
+"Вашего личного кабинета на сайте \"Орехи Причерноморья\"."
+msgstr ""
+"You received this email because you requested a password reset for your "
+"account on the \"Black Sea Nuts\" website."
+
+#: templates/auth/recover_password_email_message.html:70
+msgid "Сбросить пароль"
+msgstr "Reset Password"
+
+#: templates/auth/recover_password_email_message.html:73
+msgid "Орехи Причерноморья. Все права защищены."
+msgstr "Black Sea Nuts. All rights reserved."
+
+#: templates/auth/register.html:17 templates/checkout.html:102
+msgid "1. Контактные данные"
+msgstr "1. Contact Information"
+
+#: templates/auth/register.html:26
+msgid "Физическое лицо"
+msgstr "Individual"
+
+#: templates/auth/register.html:47 templates/auth/register.html:99
+#: templates/profile/address.html:14
+msgid "2. Адрес"
+msgstr "2. Address"
+
+#: templates/auth/register.html:54 templates/auth/register.html:106
+msgid "3. Пароль"
+msgstr "3. Password"
+
+#: templates/auth/register.html:63 templates/auth/register.html:116
+#: templates/profile/contact_information.html:25
+msgid "Загрузить фото"
+msgstr "Upload photo"
+
+#: templates/auth/register.html:78 templates/auth/register.html:163
+msgid "Я согласен с"
+msgstr "I agree to"
+
+#: templates/auth/register.html:78 templates/auth/register.html:163
+msgid "Условиями регистрации"
+msgstr "Registration Terms"
+
+#: templates/auth/register.html:82 templates/auth/register.html:167
+#: templates/checkout.html:170 templates/profile/password.html:12
+msgid "Продолжить"
+msgstr "Continue"
+
+#: templates/auth/register.html:130 templates/auth/register.html:144
+#: templates/profile/address.html:8
+msgid "1. Реквизиты"
+msgstr "1. Requisites"
+
+#: templates/auth/register.html:134
+msgid "2. Юридический адрес"
+msgstr "2. Legal Address"
+
+#: templates/auth/register.html:148
+msgid "2. Адрес ФОП"
+msgstr "2. FOP Address"
+
+#: templates/cart.html:25
+#, python-format
+msgid ""
+"\n"
+"                                    Ваш личный менеджер %(manager_name)s\n"
+"                                "
+msgstr ""
+"\n"
+"                                    Your personal manager %(manager_name)s\n"
+"                                "
+
+#: templates/checkout.html:22
+#, python-format
+msgid ""
+"\n"
+"                                        Ваш личный менеджер "
+"%(manager_name)s\n"
+"                                    "
+msgstr ""
+"\n"
+"                                        Your personal manager "
+"%(manager_name)s\n"
+"                                    "
+
+#: templates/checkout.html:39 templates/includes/cart/table.html:7
+#: templates/profile/order_detail.html:31
+msgid "Товар"
+msgstr "Product"
+
+#: templates/checkout.html:40 templates/includes/cart/table.html:8
+#: templates/profile/order_detail.html:32
+msgid "Кол - во"
+msgstr "Qty"
+
+#: templates/checkout.html:41 templates/includes/cart/table.html:9
+#: templates/profile/order_detail.html:33
+msgid "Цена за товар"
+msgstr "Price per item"
+
+#: templates/checkout.html:42 templates/includes/cart/table.html:10
+#: templates/profile/order_detail.html:34
+msgid "Итоговая стоимость"
+msgstr "Total cost"
+
+#: templates/checkout.html:67 templates/checkout.html:70
+#: templates/checkout.html:89 templates/home.html:100 templates/home.html:103
+#: templates/home.html:107 templates/includes/cart/popup_content.html:38
+#: templates/includes/cart/popup_content.html:62
+#: templates/includes/cart/table.html:38 templates/includes/cart/table.html:39
+#: templates/includes/cart/table.html:65 templates/includes/shop/cards.html:69
+#: templates/includes/shop/cards.html:72 templates/includes/shop/cards.html:76
+#: templates/product.html:124 templates/product.html:127
+#: templates/product.html:131 templates/profile/order_detail.html:54
+#: templates/profile/order_detail.html:55
+#: templates/profile/order_detail.html:73
+#: templates/profile/orders_history.html:23
+#: templates/profile/transactions_history.html:20
+msgid "грн."
+msgstr "UAH"
+
+#: templates/checkout.html:86 templates/includes/cart/popup_content.html:60
+#: templates/includes/cart/table.html:63 templates/profile/order_detail.html:70
+msgid "Всего"
+msgstr "Total"
+
+#: templates/checkout.html:113
+msgid "2. Способ доставки"
+msgstr "2. Shipping Method"
+
+#: templates/checkout.html:133
+msgid "БЕСПЛАТНО"
+msgstr "FREE"
+
+#: templates/checkout.html:154
+msgid "3. Способ оплаты"
+msgstr "3. Payment Method"
+
+#: templates/customers.html:48
+msgid "Крупные"
+msgstr "Large"
+
+#: templates/customers.html:48
+msgid "супермаркеты"
+msgstr "Supermarkets"
+
+#: templates/customers.html:49
+msgid "Розничные"
+msgstr "Retail"
+
+#: templates/customers.html:49
+msgid "магазины"
+msgstr "Stores"
+
+#: templates/customers.html:50
+msgid "Компании"
+msgstr "Companies"
+
+#: templates/customers.html:51
+msgid "Фитнес"
+msgstr "Fitness"
+
+#: templates/customers.html:51
+msgid "и спорт клубы"
+msgstr "and Sport Clubs"
+
+#: templates/customers.html:52
+msgid "Кондитерские"
+msgstr "Confectioneries"
+
+#: templates/customers.html:52
+msgid "и пекарни"
+msgstr "and Bakeries"
+
+#: templates/customers.html:79 templates/customers.html:105
+#: templates/customers.html:131 templates/customers.html:157
+#: templates/customers.html:183
+msgid "Customers Block Picture"
+msgstr "Customers Block Picture"
+
+#: templates/home.html:40 templates/includes/shop/cards.html:9
+#: templates/product.html:19
+msgid "Акция"
+msgstr "Promotion"
+
+#: templates/home.html:45 templates/includes/shop/cards.html:14
+#: templates/product.html:24 templates/unfold/product/is_new_field.html:3
+msgid "Новинка"
+msgstr "New Arrival"
+
+#: templates/home.html:68 templates/includes/shop/cards.html:37
+#: templates/product.html:53
+msgid "Арт:"
+msgstr "SKU:"
+
+#: templates/home.html:80 templates/includes/shop/cards.html:49
+#: templates/product.html:79
+msgid "г."
+msgstr "g"
+
+#: templates/home.html:88 templates/includes/shop/cards.html:57
+#: templates/product.html:164
+msgid "Упаковка"
+msgstr "Packaging"
+
+#: templates/home.html:89 templates/includes/shop/cards.html:58
+msgid "вакуумная"
+msgstr "vacuum"
+
+#: templates/home.html:96 templates/includes/shop/cards.html:65
+msgid "Цена:"
+msgstr "Price:"
+
+#: templates/home.html:113 templates/includes/shop/cards.html:82
+msgid "Купить"
+msgstr "Buy"
+
+#: templates/home.html:125
+msgid "Перейти в магазин"
+msgstr "Go to Shop"
+
+#: templates/home.html:136
+msgid "Подробнее"
+msgstr "Details"
+
+#: templates/home.html:201 templates/home.html:205
+msgid "Грецкий орех"
+msgstr "Walnut"
+
+#: templates/home.html:219 templates/home.html:223
+msgid "Фундук"
+msgstr "Hazelnut"
+
+#: templates/home.html:237 templates/home.html:241
+msgid "Шиповник"
+msgstr "Rosehip"
+
+#: templates/includes/cart/popup_content.html:67
+msgid "Перейти в корзину"
+msgstr "Go to Cart"
+
+#: templates/includes/cart/popup_content.html:73
+#: templates/includes/cart/table.html:46
+msgid "Ваша корзина пуста"
+msgstr "Your cart is empty"
+
+#: templates/includes/cart/table.html:56
+msgid "Продолжить покупки"
+msgstr "Continue Shopping"
+
+#: templates/includes/cart/table.html:71
+msgid "Оформить заказ"
+msgstr "Place Order"
+
+#: templates/includes/cart/table.html:85
+msgid "Для оформления заказа необходимо"
+msgstr "To place an order you must"
+
+#: templates/includes/cart/table.html:87
+msgid "Авторизоваться"
+msgstr "Log in"
+
+#: templates/includes/cart/table.html:88
+msgid "или"
+msgstr "or"
+
+#: templates/includes/cart/table.html:89
+msgid "Зарегистрироваться"
+msgstr "Register"
+
+#: templates/includes/contacts.html:7 templates/tags/menu_links.html:18
+msgid "Контакты"
+msgstr "Contacts"
+
+#: templates/includes/contacts.html:57
+msgid "Офис и отдел продаж"
+msgstr "Office and Sales Department"
+
+#: templates/includes/contacts.html:63
+msgid "Производство"
+msgstr "Production"
+
+#: templates/includes/footer.html:5
+msgid "Разработано"
+msgstr "Developed by"
+
+#: templates/includes/footer.html:8
+msgid "Все права защищены"
+msgstr "All rights reserved"
+
+#: templates/includes/gallery/blocks.html:50
+#: templates/includes/news/list.html:90
+msgid "Посмотреть еще"
+msgstr "Show more"
+
+#: templates/includes/header.html:7
+msgid "Menu Icon"
+msgstr "Menu Icon"
+
+#: templates/includes/header.html:70 templates/includes/header.html:75
+msgid "Заказать звонок"
+msgstr "Request a Call"
+
+#: templates/includes/shop/cards.html:97
+msgid "Фильтр"
+msgstr "Filter"
+
+#: templates/includes/shop/cards.html:114
+#: templates/profile/orders_history.html:12
+msgid "Стоимость"
+msgstr "Cost"
+
+#: templates/includes/shop/cards.html:121
+msgid "Применить"
+msgstr "Apply"
+
+#: templates/includes/shop/cards.html:128
+msgid "Сбросить"
+msgstr "Reset"
+
+#: templates/includes/shop/cards.html:147
+msgid "Загрузить еще"
+msgstr "Load more"
+
+#: templates/news/news_detail.html:53
+msgid "Последние публикации"
+msgstr "Latest Publications"
+
+#: templates/news/news_detail.html:93
+msgid "Присоединяйтесь к нам в соц. сетях"
+msgstr "Join us on social media"
+
+#: templates/payment_and_delivery.html:23
+msgid "Оплата заказа"
+msgstr "Order Payment"
+
+#: templates/payment_and_delivery.html:24
+msgid "Доставка партии"
+msgstr "Batch Delivery"
+
+#: templates/payment_and_delivery.html:25
+msgid "Возврат товара"
+msgstr "Returns"
+
+#: templates/payment_and_delivery.html:44
+msgid "Payment Block Picture"
+msgstr "Payment Block Picture"
+
+#: templates/payment_and_delivery.html:61
+msgid "Delivery Block Picture"
+msgstr "Delivery Block Picture"
+
+#: templates/payment_and_delivery.html:78
+msgid "Return Block Picture"
+msgstr "Return Block Picture"
+
+#: templates/product.html:66
+msgid "Состав:"
+msgstr "Ingredients:"
+
+#: templates/product.html:76
+msgid "Масса нетто:"
+msgstr "Net weight:"
+
+#: templates/product.html:86
+msgid "Энергетическая ценность:"
+msgstr "Energy value:"
+
+#: templates/product.html:89
+msgid "Ккал."
+msgstr "kcal"
+
+#: templates/product.html:96
+msgid "Срок годности:"
+msgstr "Shelf life:"
+
+#: templates/product.html:100
+#, python-format
+msgid ""
+"\n"
+"                                                        %(months)s месяцев, "
+"с даты расфасовки (указана на упаковке)\n"
+"                                                    "
+msgstr ""
+"\n"
+"                                                        %(months)s months "
+"from the date of packaging (indicated on the package)\n"
+"                                                    "
+
+#: templates/product.html:120
+msgid "Ваша цена:"
+msgstr "Your price:"
+
+#: templates/product.html:144
+msgid "Заказать"
+msgstr "Order"
+
+#: templates/product.html:163
+msgid "Описание"
+msgstr "Description"
+
+#: templates/product.html:165
+msgid "Оплата"
+msgstr "Payment"
+
+#: templates/product.html:166
+msgid "Доставка"
+msgstr "Shipping"
+
+#: templates/product.html:179
+msgid "Description Block Image"
+msgstr "Description Block Image"
+
+#: templates/product.html:194
+msgid "Packaging Block Image"
+msgstr "Packaging Block Image"
+
+#: templates/product.html:209
+msgid "Payment Block Image"
+msgstr "Payment Block Image"
+
+#: templates/product.html:224
+msgid "Delivering Block Image"
+msgstr "Delivering Block Image"
+
+#: templates/profile/address.html:19
+msgid "3. Юридический адрес"
+msgstr "3. Legal Address"
+
+#: templates/profile/address.html:25 templates/profile/address.html:46
+#: templates/profile/contact_information.html:15
+msgid "Сохранить"
+msgstr "Save"
+
+#: templates/profile/base.html:13
+msgid "Учетная запись"
+msgstr "Account"
+
+#: templates/profile/base.html:18 templates/profile/order_detail.html:18
+msgid "Ваш личный менеджер"
+msgstr "Your personal manager"
+
+#: templates/profile/contact_information.html:6
+msgid "Контактная информация"
+msgstr "Contact Information"
+
+#: templates/profile/order_detail.html:13
+msgid "Заказ №"
+msgstr "Order No."
+
+#: templates/profile/orders_history.html:8
+msgid "№ Заказа"
+msgstr "Order No."
+
+#: templates/profile/orders_history.html:9
+msgid "Дата"
+msgstr "Date"
+
+#: templates/profile/orders_history.html:10
+msgid "Кол - во товаров"
+msgstr "Items count"
+
+#: templates/profile/orders_history.html:11
+#: templates/profile/transactions_history.html:9
+msgid "Статус"
+msgstr "Status"
+
+#: templates/profile/orders_history.html:13
+msgid "Функции"
+msgstr "Actions"
+
+#: templates/profile/orders_history.html:26
+#: templates/profile/transactions_history.html:24
+msgid "Просмотреть заказ"
+msgstr "View Order"
+
+#: templates/profile/orders_history.html:27
+msgid "Копировать"
+msgstr "Repeat/Copy"
+
+#: templates/profile/password.html:8
+msgid "Смена пароля"
+msgstr "Change Password"
+
+#: templates/profile/transactions_history.html:8
+msgid "Добавлено"
+msgstr "Added"
+
+#: templates/profile/transactions_history.html:10
+msgid "Сумма"
+msgstr "Amount"
+
+#: templates/profile/transactions_history.html:37
+msgid "У вас не было транзакций!"
+msgstr "You have no transactions!"
+
+#: templates/shop.html:60
+msgid "Gallery Slide"
+msgstr "Gallery Slide"
+
+#: templates/tags/auth_links.html:4
+msgid "Профиль"
+msgstr "Profile"
+
+#: templates/tags/auth_links.html:10
+msgid "Выйти"
+msgstr "Logout"
+
+#: templates/tags/auth_links.html:16
+msgid "Вход"
+msgstr "Login"
+
+#: templates/tags/profile_menu_links.html:3
+msgid "Мои заказы"
+msgstr "My Orders"
+
+#: templates/tags/profile_menu_links.html:24
+msgid "Моя учетная запись"
+msgstr "My Account"
+
+#~ msgid "Контактное лицо (ФИО)"
+#~ msgstr "Contact Person (Full Name)"
+
+#~ msgid "Номер телефона"
+#~ msgstr "Phone Number"

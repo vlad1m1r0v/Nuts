@@ -1,29 +1,27 @@
 {% extends "base.html" %}
-{% load core_tags %}
+{% load core_tags i18n %}
 {% block content %}
-<!--Breadcrumbs-->
 <section class="first-section no-bg">
     <div class="container">
         {% breadcrumbs %}
     </div>
 </section>
-<!--Form-->
 <section class="registration">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6">
-                <h1 class="text-center py-4">Войти в личный кабинет</h1>
+                <h1 class="text-center py-4">{% trans "Войти в личный кабинет" %}</h1>
                 {% with customer_login_form as form %}
                 <form method="POST" action="{% url 'custom_auth:login' %}">
                     {% csrf_token %}
                     {{ form.email }}
                     {{ form.password }}
                     <div class="mini_link">
-                        <a href="{{ forgot_page.url }}">Забыли пароль?</a>
+                        <a href="{{ forgot_page.url }}">{% trans "Забыли пароль?" %}</a>
                     </div>
-                    <button class="button" type="submit">Войти</button>
+                    <button class="button" type="submit">{% trans "Войти" %}</button>
                     <div class="mini_link">
-                        <a href="{{ registration_page.url }}">Регистрация</a>
+                        <a href="{{ registration_page.url }}">{% trans "Регистрация" %}</a>
                     </div>
                 </form>
                 {% endwith %}

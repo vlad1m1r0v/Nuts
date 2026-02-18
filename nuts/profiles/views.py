@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.db import transaction
 from django.shortcuts import redirect
 from django.views import View
+from django.utils.translation import gettext as _
 
 from profiles.forms import (
     LegalEntityContactInformationForm,
@@ -24,7 +25,7 @@ class UpdateContactInformationView(View):
 
         if form.is_valid():
             form.save()
-            messages.success(request, "Ваши контактные данные успешно обновлены.")
+            messages.success(request, _("Ваши контактные данные успешно обновлены."))
             return redirect(request.META.get('HTTP_REFERER', '/'))
         else:
             for field, errors in form.errors.items():
@@ -47,9 +48,9 @@ class UpdateAddressInformationView(View):
             try:
                 with transaction.atomic():
                     form.save()
-                messages.success(request, "Адрес и реквизиты успешно обновлены.")
+                messages.success(request, _("Адрес и реквизиты успешно обновлены."))
             except Exception as e:
-                messages.error(request, f"Произошла ошибка при сохранении: {str(e)}")
+                messages.error(request, _("Произошла ошибка при сохранении: %(error)s") % {'error': str(e)})
 
             return redirect(request.META.get('HTTP_REFERER', '/'))
         else:
@@ -72,7 +73,7 @@ class UpdatePasswordView(View):
 
             update_session_auth_hash(request, user)
 
-            messages.success(request, "Ваш пароль успешно изменен.")
+            messages.success(request, _("Ваш пароль успешно изменен."))
             return redirect(request.META.get('HTTP_REFERER', '/'))
         else:
             for field, errors in form.errors.items():

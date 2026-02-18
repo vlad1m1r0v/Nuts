@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
+from django.utils.translation import gettext as _
 
 from auth.forms import (
     IndividualRegistrationForm,
@@ -94,11 +95,11 @@ class IndividualRegistrationView(View):
 
             merge_carts(customer_profile=customer_profile, anonymous_session_key=session_key)
 
-            messages.success(request, "Регистрация прошла успешно. Теперь вы можете войти.")
+            messages.success(request, _("Регистрация прошла успешно. Теперь вы можете войти."))
             return redirect(home_url)
 
         except Exception as e:
-            messages.error(request, "Произошла внутренняя ошибка сервера. Попробуйте позже.")
+            messages.error(request, _("Произошла внутренняя ошибка сервера. Попробуйте позже."))
             return redirect(register_url)
 
 
@@ -186,12 +187,12 @@ class BusinessRegistrationView(View):
 
             merge_carts(customer_profile=customer, anonymous_session_key=session_key)
 
-            messages.success(request, "Бизнес-аккаунт успешно зарегистрирован.")
+            messages.success(request, _("Бизнес-аккаунт успешно зарегистрирован."))
             return redirect(home_url)
 
         except Exception as e:
             logger.error(e)
-            messages.error(request, "Произошла внутренняя ошибка сервера. Попробуйте позже.")
+            messages.error(request, _("Произошла внутренняя ошибка сервера. Попробуйте позже."))
             return redirect(register_url)
 
 
@@ -228,10 +229,10 @@ class CustomerLoginView(View):
                 customer_profile=CustomerProfile.objects.get(user=user),
                 anonymous_session_key=session_key
             )
-            messages.success(request, f"Вход выполнен успешно.")
+            messages.success(request, _("Вход выполнен успешно."))
             return redirect(home_url)
         else:
-            messages.error(request, "Неверный E-Mail или пароль.")
+            messages.error(request, _("Неверный E-Mail или пароль."))
             return redirect(login_url)
 
 
@@ -263,7 +264,7 @@ class CustomerForgotPasswordView(View):
 
         message = EmailMessage(
             to=[data["email"]],
-            subject="Восстановление пароля",
+            subject=_("Восстановление пароля"),
             body=render_to_string(
                 template_name="auth/recover_password_email_message.html",
                 context={"reset_link": reset_link}
@@ -273,7 +274,7 @@ class CustomerForgotPasswordView(View):
         message.content_subtype = 'html'
         message.send(fail_silently=False)
 
-        messages.success(request, "Вам на почту отправлена ссылка на сброс пароля.")
+        messages.success(request, _("Вам на почту отправлена ссылка на сброс пароля."))
 
         return redirect(forgot_url)
 
@@ -304,14 +305,14 @@ class CustomerResetPasswordView(View):
                 user.set_password(form.cleaned_data['password'])
                 user.save()
 
-                messages.success(request, "Ваш пароль был успешно изменен. Теперь вы можете войти.")
+                messages.success(request, _("Ваш пароль был успешно изменен. Теперь вы можете войти."))
                 return redirect(login_url)
             else:
-                messages.error(request, "Срок действия ссылки истек или она неверна.")
+                messages.error(request, _("Срок действия ссылки истек или она неверна."))
                 return redirect(request.META.get('HTTP_REFERER'))
 
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-            messages.error(request, "Произошла ошибка при идентификации пользователя.")
+            messages.error(request, _("Произошла ошибка при идентификации пользователя."))
             return redirect(referer_url)
 
 
@@ -321,6 +322,6 @@ class CustomerLogoutView(View):
         login_url = login_page.get_url(request)
 
         logout(request)
-        messages.success(request, "Вы успешно вышли из своего аккаунта.")
+        messages.success(request, _("Вы успешно вышли из своего аккаунта."))
 
         return redirect(login_url)

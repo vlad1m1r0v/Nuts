@@ -1,4 +1,4 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags i18n %}
 <div class="wrap" id="cart-content">
     {% if cart and cart.items.all %}
     {% for item in cart.items.all %}
@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-5">
                         <div class="item_sum">
-                            <p>{{ item.item_total|floatformat:0 }} <span>грн.</span></p>
+                            <p>{{ item.item_total|floatformat:0 }} <span>{% trans "грн." %}</span></p>
                         </div>
                     </div>
                     <div class="col-1">
@@ -57,20 +57,20 @@
     {% endfor %}
     <div class="popup__cart_sum">
         <div class="sum_item">
-            <div class="sum_item_title"><p>Всего </p></div>
+            <div class="sum_item_title"><p>{% trans "Всего" %} </p></div>
             <div class="sum_item_new">
-                <p>{{ cart.cart_total|floatformat:0 }} <i>грн.</i></p>
+                <p>{{ cart.cart_total|floatformat:0 }} <i>{% trans "грн." %}</i></p>
             </div>
         </div>
         <div class="sum_item">
             <div class="sum_item_button">
-                <a href="{% pageurl cart_page %}" class="button">Перейти в корзину</a>
+                <a href="{% pageurl cart_page %}" class="button">{% trans "Перейти в корзину" %}</a>
             </div>
         </div>
     </div>
     {% else %}
     <div class="popup__cart_clean">
-        <p>Ваша корзина пуста</p>
+        <p>{% trans "Ваша корзина пуста" %}</p>
     </div>
     {% endif %}
 </div>

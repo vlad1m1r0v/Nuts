@@ -1,13 +1,12 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags i18n %}
 {% for news in news_list %}
-<!--First News-->
 {% if forloop.counter0 == 0 and news_list.number == 1 %}
 <div class="col-lg-8 py-4">
     {% with main_media=news.main_media.0 %}
     {% if main_media.block_type == 'image' %}
     {% image main_media.value original as img %}
     <div class="benefit-news__img">
-        <img src="{{img.url}}" alt="News Main Media Image">
+        <img src="{{img.url}}" alt="{% trans 'News Main Media Image' %}">
     </div>
     {% endif %}
     {% if main_media.block_type == 'video' %}
@@ -29,11 +28,10 @@
             </div>
             <h3>{{ news.title }}</h3>
             <p>{{ news.get_excerpt }}</p>
-            <a href="{% pageurl news %}">Читать <i class="nut-icon icons-read-more"></i></a>
+            <a href="{% pageurl news %}">{% trans "Читать" %} <i class="nut-icon icons-read-more"></i></a>
         </div>
     </div>
 </div>
-<!--Rest Of News-->
 {% else %}
 <div class="col-lg-4 col-md-6 col-12 py-4">
     <div class="news__item">
@@ -41,7 +39,7 @@
         {% if main_media.block_type == 'image' %}
         {% image main_media.value original as img %}
         <span class="video_wrap">
-            <img src="{{img.url}}" alt="News Main Media Image">
+            <img src="{{img.url}}" alt="{% trans 'News Main Media Image' %}">
         </span>
         {% endif %}
         {% if main_media.block_type == 'video' %}
@@ -60,14 +58,13 @@
             </div>
             <h3>{{ news.title }}</h3>
             <p>{{ news.get_excerpt }}</p>
-            <a href="{% pageurl news %}">Читать <i class="nut-icon icons-read-more"></i></a>
+            <a href="{% pageurl news %}">{% trans "Читать" %} <i class="nut-icon icons-read-more"></i></a>
         </div>
     </div>
 </div>
 {% endif %}
 {% endfor %}
 <div id="target">
-    <!--Video Jumbotron-->
     {% with hero=hero.0 %}
     <div hx-preserve id="video-jumbotron" class="col-lg-12 col-md-12 col-12 py-4">
         <div class="wrap">
@@ -83,7 +80,6 @@
         </div>
     </div>
     {% endwith %}
-    <!--Load More Button-->
     {% if news_list.has_next %}
     <div class="row">
         <div class="wrapper">
@@ -91,7 +87,7 @@
                     hx-get="{% pageurl page %}?page={{ news_list.next_page_number }}"
                     hx-target="#target"
                     hx-swap="outerHTML">
-                Посмотреть еще
+                {% trans "Посмотреть еще" %}
             </button>
         </div>
     </div>

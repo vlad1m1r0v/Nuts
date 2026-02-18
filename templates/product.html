@@ -1,13 +1,11 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags core_tags django_vite %}
+{% load wagtailcore_tags wagtailimages_tags core_tags django_vite i18n %}
 {% block content %}
-<!--Breadcrumbs-->
 <section class="first-section no-bg">
     <div class="container">
         {% breadcrumbs %}
     </div>
 </section>
-<!--Product-->
 {% if product %}
 <section class="product">
     <div class="container">
@@ -15,23 +13,19 @@
             <div class="col-lg-5 col-md-6">
                 <div class="wrap">
                     <div class="product__item">
-                        <!--New / Discounted Price Labels-->
                         {% if product.discounted_price %}
                         <div class="sticker">
                             <i class="nut-icon icons-actciya"></i>
-                            <p>Акция</p>
+                            <p>{% trans "Акция" %}</p>
                         </div>
                         {% elif product.is_new %}
                         <div class="sticker">
                             <i class="nut-icon icons-novinka"></i>
-                            <p>Новинка</p>
+                            <p>{% trans "Новинка" %}</p>
                         </div>
                         {% endif %}
-                        <!-- Slider main container -->
                         <div class="products-container swiper-container">
-                            <!-- Additional required wrapper -->
                             <div class="swiper-wrapper">
-                                <!-- Slides -->
                                 {% for item in product.images.all %}
                                 <div class="swiper-slide">
                                     <a href="#"><img src="{{ item.image.url }}" alt="{{ product.name }}"/></a>
@@ -39,7 +33,6 @@
                                 {% endfor %}
                             </div>
 
-                            <!-- Navigation buttons -->
                             <div class="swiper-button-prev"></div>
                             <div class="swiper-button-next"></div>
                             <img class="zoom" src="{% vite_asset_url 'src/img/zoom.svg' %}" alt="zoom">
@@ -57,7 +50,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="product__content_art">
-                                Арт:<span> {{ product.sku }}</span>
+                                {% trans "Арт:" %}<span> {{ product.sku }}</span>
                             </div>
                         </div>
                         <div class="col-lg-9">
@@ -70,7 +63,7 @@
                                     <li>
                                         <div class="row">
                                             <div class="col-md-5">
-                                                <strong>Состав:</strong>
+                                                <strong>{% trans "Состав:" %}</strong>
                                             </div>
                                             <div class="col-md-7">
                                                 <span>{{ product.ingredients }}</span>
@@ -80,30 +73,34 @@
                                     <li>
                                         <div class="row">
                                             <div class="col-md-5">
-                                                <strong>Масса нетто:</strong>
+                                                <strong>{% trans "Масса нетто:" %}</strong>
                                             </div>
                                             <div class="col-md-7">
-                                                <span>{{ product.weight }} г.</span>
+                                                <span>{{ product.weight }} {% trans "г." %}</span>
                                             </div>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="row">
                                             <div class="col-md-5">
-                                                <strong>Энергетическая ценность:</strong>
+                                                <strong>{% trans "Энергетическая ценность:" %}</strong>
                                             </div>
                                             <div class="col-md-7">
-                                                <span>{{ product.calories }} Ккал.</span>
+                                                <span>{{ product.calories }} {% trans "Ккал." %}</span>
                                             </div>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="row">
                                             <div class="col-md-5">
-                                                <strong>Срок годности:</strong>
+                                                <strong>{% trans "Срок годности:" %}</strong>
                                             </div>
                                             <div class="col-md-7">
-                                                <span>{{ product.shelf_life_months }} месяцев, с даты расфасовки (указана на упаковке)</span>
+                                                <span>
+                                                    {% blocktrans with months=product.shelf_life_months %}
+                                                        {{ months }} месяцев, с даты расфасовки (указана на упаковке)
+                                                    {% endblocktrans %}
+                                                </span>
                                             </div>
                                         </div>
                                     </li>
@@ -120,18 +117,18 @@
                             <div class="product__content_sum">
                                 <div class="sum_item">
                                     <div class="sum_item_title">
-                                        <p>Ваша цена: </p>
+                                        <p>{% trans "Ваша цена:" %} </p>
                                     </div>
                                     {% if product.discounted_price %}
                                     <div class="sum_item_new">
-                                        <p>{{ product.discounted_price|floatformat:0 }} <i>грн.</i></p>
+                                        <p>{{ product.discounted_price|floatformat:0 }} <i>{% trans "грн." %}</i></p>
                                     </div>
                                     <div class="sum_item_old">
-                                        <p>{{ product.price|floatformat:0 }} <i>грн.</i></p>
+                                        <p>{{ product.price|floatformat:0 }} <i>{% trans "грн." %}</i></p>
                                     </div>
                                     {% else %}
                                     <div class="sum_item_new">
-                                        <p>{{ product.price|floatformat:0 }} <i>грн.</i></p>
+                                        <p>{{ product.price|floatformat:0 }} <i>{% trans "грн." %}</i></p>
                                     </div>
                                     {% endif %}
                                 </div>
@@ -144,7 +141,7 @@
                                                 hx-swap="outerHTML"
                                                 hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
                                                 hx-disabled-elt="this">
-                                            Заказать
+                                            {% trans "Заказать" %}
                                         </button>
                                     </div>
                                 </div>
@@ -157,17 +154,16 @@
     </div>
 </section>
 {% endif %}
-<!--Tabs-->
 <section class="payment payment__product">
     <div class="tabs">
         <div class="tabs__wrap">
             <div class="container">
                 <div class="row">
                     <ul class="tabs__caption">
-                        <li class="active"><span>Описание</span></li>
-                        <li><span>Упаковка</span></li>
-                        <li><span>Оплата</span></li>
-                        <li><span>Доставка</span></li>
+                        <li class="active"><span>{% trans "Описание" %}</span></li>
+                        <li><span>{% trans "Упаковка" %}</span></li>
+                        <li><span>{% trans "Оплата" %}</span></li>
+                        <li><span>{% trans "Доставка" %}</span></li>
                     </ul>
                 </div>
             </div>
@@ -175,13 +171,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <!--Description-->
                     <div class="tabs__content active">
                         {% with block=page.description_info.0 %}
                         {% image block.value.image original as img %}
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-12">
-                                <img src="{{ img.url }}" class="tabs__content_img" alt="Description Block Image">
+                                <img src="{{ img.url }}" class="tabs__content_img" alt="{% trans 'Description Block Image' %}">
                             </div>
                             <div class="col-lg-8 col-md-6 col-12 align-self-center">
                                 <div class="tabs__content_product">
@@ -191,13 +186,12 @@
                         </div>
                         {% endwith %}
                     </div>
-                    <!--Packaging-->
                     <div class="tabs__content">
                         {% with block=page.packaging_info.0 %}
                         {% image block.value.image original as img %}
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-12">
-                                <img src="{{ img.url }}" class="tabs__content_img" alt="Packaging Block Image">
+                                <img src="{{ img.url }}" class="tabs__content_img" alt="{% trans 'Packaging Block Image' %}">
                             </div>
                             <div class="col-lg-8 col-md-6 col-12 align-self-center">
                                 <div class="tabs__content_product">
@@ -207,13 +201,12 @@
                         </div>
                         {% endwith %}
                     </div>
-                    <!--Payment-->
                     <div class="tabs__content">
                         {% with block=page.payment_info.0 %}
                         {% image block.value.image original as img %}
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-12">
-                                <img src="{{ img.url }}" class="tabs__content_img" alt="Payment Block Image">
+                                <img src="{{ img.url }}" class="tabs__content_img" alt="{% trans 'Payment Block Image' %}">
                             </div>
                             <div class="col-lg-8 col-md-6 col-12 align-self-center">
                                 <div class="tabs__content_product">
@@ -223,13 +216,12 @@
                         </div>
                         {% endwith %}
                     </div>
-                    <!--Delivering-->
                     <div class="tabs__content">
                         {% with block=page.delivery_info.0 %}
                         {% image block.value.image original as img %}
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-12">
-                                <img src="{{ img.url }}" class="tabs__content_img" alt="Delivering Block Image">
+                                <img src="{{ img.url }}" class="tabs__content_img" alt="{% trans 'Delivering Block Image' %}">
                             </div>
                             <div class="col-lg-8 col-md-6 col-12 align-self-center">
                                 <div class="tabs__content_product">

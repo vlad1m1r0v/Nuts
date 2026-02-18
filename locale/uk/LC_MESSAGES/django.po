@@ -1,0 +1,1397 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-18 13:18+0000\n"
+"PO-Revision-Date: 2026-02-18 13:30+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Ukrainian <uk@li.org>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
+"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
+"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
+"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+#: nuts/auth/forms.py:17 nuts/orders/forms.py:58 nuts/orders/forms.py:61
+#: nuts/profiles/forms.py:72
+msgid "ФИО*"
+msgstr "ПІБ*"
+
+#: nuts/auth/forms.py:20
+msgid "ФИО"
+msgstr "ПІБ"
+
+#: nuts/auth/forms.py:23 nuts/profiles/forms.py:78
+msgid "ФИО поле обязательное для заполнения."
+msgstr "Поле ПІБ є обов'язковим для заповнення."
+
+#: nuts/auth/forms.py:24
+msgid "ФИО поле может местить максимум 60 символов."
+msgstr "Поле ПІБ може містити максимум 60 символів."
+
+#: nuts/auth/forms.py:25
+msgid "ФИО поле должно местить минимум 10 символов."
+msgstr "Поле ПІБ має містити мінімум 10 символів."
+
+#: nuts/auth/forms.py:29 nuts/auth/forms.py:346 nuts/auth/forms.py:376
+#: nuts/orders/forms.py:70 nuts/orders/forms.py:71 nuts/profiles/forms.py:18
+msgid "E-Mail*"
+msgstr "E-Mail*"
+
+#: nuts/auth/forms.py:30 nuts/auth/forms.py:347 nuts/auth/forms.py:377
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: nuts/auth/forms.py:32 nuts/auth/forms.py:349 nuts/auth/forms.py:379
+#: nuts/profiles/forms.py:21
+msgid "E-Mail поле обязательное для заполнения."
+msgstr "Поле E-Mail є обов'язковим для заповнення."
+
+#: nuts/auth/forms.py:33 nuts/auth/forms.py:350 nuts/auth/forms.py:380
+msgid "E-Mail не валидний."
+msgstr "E-Mail невалідний."
+
+#: nuts/auth/forms.py:37 nuts/profiles/forms.py:26
+msgid "Телефон*"
+msgstr "Телефон*"
+
+#: nuts/auth/forms.py:38
+msgid "Телефон"
+msgstr "Телефон"
+
+#: nuts/auth/forms.py:41 nuts/profiles/forms.py:29
+msgid "Телефон поле обязательное для заполнения."
+msgstr "Поле Телефон є обов'язковим для заповнення."
+
+#: nuts/auth/forms.py:47 nuts/auth/forms.py:48 nuts/auth/forms.py:226
+#: nuts/auth/forms.py:272 nuts/profiles/forms.py:150 nuts/profiles/forms.py:230
+msgid "Страна"
+msgstr "Країна"
+
+#: nuts/auth/forms.py:50 nuts/profiles/forms.py:152
+msgid "Страна поле обязательное для заполнения."
+msgstr "Поле Країна є обов'язковим для заповнення."
+
+#: nuts/auth/forms.py:55 nuts/auth/forms.py:56 nuts/auth/forms.py:232
+#: nuts/auth/forms.py:278 nuts/profiles/forms.py:156 nuts/profiles/forms.py:236
+msgid "Область"
+msgstr "Область"
+
+#: nuts/auth/forms.py:58 nuts/profiles/forms.py:158
+msgid "Область поле обязательное для заполнения."
+msgstr "Поле Область є обов'язковим для заповнення."
+
+#: nuts/auth/forms.py:62 nuts/auth/forms.py:239 nuts/auth/forms.py:285
+#: nuts/profiles/forms.py:161 nuts/profiles/forms.py:243
+msgid "Город*"
+msgstr "Місто*"
+
+#: nuts/auth/forms.py:65
+msgid "Город"
+msgstr "Місто"
+
+#: nuts/auth/forms.py:67 nuts/profiles/forms.py:166
+msgid "Город поле обязательное для заполнения."
+msgstr "Поле Місто є обов'язковим для заповнення."
+
+#: nuts/auth/forms.py:68 nuts/profiles/forms.py:167 nuts/profiles/forms.py:245
+msgid "Город поле может местить максимум 30 символов."
+msgstr "Поле Місто може містити максимум 30 символів."
+
+#: nuts/auth/forms.py:69 nuts/profiles/forms.py:168 nuts/profiles/forms.py:246
+msgid "Город поле должно местить минимум 3 символа."
+msgstr "Поле Місто має містити мінімум 3 символи."
+
+#: nuts/auth/forms.py:73 nuts/auth/forms.py:76 nuts/auth/forms.py:250
+#: nuts/auth/forms.py:296 nuts/profiles/forms.py:254
+#: templates/profile/address.html:41
+msgid "Адрес"
+msgstr "Адреса"
+
+#: nuts/auth/forms.py:79 nuts/profiles/forms.py:178 nuts/profiles/forms.py:256
+msgid "Адрес поле может местить максимум 100 символов."
+msgstr "Поле Адреса може містити максимум 100 символів."
+
+#: nuts/auth/forms.py:80
+msgid "Адрес поле должно местить минимум 20 символов."
+msgstr "Поле Адреса має містити мінімум 20 символів."
+
+#: nuts/auth/forms.py:86 nuts/auth/forms.py:356 nuts/auth/forms.py:406
+msgid "Пароль*"
+msgstr "Пароль*"
+
+#: nuts/auth/forms.py:88 nuts/auth/forms.py:358 nuts/auth/forms.py:408
+msgid "Пароль"
+msgstr "Пароль"
+
+#: nuts/auth/forms.py:90 nuts/auth/forms.py:360 nuts/auth/forms.py:410
+msgid "Пароль поле обязательное для заполнения."
+msgstr "Поле Пароль є обов'язковим для заповнення."
+
+#: nuts/auth/forms.py:95 nuts/auth/forms.py:415
+msgid "Подтвердите пароль*"
+msgstr "Підтвердіть пароль*"
+
+#: nuts/auth/forms.py:97 nuts/auth/forms.py:417
+msgid "Подтвердите пароль"
+msgstr "Підтвердіть пароль"
+
+#: nuts/auth/forms.py:99 nuts/auth/forms.py:419
+msgid "Подтвердите пароль поле обязательное для заполнения."
+msgstr "Поле Підтвердження пароля є обов'язковим для заповнення."
+
+#: nuts/auth/forms.py:105 nuts/auth/forms.py:194
+msgid "Согласие с условиями"
+msgstr "Згода з умовами"
+
+#: nuts/auth/forms.py:107 nuts/auth/forms.py:196
+msgid "Согласие с условиями поле обязательное для заполнения."
+msgstr "Поле Згода з умовами є обов'язковим для заповнення."
+
+#: nuts/auth/forms.py:116 nuts/auth/forms.py:181
+msgid "Аватар"
+msgstr "Аватар"
+
+#: nuts/auth/forms.py:122 nuts/auth/forms.py:187
+msgid "Аватар поле обязательное для заполнения."
+msgstr "Поле Аватар є обов'язковим для заповнення."
+
+#: nuts/auth/forms.py:123 nuts/auth/forms.py:188 nuts/profiles/forms.py:43
+msgid "Загруженный файл не является изображением или поврежден."
+msgstr "Завантажений файл не є зображенням або він пошкоджений."
+
+#: nuts/auth/forms.py:130
+msgid ""
+"E-Mail поле: Пользователь с таким электронным адресом уже зарегистрирован."
+msgstr ""
+"Поле E-Mail: Користувач з такою електронною адресою вже зареєстрований."
+
+#: nuts/auth/forms.py:136
+msgid ""
+"Телефон поле: Пользователь с таким номером телефона уже зарегистрирован."
+msgstr "Поле Телефон: Користувач з таким номером телефону вже зареєстрований."
+
+#: nuts/auth/forms.py:145 nuts/auth/forms.py:370 nuts/auth/forms.py:429
+#: nuts/profiles/forms.py:371
+msgid "Ваш пароль не соответствует требованиям безопасности."
+msgstr "Ваш пароль не відповідає вимогам безпеки."
+
+#: nuts/auth/forms.py:155 nuts/orders/forms.py:167 nuts/profiles/forms.py:193
+#: nuts/profiles/forms.py:299
+msgid "Выбранная область не принадлежит указанной стране."
+msgstr "Вибрана область не належить до вказаної країни."
+
+#: nuts/auth/forms.py:161 nuts/auth/forms.py:439
+msgid "Пароли не совпадают."
+msgstr "Паролі не збігаються."
+
+#: nuts/auth/forms.py:170 templates/auth/register.html:68
+msgid "Являюсь ФОП"
+msgstr "Я є ФОП"
+
+#: nuts/auth/forms.py:201 nuts/users/models.py:28
+#: templates/auth/register.html:29
+msgid "Юридическое лицо"
+msgstr "Юридична особа"
+
+#: nuts/auth/forms.py:201 nuts/users/models.py:29
+msgid "ФОП"
+msgstr "ФОП"
+
+#: nuts/auth/forms.py:204
+msgid "Тип бизнеса"
+msgstr "Тип бізнесу"
+
+#: nuts/auth/forms.py:210 nuts/auth/forms.py:211 nuts/auth/forms.py:309
+#: nuts/profiles/forms.py:279
+msgid "ОКПО"
+msgstr "ЄДРПОУ/ЗКПО"
+
+#: nuts/auth/forms.py:212 nuts/profiles/forms.py:216
+msgid "ОКПО поле может местить максимум 32 символа."
+msgstr "Поле ЄДРПОУ/ЗКПО може містити максимум 32 символи."
+
+#: nuts/auth/forms.py:217 nuts/auth/forms.py:218 nuts/auth/forms.py:322
+msgid "ЕДРПО"
+msgstr "ЄДРПОУ"
+
+#: nuts/auth/forms.py:219
+msgid "ЕДРПО поле может местить максимум 32 символа."
+msgstr "Поле ЄДРПОУ може містити максимум 32 символи."
+
+#: nuts/auth/forms.py:225 nuts/auth/forms.py:310 nuts/profiles/forms.py:280
+msgid "Страна (юр.)"
+msgstr "Країна (юр.)"
+
+#: nuts/auth/forms.py:231 nuts/auth/forms.py:311 nuts/profiles/forms.py:281
+msgid "Область (юр.)"
+msgstr "Область (юр.)"
+
+#: nuts/auth/forms.py:238 nuts/auth/forms.py:312 nuts/profiles/forms.py:282
+msgid "Город (юр.)"
+msgstr "Місто (юр.)"
+
+#: nuts/auth/forms.py:241
+msgid "Город (юр.) поле может местить максимум 30 символов."
+msgstr "Поле Місто (юр.) може містити максимум 30 символів."
+
+#: nuts/auth/forms.py:242
+msgid "Город (юр.) поле должно местить минимум 3 символа."
+msgstr "Поле Місто (юр.) має містити мінімум 3 символи."
+
+#: nuts/auth/forms.py:249 nuts/profiles/forms.py:283
+msgid "Адрес (юр.)"
+msgstr "Адреса (юр.)"
+
+#: nuts/auth/forms.py:252
+msgid "Адрес (юр.) поле может местить максимум 100 символов."
+msgstr "Поле Адреса (юр.) може містити максимум 100 символів."
+
+#: nuts/auth/forms.py:253
+msgid "Адрес (юр.) поле должно местить минимум 10 символов."
+msgstr "Поле Адреса (юр.) має містити мінімум 10 символів."
+
+#: nuts/auth/forms.py:260 nuts/profiles/forms.py:284
+msgid "Индекс (юр.)"
+msgstr "Індекс (юр.)"
+
+#: nuts/auth/forms.py:261 nuts/profiles/forms.py:265
+msgid "Индекс"
+msgstr "Індекс"
+
+#: nuts/auth/forms.py:263
+msgid "Индекс (юр.) поле может местить максимум 10 символов."
+msgstr "Поле Індекс (юр.) може містити максимум 10 символів."
+
+#: nuts/auth/forms.py:264
+msgid "Индекс (юр.) поле должно местить минимум 5 символов."
+msgstr "Поле Індекс (юр.) має містити мінімум 5 символів."
+
+#: nuts/auth/forms.py:271 nuts/auth/forms.py:323 nuts/profiles/forms.py:289
+msgid "Страна (деятельности)"
+msgstr "Країна (діяльності)"
+
+#: nuts/auth/forms.py:277 nuts/auth/forms.py:324 nuts/profiles/forms.py:290
+msgid "Область (деятельности)"
+msgstr "Область (діяльності)"
+
+#: nuts/auth/forms.py:284 nuts/auth/forms.py:325 nuts/profiles/forms.py:291
+msgid "Город (деятельности)"
+msgstr "Місто (діяльності)"
+
+#: nuts/auth/forms.py:287
+msgid "Город (деятельности) поле может местить максимум 30 символов."
+msgstr "Поле Місто (діяльності) може містити максимум 30 символів."
+
+#: nuts/auth/forms.py:288
+msgid "Город (деятельности) поле должно местить минимум 3 символа."
+msgstr "Поле Місто (діяльності) має містити мінімум 3 символи."
+
+#: nuts/auth/forms.py:295 nuts/profiles/forms.py:292
+msgid "Адрес (деятельности)"
+msgstr "Адреса (діяльності)"
+
+#: nuts/auth/forms.py:298
+msgid "Адрес (деятельности) поле может местить максимум 100 символов."
+msgstr "Поле Адреса (діяльності) може містити максимум 100 символів."
+
+#: nuts/auth/forms.py:299
+msgid "Адрес (деятельности) поле должно местить минимум 10 символов."
+msgstr "Поле Адреса (діяльності) має містити мінімум 10 символів."
+
+#: nuts/auth/forms.py:318
+msgid "Область (юр.) поле: Выбранная область не принадлежит указанной стране."
+msgstr "Поле Область (юр.): Вибрана область не належить до вказаної країни."
+
+#: nuts/auth/forms.py:332
+msgid ""
+"Область (деятельности) поле: Выбранная область не принадлежит указанной "
+"стране."
+msgstr ""
+"Поле Область (діяльності): Вибрана область не належить до вказаної країни."
+
+#: nuts/auth/forms.py:340 nuts/profiles/forms.py:306
+#, python-format
+msgid "%(label)s поле обязательное для заполнения."
+msgstr "Поле %(label)s є обов'язковим для заповнення."
+
+#: nuts/auth/forms.py:396
+msgid "У пользователя нет личного кабинета."
+msgstr "У користувача немає особистого кабінету."
+
+#: nuts/auth/forms.py:398
+msgid "Пользователь с данным E-Mail не обнаружен."
+msgstr "Користувача з таким E-Mail не знайдено."
+
+#: nuts/auth/mixins.py:19
+msgid "Для доступа к этой странице необходимо войти в аккаунт."
+msgstr "Для доступу до цієї сторінки необхідно увійти в акаунт."
+
+#: nuts/auth/models.py:119 nuts/auth/models.py:127 nuts/auth/models.py:136
+msgid "Предоставленный токен доступа не валидный."
+msgstr "Наданий токен доступу невалідний."
+
+#: nuts/auth/views.py:98
+msgid "Регистрация прошла успешно. Теперь вы можете войти."
+msgstr "Реєстрація пройшла успішно. Тепер ви можете увійти."
+
+#: nuts/auth/views.py:102 nuts/auth/views.py:195
+msgid "Произошла внутренняя ошибка сервера. Попробуйте позже."
+msgstr "Сталася внутрішня помилка сервера. Спробуйте пізніше."
+
+#: nuts/auth/views.py:190
+msgid "Бизнес-аккаунт успешно зарегистрирован."
+msgstr "Бізнес-акаунт успішно зареєстровано."
+
+#: nuts/auth/views.py:232
+msgid "Вход выполнен успешно."
+msgstr "Вхід виконано успішно."
+
+#: nuts/auth/views.py:235
+msgid "Неверный E-Mail или пароль."
+msgstr "Невірний E-Mail або пароль."
+
+#: nuts/auth/views.py:267 templates/auth/forgot_password.html:13
+#: templates/auth/recover_password.html:13
+#: templates/auth/recover_password.html:17
+msgid "Восстановление пароля"
+msgstr "Відновлення пароля"
+
+#: nuts/auth/views.py:277
+msgid "Вам на почту отправлена ссылка на сброс пароля."
+msgstr "Вам на пошту надіслано посилання для скидання пароля."
+
+#: nuts/auth/views.py:308
+msgid "Ваш пароль был успешно изменен. Теперь вы можете войти."
+msgstr "Ваш пароль було успішно змінено. Тепер ви можете увійти."
+
+#: nuts/auth/views.py:311
+msgid "Срок действия ссылки истек или она неверна."
+msgstr "Термін дії посилання закінчився або воно є невірним."
+
+#: nuts/auth/views.py:315
+msgid "Произошла ошибка при идентификации пользователя."
+msgstr "Сталася помилка при ідентифікації користувача."
+
+#: nuts/auth/views.py:325
+msgid "Вы успешно вышли из своего аккаунта."
+msgstr "Ви успішно вийшли зі свого акаунта."
+
+#: nuts/core/validators.py:10
+msgid "Мобильный телефон должен быть в формате +38 (0XX) XXX-XX-XX."
+msgstr "Мобільний телефон має бути у форматі +38 (0XX) XXX-XX-XX."
+
+#: nuts/core/validators.py:17
+msgid "Файл слишком большой. Максимальный размер — 2 МБ."
+msgstr "Файл занадто великий. Максимальний розмір — 2 МБ."
+
+#: nuts/nuts/settings/base.py:167
+msgid "English"
+msgstr "Англійська"
+
+#: nuts/nuts/settings/base.py:168
+msgid "Russian"
+msgstr "Російська"
+
+#: nuts/nuts/settings/base.py:169
+msgid "Ukrainian"
+msgstr "Українська"
+
+#: nuts/orders/forms.py:34 nuts/orders/forms.py:35 nuts/profiles/forms.py:104
+msgid "Название компании*"
+msgstr "Назва компанії*"
+
+#: nuts/orders/forms.py:39
+msgid "Название компанни поле может местить максимум 255 символов."
+msgstr "Поле Назва компанії може містити максимум 255 символів."
+
+#: nuts/orders/forms.py:40
+msgid "Название компанни должно местить минимум 3 символа."
+msgstr "Поле Назва компанії має містити мінімум 3 символи."
+
+#: nuts/orders/forms.py:46 nuts/orders/forms.py:49 nuts/profiles/forms.py:116
+msgid "Контактное лицо*"
+msgstr "Контактна особа*"
+
+#: nuts/orders/forms.py:51
+msgid "Контактное лицо поле может местить максимум 255 символов."
+msgstr "Поле Контактна особа може містити максимум 255 символів."
+
+#: nuts/orders/forms.py:52
+msgid "Контактное лицо должно местить минимум 3 символа."
+msgstr "Поле Контактна особа має містити мінімум 3 символи."
+
+#: nuts/orders/forms.py:63
+msgid "ФИО поле может местить максимум 255 символов."
+msgstr "Поле ПІБ може містити максимум 255 символів."
+
+#: nuts/orders/forms.py:64
+msgid "ФИО должно местить минимум 3 символа."
+msgstr "Поле ПІБ має містити мінімум 3 символи."
+
+#: nuts/orders/forms.py:73
+msgid "Поле E-Mail обязательно для заполнени."
+msgstr "Поле E-Mail є обов'язковим для заповнення."
+
+#: nuts/orders/forms.py:74
+msgid "Введите корректный адрес электронной почты."
+msgstr "Введіть коректну адресу електронної пошти."
+
+#: nuts/orders/forms.py:80 nuts/orders/forms.py:82
+msgid "Номер телефона*"
+msgstr "Номер телефону*"
+
+#: nuts/orders/forms.py:84
+msgid "Номер телефона обязателен для заполнения."
+msgstr "Номер телефону є обов'язковим для заповнення."
+
+#: nuts/orders/forms.py:90
+msgid "Способ доставки"
+msgstr "Спосіб доставки"
+
+#: nuts/orders/forms.py:93
+msgid "Выберите способ доставки."
+msgstr "Виберіть спосіб доставки."
+
+#: nuts/orders/forms.py:94
+msgid "Выбран недопустимый способ доставки."
+msgstr "Вибрано неприпустимий спосіб доставки."
+
+#: nuts/orders/forms.py:101
+msgid "Страна доставки"
+msgstr "Країна доставки"
+
+#: nuts/orders/forms.py:102
+msgid "Выберите страну"
+msgstr "Виберіть країну"
+
+#: nuts/orders/forms.py:104
+msgid "Выбранная страна не существует в базе данных."
+msgstr "Вибраної країни не існує в базі даних."
+
+#: nuts/orders/forms.py:111
+msgid "Регион доставки"
+msgstr "Регіон доставки"
+
+#: nuts/orders/forms.py:112
+msgid "Выберите область"
+msgstr "Виберіть область"
+
+#: nuts/orders/forms.py:114
+msgid "Выбранная область не существует в базе данных."
+msgstr "Вибраної області не існує в базі даних."
+
+#: nuts/orders/forms.py:120
+msgid "Адрес доставки"
+msgstr "Адреса доставки"
+
+#: nuts/orders/forms.py:121
+msgid "Адрес*"
+msgstr "Адреса*"
+
+#: nuts/orders/forms.py:123
+msgid "Адрес доставки слишком длинный."
+msgstr "Адреса доставки занадто довга."
+
+#: nuts/orders/forms.py:129
+msgid "Способ оплаты"
+msgstr "Спосіб оплати"
+
+#: nuts/orders/forms.py:132
+msgid "Выберите способ оплаты."
+msgstr "Виберіть спосіб оплати."
+
+#: nuts/orders/forms.py:133
+msgid "Выбран недопустимый способ оплаты."
+msgstr "Вибрано неприпустимий спосіб оплати."
+
+#: nuts/orders/forms.py:147
+msgid "Название компании обязательно для бизнес-аккаунтов."
+msgstr "Назва компанії обов'язкова для бізнес-акаунтів."
+
+#: nuts/orders/forms.py:149
+msgid "Контактное лицо обязательно для бизнес-аккаунтов."
+msgstr "Контактна особа обов'язкова для бізнес-акаунтів."
+
+#: nuts/orders/forms.py:152
+msgid "ФИО обязательно для физических лиц."
+msgstr "ПІБ обов'язкове для фізичних осіб."
+
+#: nuts/orders/forms.py:156
+msgid "Выберите страну для доставки Новой Почтой."
+msgstr "Виберіть країну для доставки Новою Поштою."
+
+#: nuts/orders/forms.py:158
+msgid "Выберите область для доставки Новой Почтой."
+msgstr "Виберіть область для доставки Новою Поштою."
+
+#: nuts/orders/forms.py:162
+msgid "Укажите адрес для курьерской доставки по Одессе."
+msgstr "Вкажіть адресу для кур'єрської доставки по Одесі."
+
+#: nuts/orders/forms.py:216
+msgid "Количество не может быть меньше 1."
+msgstr "Кількість не може бути меншою за 1."
+
+#: nuts/orders/models.py:54
+msgid "Новый"
+msgstr "Новий"
+
+#: nuts/orders/models.py:55 nuts/payment_transactions/models.py:9
+msgid "В обработке"
+msgstr "В обробці"
+
+#: nuts/orders/models.py:56
+msgid "Провален"
+msgstr "Провалено"
+
+#: nuts/orders/models.py:57
+msgid "Оплачен"
+msgstr "Оплачено"
+
+#: nuts/orders/models.py:58
+msgid "Отправлен"
+msgstr "Відправлено"
+
+#: nuts/orders/models.py:59
+msgid "Завершен"
+msgstr "Завершено"
+
+#: nuts/orders/models.py:60
+msgid "Отменен"
+msgstr "Скасовано"
+
+#: nuts/orders/models.py:63
+msgid "Новая Почта"
+msgstr "Нова Пошта"
+
+#: nuts/orders/models.py:64
+msgid "Курьер"
+msgstr "Кур'єр"
+
+#: nuts/orders/models.py:65
+msgid "Самовывоз"
+msgstr "Самовивіз"
+
+#: nuts/orders/models.py:68
+msgid "Liqpay"
+msgstr "Liqpay"
+
+#: nuts/orders/models.py:69
+msgid "Банковский перевод"
+msgstr "Банківський переказ"
+
+#: nuts/orders/models.py:70
+msgid "Наложенный платеж"
+msgstr "Накладений платіж"
+
+#: nuts/orders/views.py:26
+msgid "Ваша корзина пуста."
+msgstr "Ваш кошик порожній."
+
+#: nuts/orders/views.py:48
+msgid "Заказ успешно оформлен."
+msgstr "Замовлення успішно оформлено."
+
+#: nuts/orders/views.py:52
+#, python-format
+msgid "Произошла ошибка при сохранении заказа: %(error)s"
+msgstr "Сталася помилка при збереженні замовлення: %(error)s"
+
+#: nuts/payment_transactions/models.py:8
+msgid "Новая"
+msgstr "Нова"
+
+#: nuts/payment_transactions/models.py:10
+msgid "Успешно"
+msgstr "Успішно"
+
+#: nuts/payment_transactions/models.py:11
+msgid "Ошибка"
+msgstr "Помилка"
+
+#: nuts/products/models.py:55
+msgid "Не указан идентфикатор товара."
+msgstr "Не вказано ідентифікатор товару."
+
+#: nuts/products/models.py:64
+msgid "Товар с указаным идентификатором не обнаружен."
+msgstr "Товар із вказаним ідентифікатором не знайдено."
+
+#: nuts/profiles/forms.py:22
+msgid "E-Mail не валидный."
+msgstr "E-Mail невалідний."
+
+#: nuts/profiles/forms.py:57
+msgid "Пользователь с таким E-Mail уже зарегистрирован."
+msgstr "Користувач із таким E-Mail уже зареєстрований."
+
+#: nuts/profiles/forms.py:66
+msgid "Пользователь с таким номером телефона уже зарегистрирован."
+msgstr "Користувач із таким номером телефону вже зареєстрований."
+
+#: nuts/profiles/forms.py:79
+msgid "ФИО должно содержать минимум 10 символов."
+msgstr "ПІБ має містити мінімум 10 символів."
+
+#: nuts/profiles/forms.py:80 nuts/profiles/forms.py:124
+msgid "ФИО не может превышать 60 символов."
+msgstr "ПІБ не може перевищувати 60 символів."
+
+#: nuts/profiles/forms.py:109
+msgid "Название компании обязательно для заполнения."
+msgstr "Назва компанії обов'язкова для заповнення."
+
+#: nuts/profiles/forms.py:110
+msgid "Название компании слишком короткое."
+msgstr "Назва компанії занадто коротка."
+
+#: nuts/profiles/forms.py:111
+msgid "Название компании не может превышать 60 символов."
+msgstr "Назва компанії не може перевищувати 60 символів."
+
+#: nuts/profiles/forms.py:122
+msgid "Укажите контактное лицо."
+msgstr "Вкажіть контактну особу."
+
+#: nuts/profiles/forms.py:123
+msgid "ФИО контактного лица слишком короткое."
+msgstr "ПІБ контактної особи занадто коротке."
+
+#: nuts/profiles/forms.py:172
+msgid "Адрес (улица, дом, кв.)*"
+msgstr "Адреса (вулиця, будинок, кв.)*"
+
+#: nuts/profiles/forms.py:177
+msgid "Адрес поле обязательное для заполнения."
+msgstr "Поле Адреса є обов'язковим для заповнення."
+
+#: nuts/profiles/forms.py:179 nuts/profiles/forms.py:257
+msgid "Адрес поле должно местить минимум 10 символов."
+msgstr "Поле Адреса має містити мінімум 10 символів."
+
+#: nuts/profiles/forms.py:223
+msgid "ЕДРПОУ поле может местить максимум 32 символа."
+msgstr "Поле ЄДРПОУ може містити максимум 32 символи."
+
+#: nuts/profiles/forms.py:267
+msgid "Индекс поле может местить максимум 10 символов."
+msgstr "Поле Індекс може містити максимум 10 символів."
+
+#: nuts/profiles/forms.py:268
+msgid "Индекс поле должно местить минимум 5 символов."
+msgstr "Поле Індекс має містити мінімум 5 символів."
+
+#: nuts/profiles/forms.py:288
+msgid "ЕДРПОУ"
+msgstr "ЄДРПОУ"
+
+#: nuts/profiles/forms.py:293
+msgid "Индекс (деятельности)"
+msgstr "Індекс (діяльності)"
+
+#: nuts/profiles/forms.py:339
+msgid "Текущий пароль*"
+msgstr "Поточний пароль*"
+
+#: nuts/profiles/forms.py:341
+msgid "Введите текущий пароль."
+msgstr "Введіть поточний пароль."
+
+#: nuts/profiles/forms.py:344
+msgid "Новый пароль*"
+msgstr "Новий пароль*"
+
+#: nuts/profiles/forms.py:346
+msgid "Введите новый пароль."
+msgstr "Введіть новий пароль."
+
+#: nuts/profiles/forms.py:349
+msgid "Подтвердить пароль*"
+msgstr "Підтвердити пароль*"
+
+#: nuts/profiles/forms.py:351
+msgid "Подтвердите новый пароль."
+msgstr "Підтвердіть новий пароль."
+
+#: nuts/profiles/forms.py:361
+msgid "Текущий пароль введён неверно."
+msgstr "Поточний пароль введено невірно."
+
+#: nuts/profiles/forms.py:382
+msgid "Новые пароли не совпадают."
+msgstr "Нові паролі не збігаються."
+
+#: nuts/profiles/forms.py:385
+msgid "Новый пароль не должен совпадать со старым."
+msgstr "Новий пароль не повинен збігатися зі старим."
+
+#: nuts/profiles/views.py:28
+msgid "Ваши контактные данные успешно обновлены."
+msgstr "Ваші контактні дані успішно оновлено."
+
+#: nuts/profiles/views.py:51
+msgid "Адрес и реквизиты успешно обновлены."
+msgstr "Адресу та реквізити успішно оновлено."
+
+#: nuts/profiles/views.py:53
+#, python-format
+msgid "Произошла ошибка при сохранении: %(error)s"
+msgstr "Сталася помилка при збереженні: %(error)s"
+
+#: nuts/profiles/views.py:76
+msgid "Ваш пароль успешно изменен."
+msgstr "Ваш пароль успішно змінено."
+
+#: nuts/shop/forms.py:9
+msgid "Вкус"
+msgstr "Смак"
+
+#: nuts/shop/forms.py:14 templates/home.html:79
+#: templates/includes/shop/cards.html:48
+msgid "Масса"
+msgstr "Маса"
+
+#: nuts/shop/forms.py:15
+msgid "от 0 до 50 г"
+msgstr "від 0 до 50 г"
+
+#: nuts/shop/forms.py:16
+msgid "от 50 до 100 г"
+msgstr "від 50 до 100 г"
+
+#: nuts/shop/forms.py:17
+msgid "от 100 до 200 г"
+msgstr "від 100 до 200 г"
+
+#: nuts/shop/forms.py:18
+msgid "от 200 до 400 г"
+msgstr "від 200 до 400 г"
+
+#: nuts/shop/forms.py:19
+msgid "от 400 г"
+msgstr "від 400 г"
+
+#: nuts/shop/forms.py:28
+msgid "По возрастанию"
+msgstr "За зростанням"
+
+#: nuts/shop/forms.py:29
+msgid "По убыванию"
+msgstr "За спаданням"
+
+#: nuts/users/validators.py:11
+msgid "Введите корректное ФИО (2 или 3 слова, без спецсимволов)"
+msgstr "Введіть коректне ПІБ (2 або 3 слова, без спецсимволів)"
+
+#: templates/about.html:66
+msgid "Owner Photo"
+msgstr "Фото власника"
+
+#: templates/about.html:79 templates/customers.html:73
+#: templates/customers.html:99 templates/customers.html:125
+#: templates/customers.html:151 templates/customers.html:177
+msgid "Написать нам"
+msgstr "Написати нам"
+
+#: templates/about.html:151
+msgid "Смотреть всю галерею"
+msgstr "Дивитися всю галерею"
+
+#: templates/about.html:198 templates/home.html:305
+#: templates/includes/news/list.html:9 templates/includes/news/list.html:42
+#: templates/news/news_detail.html:26 templates/news/news_detail.html:44
+msgid "News Main Media Image"
+msgstr "Головне зображення новини"
+
+#: templates/about.html:217 templates/home.html:324
+#: templates/includes/news/list.html:31 templates/includes/news/list.html:61
+#: templates/news/news_detail.html:82
+msgid "Читать"
+msgstr "Читати"
+
+#: templates/about.html:228 templates/home.html:335
+msgid "Смотреть все новости"
+msgstr "Дивитися всі новини"
+
+#: templates/auth/forgot_password.html:17 templates/auth/login.html:20
+msgid "Забыли пароль?"
+msgstr "Забули пароль?"
+
+#: templates/auth/forgot_password.html:19
+msgid ""
+"Введите Email Вашего аккаунта, Вам будет выслана ссылка для восстановления "
+"пароля."
+msgstr ""
+"Введіть Email Вашого акаунта, Вам буде надіслано посилання для відновлення "
+"пароля."
+
+#: templates/auth/forgot_password.html:25
+msgid "Отправить ссылку"
+msgstr "Надіслати посилання"
+
+#: templates/auth/login.html:13
+msgid "Войти в личный кабинет"
+msgstr "Увійти до особистого кабінету"
+
+#: templates/auth/login.html:22
+msgid "Войти"
+msgstr "Увійти"
+
+#: templates/auth/login.html:24 templates/tags/auth_links.html:19
+msgid "Регистрация"
+msgstr "Реєстрація"
+
+#: templates/auth/recover_password.html:19
+msgid "Введите новый пароль для E-Mail"
+msgstr "Введіть новий пароль для E-Mail"
+
+#: templates/auth/recover_password.html:26
+msgid "Сменить пароль"
+msgstr "Змінити пароль"
+
+#: templates/auth/recover_password_email_message.html:13
+#: templates/auth/recover_password_email_message.html:67
+msgid "Сброс пароля"
+msgstr "Скидання пароля"
+
+#: templates/auth/recover_password_email_message.html:65
+msgid "Орехи Причерноморья"
+msgstr "Горіхи Причорномор'я"
+
+#: templates/auth/recover_password_email_message.html:69
+msgid ""
+"Вы получили это письмо, потому что Вы отправили запрос на сброс пароля для "
+"Вашего личного кабинета на сайте \"Орехи Причерноморья\"."
+msgstr ""
+"Ви отримали цей лист, тому що Ви надіслали запит на скидання пароля для "
+"Вашого особистого кабінету на сайті \"Горіхи Причорномор'я\"."
+
+#: templates/auth/recover_password_email_message.html:70
+msgid "Сбросить пароль"
+msgstr "Скинути пароль"
+
+#: templates/auth/recover_password_email_message.html:73
+msgid "Орехи Причерноморья. Все права защищены."
+msgstr "Горіхи Причорномор'я. Всі права захищені."
+
+#: templates/auth/register.html:17 templates/checkout.html:102
+msgid "1. Контактные данные"
+msgstr "1. Контактні дані"
+
+#: templates/auth/register.html:26
+msgid "Физическое лицо"
+msgstr "Фізична особа"
+
+#: templates/auth/register.html:47 templates/auth/register.html:99
+#: templates/profile/address.html:14
+msgid "2. Адрес"
+msgstr "2. Адреса"
+
+#: templates/auth/register.html:54 templates/auth/register.html:106
+msgid "3. Пароль"
+msgstr "3. Пароль"
+
+#: templates/auth/register.html:63 templates/auth/register.html:116
+#: templates/profile/contact_information.html:25
+msgid "Загрузить фото"
+msgstr "Завантажити фото"
+
+#: templates/auth/register.html:78 templates/auth/register.html:163
+msgid "Я согласен с"
+msgstr "Я погоджуюся з"
+
+#: templates/auth/register.html:78 templates/auth/register.html:163
+msgid "Условиями регистрации"
+msgstr "Умовами реєстрації"
+
+#: templates/auth/register.html:82 templates/auth/register.html:167
+#: templates/checkout.html:170 templates/profile/password.html:12
+msgid "Продолжить"
+msgstr "Продовжити"
+
+#: templates/auth/register.html:130 templates/auth/register.html:144
+#: templates/profile/address.html:8
+msgid "1. Реквизиты"
+msgstr "1. Реквізити"
+
+#: templates/auth/register.html:134
+msgid "2. Юридический адрес"
+msgstr "2. Юридична адреса"
+
+#: templates/auth/register.html:148
+msgid "2. Адрес ФОП"
+msgstr "2. Адреса ФОП"
+
+#: templates/cart.html:25
+#, python-format
+msgid ""
+"\n"
+"                                    Ваш личный менеджер %(manager_name)s\n"
+"                                "
+msgstr ""
+"\n"
+"                                    Ваш особистий менеджер %(manager_name)s\n"
+"                                "
+
+#: templates/checkout.html:22
+#, python-format
+msgid ""
+"\n"
+"                                        Ваш личный менеджер "
+"%(manager_name)s\n"
+"                                    "
+msgstr ""
+"\n"
+"                                        Ваш особистий менеджер "
+"%(manager_name)s\n"
+"                                    "
+
+#: templates/checkout.html:39 templates/includes/cart/table.html:7
+#: templates/profile/order_detail.html:31
+msgid "Товар"
+msgstr "Товар"
+
+#: templates/checkout.html:40 templates/includes/cart/table.html:8
+#: templates/profile/order_detail.html:32
+msgid "Кол - во"
+msgstr "Кіл-ть"
+
+#: templates/checkout.html:41 templates/includes/cart/table.html:9
+#: templates/profile/order_detail.html:33
+msgid "Цена за товар"
+msgstr "Ціна за товар"
+
+#: templates/checkout.html:42 templates/includes/cart/table.html:10
+#: templates/profile/order_detail.html:34
+msgid "Итоговая стоимость"
+msgstr "Підсумкова вартість"
+
+#: templates/checkout.html:67 templates/checkout.html:70
+#: templates/checkout.html:89 templates/home.html:100 templates/home.html:103
+#: templates/home.html:107 templates/includes/cart/popup_content.html:38
+#: templates/includes/cart/popup_content.html:62
+#: templates/includes/cart/table.html:38 templates/includes/cart/table.html:39
+#: templates/includes/cart/table.html:65 templates/includes/shop/cards.html:69
+#: templates/includes/shop/cards.html:72 templates/includes/shop/cards.html:76
+#: templates/product.html:124 templates/product.html:127
+#: templates/product.html:131 templates/profile/order_detail.html:54
+#: templates/profile/order_detail.html:55
+#: templates/profile/order_detail.html:73
+#: templates/profile/orders_history.html:23
+#: templates/profile/transactions_history.html:20
+msgid "грн."
+msgstr "грн."
+
+#: templates/checkout.html:86 templates/includes/cart/popup_content.html:60
+#: templates/includes/cart/table.html:63 templates/profile/order_detail.html:70
+msgid "Всего"
+msgstr "Всього"
+
+#: templates/checkout.html:113
+msgid "2. Способ доставки"
+msgstr "2. Спосіб доставки"
+
+#: templates/checkout.html:133
+msgid "БЕСПЛАТНО"
+msgstr "БЕЗКОШТОВНО"
+
+#: templates/checkout.html:154
+msgid "3. Способ оплаты"
+msgstr "3. Спосіб оплати"
+
+#: templates/customers.html:48
+msgid "Крупные"
+msgstr "Великі"
+
+#: templates/customers.html:48
+msgid "супермаркеты"
+msgstr "супермаркети"
+
+#: templates/customers.html:49
+msgid "Розничные"
+msgstr "Роздрібні"
+
+#: templates/customers.html:49
+msgid "магазины"
+msgstr "магазини"
+
+#: templates/customers.html:50
+msgid "Компании"
+msgstr "Компанії"
+
+#: templates/customers.html:51
+msgid "Фитнес"
+msgstr "Фітнес"
+
+#: templates/customers.html:51
+msgid "и спорт клубы"
+msgstr "та спортклуби"
+
+#: templates/customers.html:52
+msgid "Кондитерские"
+msgstr "Кондитерські"
+
+#: templates/customers.html:52
+msgid "и пекарни"
+msgstr "та пекарні"
+
+#: templates/customers.html:79 templates/customers.html:105
+#: templates/customers.html:131 templates/customers.html:157
+#: templates/customers.html:183
+msgid "Customers Block Picture"
+msgstr "Зображення блоку клієнтів"
+
+#: templates/home.html:40 templates/includes/shop/cards.html:9
+#: templates/product.html:19
+msgid "Акция"
+msgstr "Акція"
+
+#: templates/home.html:45 templates/includes/shop/cards.html:14
+#: templates/product.html:24 templates/unfold/product/is_new_field.html:3
+msgid "Новинка"
+msgstr "Новинка"
+
+#: templates/home.html:68 templates/includes/shop/cards.html:37
+#: templates/product.html:53
+msgid "Арт:"
+msgstr "Арт:"
+
+#: templates/home.html:80 templates/includes/shop/cards.html:49
+#: templates/product.html:79
+msgid "г."
+msgstr "г"
+
+#: templates/home.html:88 templates/includes/shop/cards.html:57
+#: templates/product.html:164
+msgid "Упаковка"
+msgstr "Упаковка"
+
+#: templates/home.html:89 templates/includes/shop/cards.html:58
+msgid "вакуумная"
+msgstr "вакуумна"
+
+#: templates/home.html:96 templates/includes/shop/cards.html:65
+msgid "Цена:"
+msgstr "Ціна:"
+
+#: templates/home.html:113 templates/includes/shop/cards.html:82
+msgid "Купить"
+msgstr "Купити"
+
+#: templates/home.html:125
+msgid "Перейти в магазин"
+msgstr "Перейти до магазину"
+
+#: templates/home.html:136
+msgid "Подробнее"
+msgstr "Детальніше"
+
+#: templates/home.html:201 templates/home.html:205
+msgid "Грецкий орех"
+msgstr "Волоський горіх"
+
+#: templates/home.html:219 templates/home.html:223
+msgid "Фундук"
+msgstr "Фундук"
+
+#: templates/home.html:237 templates/home.html:241
+msgid "Шиповник"
+msgstr "Шипшина"
+
+#: templates/includes/cart/popup_content.html:67
+msgid "Перейти в корзину"
+msgstr "Перейти до кошика"
+
+#: templates/includes/cart/popup_content.html:73
+#: templates/includes/cart/table.html:46
+msgid "Ваша корзина пуста"
+msgstr "Ваш кошик порожній"
+
+#: templates/includes/cart/table.html:56
+msgid "Продолжить покупки"
+msgstr "Продовжити покупки"
+
+#: templates/includes/cart/table.html:71
+msgid "Оформить заказ"
+msgstr "Оформити замовлення"
+
+#: templates/includes/cart/table.html:85
+msgid "Для оформления заказа необходимо"
+msgstr "Для оформлення замовлення необхідно"
+
+#: templates/includes/cart/table.html:87
+msgid "Авторизоваться"
+msgstr "Авторизуватися"
+
+#: templates/includes/cart/table.html:88
+msgid "или"
+msgstr "або"
+
+#: templates/includes/cart/table.html:89
+msgid "Зарегистрироваться"
+msgstr "Зареєструватися"
+
+#: templates/includes/contacts.html:7 templates/tags/menu_links.html:18
+msgid "Контакты"
+msgstr "Контакти"
+
+#: templates/includes/contacts.html:57
+msgid "Офис и отдел продаж"
+msgstr "Офіс та відділ продажів"
+
+#: templates/includes/contacts.html:63
+msgid "Производство"
+msgstr "Виробництво"
+
+#: templates/includes/footer.html:5
+msgid "Разработано"
+msgstr "Розроблено"
+
+#: templates/includes/footer.html:8
+msgid "Все права защищены"
+msgstr "Всі права захищені"
+
+#: templates/includes/gallery/blocks.html:50
+#: templates/includes/news/list.html:90
+msgid "Посмотреть еще"
+msgstr "Подивитися ще"
+
+#: templates/includes/header.html:7
+msgid "Menu Icon"
+msgstr "Іконка меню"
+
+#: templates/includes/header.html:70 templates/includes/header.html:75
+msgid "Заказать звонок"
+msgstr "Замовити дзвінок"
+
+#: templates/includes/shop/cards.html:97
+msgid "Фильтр"
+msgstr "Фільтр"
+
+#: templates/includes/shop/cards.html:114
+#: templates/profile/orders_history.html:12
+msgid "Стоимость"
+msgstr "Вартість"
+
+#: templates/includes/shop/cards.html:121
+msgid "Применить"
+msgstr "Застосувати"
+
+#: templates/includes/shop/cards.html:128
+msgid "Сбросить"
+msgstr "Скинути"
+
+#: templates/includes/shop/cards.html:147
+msgid "Загрузить еще"
+msgstr "Завантажити ще"
+
+#: templates/news/news_detail.html:53
+msgid "Последние публикации"
+msgstr "Останні публікації"
+
+#: templates/news/news_detail.html:93
+msgid "Присоединяйтесь к нам в соц. сетях"
+msgstr "Приєднуйтесь до нас у соцмережах"
+
+#: templates/payment_and_delivery.html:23
+msgid "Оплата заказа"
+msgstr "Оплата замовлення"
+
+#: templates/payment_and_delivery.html:24
+msgid "Доставка партии"
+msgstr "Доставка партії"
+
+#: templates/payment_and_delivery.html:25
+msgid "Возврат товара"
+msgstr "Повернення товару"
+
+#: templates/payment_and_delivery.html:44
+msgid "Payment Block Picture"
+msgstr "Зображення блоку оплати"
+
+#: templates/payment_and_delivery.html:61
+msgid "Delivery Block Picture"
+msgstr "Зображення блоку доставки"
+
+#: templates/payment_and_delivery.html:78
+msgid "Return Block Picture"
+msgstr "Зображення блоку повернення"
+
+#: templates/product.html:66
+msgid "Состав:"
+msgstr "Склад:"
+
+#: templates/product.html:76
+msgid "Масса нетто:"
+msgstr "Маса нетто:"
+
+#: templates/product.html:86
+msgid "Энергетическая ценность:"
+msgstr "Енергетична цінність:"
+
+#: templates/product.html:89
+msgid "Ккал."
+msgstr "Ккал"
+
+#: templates/product.html:96
+msgid "Срок годности:"
+msgstr "Термін придатності:"
+
+#: templates/product.html:100
+#, python-format
+msgid ""
+"\n"
+"                                                        %(months)s месяцев, "
+"с даты расфасовки (указана на упаковке)\n"
+"                                                    "
+msgstr ""
+"\n"
+"                                                        %(months)s місяців, "
+"з дати фасування (вказана на упаковці)\n"
+"                                                    "
+
+#: templates/product.html:120
+msgid "Ваша цена:"
+msgstr "Ваша ціна:"
+
+#: templates/product.html:144
+msgid "Заказать"
+msgstr "Замовити"
+
+#: templates/product.html:163
+msgid "Описание"
+msgstr "Опис"
+
+#: templates/product.html:165
+msgid "Оплата"
+msgstr "Оплата"
+
+#: templates/product.html:166
+msgid "Доставка"
+msgstr "Доставка"
+
+#: templates/product.html:179
+msgid "Description Block Image"
+msgstr "Зображення блоку опису"
+
+#: templates/product.html:194
+msgid "Packaging Block Image"
+msgstr "Зображення блоку упаковки"
+
+#: templates/product.html:209
+msgid "Payment Block Image"
+msgstr "Зображення блоку оплати"
+
+#: templates/product.html:224
+msgid "Delivering Block Image"
+msgstr "Зображення блоку доставки"
+
+#: templates/profile/address.html:19
+msgid "3. Юридический адрес"
+msgstr "3. Юридична адреса"
+
+#: templates/profile/address.html:25 templates/profile/address.html:46
+#: templates/profile/contact_information.html:15
+msgid "Сохранить"
+msgstr "Зберегти"
+
+#: templates/profile/base.html:13
+msgid "Учетная запись"
+msgstr "Обліковий запис"
+
+#: templates/profile/base.html:18 templates/profile/order_detail.html:18
+msgid "Ваш личный менеджер"
+msgstr "Ваш особистий менеджер"
+
+#: templates/profile/contact_information.html:6
+msgid "Контактная информация"
+msgstr "Контактна інформація"
+
+#: templates/profile/order_detail.html:13
+msgid "Заказ №"
+msgstr "Замовлення №"
+
+#: templates/profile/orders_history.html:8
+msgid "№ Заказа"
+msgstr "№ Замовлення"
+
+#: templates/profile/orders_history.html:9
+msgid "Дата"
+msgstr "Дата"
+
+#: templates/profile/orders_history.html:10
+msgid "Кол - во товаров"
+msgstr "Кіл-ть товарів"
+
+#: templates/profile/orders_history.html:11
+#: templates/profile/transactions_history.html:9
+msgid "Статус"
+msgstr "Статус"
+
+#: templates/profile/orders_history.html:13
+msgid "Функции"
+msgstr "Функції"
+
+#: templates/profile/orders_history.html:26
+#: templates/profile/transactions_history.html:24
+msgid "Просмотреть заказ"
+msgstr "Переглянути замовлення"
+
+#: templates/profile/orders_history.html:27
+msgid "Копировать"
+msgstr "Копіювати"
+
+#: templates/profile/password.html:8
+msgid "Смена пароля"
+msgstr "Зміна пароля"
+
+#: templates/profile/transactions_history.html:8
+msgid "Добавлено"
+msgstr "Додано"
+
+#: templates/profile/transactions_history.html:10
+msgid "Сумма"
+msgstr "Сума"
+
+#: templates/profile/transactions_history.html:37
+msgid "У вас не было транзакций!"
+msgstr "У вас не було транзакцій!"
+
+#: templates/shop.html:60
+msgid "Gallery Slide"
+msgstr "Слайд галереї"
+
+#: templates/tags/auth_links.html:4
+msgid "Профиль"
+msgstr "Профіль"
+
+#: templates/tags/auth_links.html:10
+msgid "Выйти"
+msgstr "Вийти"
+
+#: templates/tags/auth_links.html:16
+msgid "Вход"
+msgstr "Вхід"
+
+#: templates/tags/profile_menu_links.html:3
+msgid "Мои заказы"
+msgstr "Мої замовлення"
+
+#: templates/tags/profile_menu_links.html:24
+msgid "Моя учетная запись"
+msgstr "Мій обліковий запис"
+
+#~ msgid "Контактное лицо (ФИО)"
+#~ msgstr "Контактна особа (ПІБ)"
+
+#~ msgid "Номер телефона"
+#~ msgstr "Номер телефону"

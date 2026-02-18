@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import inlineformset_factory
+from django.utils.translation import gettext_lazy as _
 
 from orders.models import Order, OrderItem
 
@@ -30,106 +31,106 @@ class OrderCreateForm(forms.ModelForm):
 
     company_name = forms.CharField(
         required=False,
-        widget=forms.TextInput(),
-        label="Название компании*",
+        widget=forms.TextInput(attrs={'placeholder': _("Название компании*")}),
+        label=_("Название компании*"),
         min_length=3,
         max_length=255,
         error_messages={
-            "max_length": "Название компанни поле может местить максимум 255 символов.",
-            "min_length": "Название компанни должно местить минимум 3 символа."
+            "max_length": _("Название компанни поле может местить максимум 255 символов."),
+            "min_length": _("Название компанни должно местить минимум 3 символа.")
         }
     )
 
     contact_person = forms.CharField(
         required=False,
-        label="Контактное лицо*",
+        label=_("Контактное лицо*"),
         min_length=3,
         max_length=255,
-        widget=forms.TextInput(attrs={"placeholder": "Контактное лицо (ФИО)"}),
+        widget=forms.TextInput(attrs={"placeholder": _("Контактное лицо*")}),
         error_messages={
-            "max_length": "Контактное лицо поле может местить максимум 255 символов.",
-            "min_length": "Контактное лицо должно местить минимум 3 символа."
+            "max_length": _("Контактное лицо поле может местить максимум 255 символов."),
+            "min_length": _("Контактное лицо должно местить минимум 3 символа.")
         }
     )
 
     full_name = forms.CharField(
         required=False,
-        label="ФИО",
+        label=_("ФИО*"),
         min_length=3,
         max_length=255,
-        widget=forms.TextInput(attrs={"placeholder": "ФИО*"}),
+        widget=forms.TextInput(attrs={"placeholder": _("ФИО*")}),
         error_messages={
-            "max_length": "ФИО поле может местить максимум 255 символов.",
-            "min_length": "ФИО должно местить минимум 3 символа."
+            "max_length": _("ФИО поле может местить максимум 255 символов."),
+            "min_length": _("ФИО должно местить минимум 3 символа.")
         }
     )
 
     email = forms.EmailField(
         required=True,
-        label="E-Mail",
-        widget=forms.EmailInput(attrs={"placeholder": "E-Mail*"}),
+        label=_("E-Mail*"),
+        widget=forms.EmailInput(attrs={"placeholder": _("E-Mail*")}),
         error_messages={
-            "required": "Поле E-Mail обязательно для заполнения.",
-            "invalid": "Введите корректный адрес электронной почты."
+            "required": _("Поле E-Mail обязательно для заполнени."),
+            "invalid": _("Введите корректный адрес электронной почты.")
         }
     )
 
     phone = forms.CharField(
         required=True,
-        label="Номер телефона",
+        label=_("Номер телефона*"),
         validators=[ukrainian_phone_validator],
-        widget=forms.TextInput(attrs={"placeholder": "Номер телефона*"}),
+        widget=forms.TextInput(attrs={"placeholder": _("Номер телефона*")}),
         error_messages={
-            "required": "Номер телефона обязателен для заполнения.",
+            "required": _("Номер телефона обязателен для заполнения."),
         }
     )
 
     delivery_method = forms.ChoiceField(
         choices=Order.DeliveryMethod,
-        label="Способ доставки",
+        label=_("Способ доставки"),
         widget=forms.RadioSelect(),
         error_messages={
-            "required": "Выберите способ доставки.",
-            "invalid_choice": "Выбран недопустимый способ доставки."
+            "required": _("Выберите способ доставки."),
+            "invalid_choice": _("Выбран недопустимый способ доставки.")
         }
     )
 
     delivery_country = forms.ModelChoiceField(
         queryset=Country.objects.all(),
         required=False,
-        label="Страна доставки",
-        empty_label="Выберите страну",
+        label=_("Страна доставки"),
+        empty_label=_("Выберите страну"),
         error_messages={
-            "invalid_choice": "Выбранная страна не существует в базе данных."
+            "invalid_choice": _("Выбранная страна не существует в базе данных.")
         }
     )
 
     delivery_region = forms.ModelChoiceField(
         queryset=Region.objects.all(),
         required=False,
-        label="Регион доставки",
-        empty_label="Выберите область",
+        label=_("Регион доставки"),
+        empty_label=_("Выберите область"),
         error_messages={
-            "invalid_choice": "Выбранная область не существует в базе данных."
+            "invalid_choice": _("Выбранная область не существует в базе данных.")
         }
     )
 
     delivery_address = forms.CharField(
         required=False,
-        label="Адрес доставки",
-        widget=forms.TextInput(attrs={"placeholder": "Адрес*"}),
+        label=_("Адрес доставки"),
+        widget=forms.TextInput(attrs={"placeholder": _("Адрес*")}),
         error_messages={
-            "max_length": "Адрес доставки слишком длинный."
+            "max_length": _("Адрес доставки слишком длинный.")
         }
     )
 
     payment_method = forms.ChoiceField(
         choices=Order.PaymentMethod,
-        label="Способ оплаты",
+        label=_("Способ оплаты"),
         widget=forms.RadioSelect(),
         error_messages={
-            "required": "Выберите способ оплаты.",
-            "invalid_choice": "Выбран недопустимый способ оплаты."
+            "required": _("Выберите способ оплаты."),
+            "invalid_choice": _("Выбран недопустимый способ оплаты.")
         }
     )
 
@@ -143,27 +144,27 @@ class OrderCreateForm(forms.ModelForm):
 
         if is_business:
             if not cleaned_data.get('company_name'):
-                self.add_error('company_name', "Название компании обязательно для бизнес-аккаунтов.")
+                self.add_error('company_name', _("Название компании обязательно для бизнес-аккаунтов."))
             if not cleaned_data.get('contact_person'):
-                self.add_error('contact_person', "Контактное лицо обязательно для бизнес-аккаунтов.")
+                self.add_error('contact_person', _("Контактное лицо обязательно для бизнес-аккаунтов."))
         else:
             if not cleaned_data.get('full_name'):
-                self.add_error('full_name', "ФИО обязательно для физических лиц.")
+                self.add_error('full_name', _("ФИО обязательно для физических лиц."))
 
         if delivery_method == Order.DeliveryMethod.NOVA_POSHTA:
             if not cleaned_data.get('delivery_country'):
-                self.add_error('delivery_country', "Выберите страну для доставки Новой Почтой.")
+                self.add_error('delivery_country', _("Выберите страну для доставки Новой Почтой."))
             if not cleaned_data.get('delivery_region'):
-                self.add_error('delivery_region', "Выберите область для доставки Новой Почтой.")
+                self.add_error('delivery_region', _("Выберите область для доставки Новой Почтой."))
 
         elif delivery_method == Order.DeliveryMethod.COURIER:
             if not cleaned_data.get('delivery_address'):
-                self.add_error('delivery_address', "Укажите адрес для курьерской доставки по Одессе.")
+                self.add_error('delivery_address', _("Укажите адрес для курьерской доставки по Одессе."))
 
         country = cleaned_data.get('delivery_country')
         region = cleaned_data.get('delivery_region')
         if country and region and region.country_id != country.pk:
-            self.add_error('delivery_region', "Выбранная область не принадлежит указанной стране.")
+            self.add_error('delivery_region', _("Выбранная область не принадлежит указанной стране."))
 
         # Clean redundant fields
         if delivery_method == Order.DeliveryMethod.NOVA_POSHTA:
@@ -201,7 +202,6 @@ class OrderCreateForm(forms.ModelForm):
             "delivery_country",
             "delivery_region",
             "delivery_address",
-            "payment_method"
         ]
 
 
@@ -213,7 +213,7 @@ class OrderItemForm(forms.ModelForm):
             'readonly': 'readonly'
         }),
         error_messages={
-            'min_value': "Количество не может быть меньше 1."
+            'min_value': _("Количество не может быть меньше 1.")
         }
     )
 

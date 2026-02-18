@@ -1,7 +1,6 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags core_tags django_vite %}
+{% load wagtailcore_tags wagtailimages_tags core_tags django_vite i18n %}
 {% block content %}
-<!--Video Hero-->
 {% with block=page.video_hero.0 %}
 {% if block.block_type == 'video_jumbotron' %}
 <section class="first-section overlay">
@@ -22,18 +21,14 @@
 </section>
 {% endif %}
 {% endwith %}
-<!--Products-->
 <section class="production">
     <div class="container">
         <div class="row align-items-center justify-content-center">
             <div class="col-12">
-                <!--Product Title-->
                 <h2>{{ page.products_title }}</h2>
-                <!--Product Subtitle-->
                 <p>{{ page.products_subtitle }}</p>
             </div>
         </div>
-        <!--Products list-->
         <div class="row justify-content-center">
             {% for product in products %}
             <div class="col-lg-4 col-md-6 col-12">
@@ -42,12 +37,12 @@
                         {% if product.discounted_price %}
                         <div class="sticker">
                             <i class="nut-icon icons-actciya"></i>
-                            <p>Акция</p>
+                            <p>{% trans "Акция" %}</p>
                         </div>
                         {% elif product.is_new %}
                         <div class="sticker">
                             <i class="nut-icon icons-novinka"></i>
-                            <p>Новинка</p>
+                            <p>{% trans "Новинка" %}</p>
                         </div>
                         {% endif %}
 
@@ -70,7 +65,7 @@
                                 {{ product.name }}
                             </div>
                             <div class="production__item_art">
-                                <span>Арт:</span> {{ product.sku }}
+                                <span>{% trans "Арт:" %}</span> {{ product.sku }}
                             </div>
                             <div class="production__item_descr">
                                 {{ product.features.all|join:", " }}
@@ -81,8 +76,8 @@
                                         <i class="nut-icon icons-food-scale-tool"></i>
                                     </div>
                                     <div class="weight_item_descr">
-                                        <p>Масса</p>
-                                        <p><span>{{ product.weight }}<i>г.</i></span></p>
+                                        <p>{% trans "Масса" %}</p>
+                                        <p><span>{{ product.weight }}<i>{% trans "г." %}</i></span></p>
                                     </div>
                                 </div>
                                 <div class="weight_item">
@@ -90,32 +85,32 @@
                                         <i class="nut-icon icons-group"></i>
                                     </div>
                                     <div class="weight_item_descr">
-                                        <p>Упаковка</p>
-                                        <p><span>вакуумная</span></p>
+                                        <p>{% trans "Упаковка" %}</p>
+                                        <p><span>{% trans "вакуумная" %}</span></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="production__item_sum">
                                 <div class="sum_item">
                                     <div class="sum_item_title">
-                                        <p>Цена: </p>
+                                        <p>{% trans "Цена:" %} </p>
                                     </div>
                                     {% if product.discounted_price %}
                                     <div class="sum_item_new">
-                                        <p>{{ product.discounted_price|floatformat:0 }} <i>грн.</i></p>
+                                        <p>{{ product.discounted_price|floatformat:0 }} <i>{% trans "грн." %}</i></p>
                                     </div>
                                     <div class="sum_item_old">
-                                        <p>{{ product.price|floatformat:0 }} <i>грн.</i></p>
+                                        <p>{{ product.price|floatformat:0 }} <i>{% trans "грн." %}</i></p>
                                     </div>
                                     {% else %}
                                     <div class="sum_item_new">
-                                        <p>{{ product.price|floatformat:0 }} <i>грн.</i></p>
+                                        <p>{{ product.price|floatformat:0 }} <i>{% trans "грн." %}</i></p>
                                     </div>
                                     {% endif %}
                                 </div>
                                 <div class="sum_item">
                                     <div class="sum_item_button">
-                                        <a href="{% pageurl product_page %}?product_id={{ product.id }}" class="button">Купить</a>
+                                        <a href="{% pageurl product_page %}?product_id={{ product.id }}" class="button">{% trans "Купить" %}</a>
                                     </div>
                                 </div>
                             </div>
@@ -125,25 +120,21 @@
             </div>
             {% endfor %}
         </div>
-        <!--Go To The Shop Button-->
         <div class="row">
             <div class="wrapper">
-                <a href="{% pageurl shop_page %}" class="button button_transparent">Перейти в магазин</a>
+                <a href="{% pageurl shop_page %}" class="button button_transparent">{% trans "Перейти в магазин" %}</a>
             </div>
         </div>
     </div>
 </section>
-<!--About-->
 <section class="manufacturer gray_section">
     <div class="container">
         <div class="row align-items-center">
-            <!--Block Title And Description-->
             <div class="col-md-5">
                 <h2>{{ about_page.title }}</h2>
                 <p>{{ about_page.short_description|richtext }}</p>
-                <a href="{{ about_page.url }}" class="button button_transparent">Подробнее</a>
+                <a href="{{ about_page.url }}" class="button button_transparent">{% trans "Подробнее" %}</a>
             </div>
-            <!--Video Carousel-->
             <div class="col-md-7">
                 <div class="manufacturer-container swiper-container">
                     <div class="swiper-wrapper">
@@ -159,7 +150,6 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <!--Arrows-->
                     <div class="wrap">
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
@@ -169,9 +159,7 @@
         </div>
     </div>
 </section>
-<!--Statistics-->
 {% include "includes/statistics.html" %}
-<!--Video Hero 2-->
 {% with block=page.video_hero_2.0 %}
 {% if block.block_type == 'video_jumbotron' %}
 <div class="parallax" data-scrollax-parent="true">
@@ -196,7 +184,6 @@
 </div>
 {% endif %}
 {% endwith %}
-<!--Product Utility-->
 <section class="benefit">
     <div class="container">
         <div class="row align-items-center justify-content-center">
@@ -206,17 +193,16 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <!--Walnut-->
             <div class="col-lg-4 col-md-6 col-12">
                 <div class="wrap">
                     {% image page.walnut_image original as walnut_img %}
                     <div class="benefit__item overlay" style="background-image: url('{{ walnut_img.url }}')">
                         <i class="nut-icon icons-group4"></i>
-                        <h3>Грецкий орех</h3>
+                        <h3>{% trans "Грецкий орех" %}</h3>
                     </div>
                     <div class="benefit__item item_hover overlay_green">
                         <i class="nut-icon icons-group4"></i>
-                        <h3>Грецкий орех</h3>
+                        <h3>{% trans "Грецкий орех" %}</h3>
                         <div class="benefit__text">
                             <p>
                                 {{ page.walnut_utility_description }}
@@ -225,17 +211,16 @@
                     </div>
                 </div>
             </div>
-            <!--Hazelnut-->
             <div class="col-lg-4 col-md-6 col-12">
                 <div class="wrap">
                     {% image page.hazelnut_image original as hazelnut_img %}
                     <div class="benefit__item overlay" style="background-image: url('{{ hazelnut_img.url }}')">
                         <i class="nut-icon icons-vector4"></i>
-                        <h3>Фундук</h3>
+                        <h3>{% trans "Фундук" %}</h3>
                     </div>
                     <div class="benefit__item item_hover overlay_green">
                         <i class="nut-icon icons-vector4"></i>
-                        <h3>Фундук</h3>
+                        <h3>{% trans "Фундук" %}</h3>
                         <div class="benefit__text">
                             <p>
                                 {{ page.hazelnut_utility_description }}
@@ -244,17 +229,16 @@
                     </div>
                 </div>
             </div>
-            <!--Rosehip-->
             <div class="col-lg-4 col-md-6 col-12">
                 <div class="wrap">
                     {% image page.rosehip_image original as rosehip_img %}
                     <div class="benefit__item overlay" style="background-image: url('{{ rosehip_img.url }}')">
                         <i class="nut-icon icons-group5"></i>
-                        <h3>Шиповник</h3>
+                        <h3>{% trans "Шиповник" %}</h3>
                     </div>
                     <div class="benefit__item item_hover overlay_green">
                         <i class="nut-icon icons-group5"></i>
-                        <h3>Шиповник</h3>
+                        <h3>{% trans "Шиповник" %}</h3>
                         <div class="benefit__text">
                             <p>
                                 {{ page.rosehip_utility_description }}
@@ -267,7 +251,6 @@
         </div>
     </div>
 </section>
-<!--Image Hero-->
 {% with hero=page.image_hero.0 %}
 {% if hero.block_type == 'image_jumbotron' %}
 {% image hero.value.background_image original as bg_image %}
@@ -294,7 +277,6 @@
     </section>
 </div>
 {% endwith %}
-<!--News-->
 <section class="news gray_section">
     <div class="container">
         <div class="row align-items-center">
@@ -309,9 +291,7 @@
                 </div>
             </div>
             <div class="col-12">
-                <!-- Swiper -->
                 <div class="news-container swiper-container">
-                    <!-- Add Arrows -->
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                     <div class="swiper-wrapper">
@@ -322,7 +302,7 @@
                                 {% if main_media.block_type == 'image' %}
                                 {% image main_media.value original as img %}
                                 <span class="video_wrap">
-                                <img src="{{img.url}}" alt="News Main Media Image">
+                                <img src="{{img.url}}" alt="{% trans 'News Main Media Image' %}">
                             </span>
                                 {% endif %}
                                 {% if main_media.block_type == 'video' %}
@@ -341,7 +321,7 @@
                                     </div>
                                     <h3>{{ news.title }}</h3>
                                     <p>{{ news.get_excerpt }}</p>
-                                    <a href="{% pageurl news %}">Читать <i class="nut-icon icons-read-more"></i></a>
+                                    <a href="{% pageurl news %}">{% trans "Читать" %} <i class="nut-icon icons-read-more"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -352,7 +332,7 @@
         </div>
         <div class="row">
             <div class="wrapper">
-                <a href="{% pageurl news_page %}" class="button button_transparent">Смотреть все новости</a>
+                <a href="{% pageurl news_page %}" class="button button_transparent">{% trans "Смотреть все новости" %}</a>
             </div>
         </div>
     </div>

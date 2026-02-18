@@ -1,13 +1,11 @@
 {% extends "base.html" %}
-{% load core_tags %}
+{% load core_tags i18n %}
 {% block content %}
-<!--Breadcrumbs-->
 <section class="first-section no-bg">
     <div class="container">
         {% breadcrumbs %}
     </div>
 </section>
-<!--Forms-->
 <section class="registration">
     <div class="container">
         <div class="row">
@@ -16,7 +14,7 @@
             </div>
             <div class="col-12">
                 <div class="form__title">
-                    1. Контактные данные
+                    {% trans "1. Контактные данные" %}
                 </div>
             </div>
             <div class="tabs">
@@ -25,17 +23,16 @@
                         <div class="tabs__wrap">
                             <ul class="tabs__caption">
                                 <li class="active">
-                                    Физическое лицо
+                                    {% trans "Физическое лицо" %}
                                 </li>
                                 <li>
-                                    Юридическое лицо
+                                    {% trans "Юридическое лицо" %}
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-6"></div>
                 </div>
-                <!--Individual-->
                 <div class="tabs__content active">
                     {% with individual_registration_form as form %}
                     <form action="{% url 'custom_auth:individual-registration' %}" method="POST"
@@ -47,14 +44,14 @@
                                 {{ form.email }}
                                 {{ form.phone }}
                                 <div class="form__title">
-                                    2. Адрес
+                                    {% trans "2. Адрес" %}
                                 </div>
                                 {{ form.country }}
                                 {{ form.region }}
                                 {{ form.city }}
                                 {{ form.address_line }}
                                 <div class="form__title">
-                                    3. Пароль
+                                    {% trans "3. Пароль" %}
                                 </div>
                                 {{ form.password }}
                                 {{ form.password_confirm }}
@@ -63,12 +60,12 @@
                                 <div class="wrapper">
                                     <div class="file__wrap">
                                         {{ form.avatar }}
-                                        <label for="{{form.avatar.id_for_label}}"><span>Загрузить фото</span></label>
+                                        <label for="{{form.avatar.id_for_label}}"><span>{% trans "Загрузить фото" %}</span></label>
                                     </div>
                                     <div class="checkbox__wrap">
                                         {{ form.is_fop }}
                                         <label for="checkbox-1" class="checkbox-custom-label">
-                                            <span>Являюсь ФОП</span>
+                                            <span>{% trans "Являюсь ФОП" %}</span>
                                         </label>
                                     </div>
                                 </div>
@@ -78,18 +75,17 @@
                                     {{ form.agreed_to_terms }}
                                     <label for="{{ form.agreed_to_terms.id_for_label }}" class="checkbox-custom-label">
                                         <span>
-                                            Я согласен с <a href="{{terms_page.url}}">Условиями регистрации</a>
+                                            {% trans "Я согласен с" %} <a href="{{terms_page.url}}">{% trans "Условиями регистрации" %}</a>
                                         </span>
                                     </label>
                                 </div>
-                                <button class="button" type="submit">Продолжить</button>
+                                <button class="button" type="submit">{% trans "Продолжить" %}</button>
                             </div>
                             <div class="col-lg-7 col-md-6"></div>
                         </div>
                     </form>
                     {% endwith %}
                 </div>
-                <!--Legal Entity-->
                 <div class="tabs__content">
                     {% with business_registration_form as form %}
                     <form method="POST" enctype="multipart/form-data" action="{% url 'custom_auth:business-registration' %}">
@@ -100,14 +96,14 @@
                                 {{ form.email }}
                                 {{ form.phone }}
                                 <div class="form__title">
-                                    2. Адрес
+                                    {% trans "2. Адрес" %}
                                 </div>
                                 {{ form.country }}
                                 {{ form.region }}
                                 {{ form.city }}
                                 {{ form.address_line }}
                                 <div class="form__title">
-                                    3. Пароль
+                                    {% trans "3. Пароль" %}
                                 </div>
                                 {{ form.password }}
                                 {{ form.password_confirm }}
@@ -117,7 +113,7 @@
                                     <div class="file__wrap">
                                         {{ form.avatar }}
                                         <label for="{{form.avatar.id_for_label}}">
-                                            <span>Загрузить фото</span>
+                                            <span>{% trans "Загрузить фото" %}</span>
                                         </label>
                                     </div>
                                     <div class="radio__wrap">
@@ -129,14 +125,13 @@
                                         {% endfor %}
                                     </div>
                                     <div class="box-wrap">
-                                        <!--Legal Entity-->
                                         <div class="ur box">
                                             <div class="form__title">
-                                                1. Реквизиты
+                                                {% trans "1. Реквизиты" %}
                                             </div>
                                             {{ form.okpo }}
                                             <div class="form__title">
-                                                2. Юридический адрес
+                                                {% trans "2. Юридический адрес" %}
                                             </div>
                                             {{ form.legal_country }}
                                             {{ form.legal_region }}
@@ -144,14 +139,13 @@
                                             {{ form.legal_address_line }}
                                             {{ form.legal_index }}
                                         </div>
-                                        <!--FOP-->
                                         <div class="fop box">
                                             <div class="form__title">
-                                                1. Реквизиты
+                                                {% trans "1. Реквизиты" %}
                                             </div>
-                                            {{ form.erdpo }}
+                                            {{ form.edrpo }}
                                             <div class="form__title">
-                                                2. Адрес ФОП
+                                                {% trans "2. Адрес ФОП" %}
                                             </div>
                                             {{ form.fop_country }}
                                             {{ form.fop_region }}
@@ -166,11 +160,11 @@
                                     {{ form.agreed_to_terms }}
                                     <label for="{{ form.agreed_to_terms.id_for_label }}" class="checkbox-custom-label">
                                         <span>
-                                            Я согласен с <a href="{{terms_page.url}}">Условиями регистрации</a>
+                                            {% trans "Я согласен с" %} <a href="{{terms_page.url}}">{% trans "Условиями регистрации" %}</a>
                                         </span>
                                     </label>
                                 </div>
-                                <button class="button" type="submit">Продолжить</button>
+                                <button class="button" type="submit">{% trans "Продолжить" %}</button>
                             </div>
                             <div class="col-lg-7 col-md-6"></div>
                         </div>

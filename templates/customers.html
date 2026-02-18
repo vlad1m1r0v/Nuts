@@ -1,7 +1,6 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags core_tags %}
+{% load wagtailcore_tags wagtailimages_tags core_tags i18n %}
 {% block content %}
-<!--Image Hero-->
 {% with hero=page.hero.0 %}
 {% if hero.block_type == 'image_jumbotron' %}
 {% image hero.value.background_image original as bg_image %}
@@ -18,7 +17,6 @@
 </section>
 {% endif %}
 {% endwith %}
-<!--Columns-->
 <section class="customers">
     <div class="container">
         <div class="row no-gutters">
@@ -40,7 +38,6 @@
         </div>
     </div>
 </section>
-<!--Tabs-->
 <section class="payment">
     <div class="tabs">
         <div class="tabs__wrap">
@@ -48,11 +45,11 @@
                 <div class="row">
                     <ul class="tabs__caption">
                         <li class="active"><i class="nut-icon icons-supermarket"></i>
-                            <span>Крупные<br> супермаркеты</span></li>
-                        <li><i class="nut-icon icons-shop"></i> <span>Розничные<br> магазины</span></li>
-                        <li><i class="nut-icon icons-dinner-table"></i> <span>Компании<br> HoReCa</span></li>
-                        <li><i class="nut-icon icons-vector11"></i> <span>Фитнес<br> и спорт клубы</span></li>
-                        <li><i class="nut-icon icons-cake"></i> <span>Кондитерские<br> и пекарни</span></li>
+                            <span>{% trans "Крупные" %}<br> {% trans "супермаркеты" %}</span></li>
+                        <li><i class="nut-icon icons-shop"></i> <span>{% trans "Розничные" %}<br> {% trans "магазины" %}</span></li>
+                        <li><i class="nut-icon icons-dinner-table"></i> <span>{% trans "Компании" %}<br> HoReCa</span></li>
+                        <li><i class="nut-icon icons-vector11"></i> <span>{% trans "Фитнес" %}<br> {% trans "и спорт клубы" %}</span></li>
+                        <li><i class="nut-icon icons-cake"></i> <span>{% trans "Кондитерские" %}<br> {% trans "и пекарни" %}</span></li>
                     </ul>
                 </div>
             </div>
@@ -60,7 +57,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <!--Supermarkets-->
                     <div class="tabs__content active">
                         <div class="tabs__content_block">
                             <div class="row">
@@ -74,20 +70,19 @@
                                                 href="mailto:{{settings.core.ContactSettings.email}}"
                                                 class="button"
                                         >
-                                            Написать нам
+                                            {% trans "Написать нам" %}
                                         </a>
                                     </div>
                                 </div>
                                 <div class="col-md-7 col-12">
                                     <img src="{{img.url}}" class="tabs__content_img"
-                                         alt="Customers Block Picture">
+                                         alt="{% trans 'Customers Block Picture' %}">
                                 </div>
                                 {% endif %}
                                 {% endwith %}
                             </div>
                         </div>
                     </div>
-                    <!--Retail stores-->
                     <div class="tabs__content">
                         <div class="tabs__content_block">
                             <div class="row">
@@ -101,20 +96,19 @@
                                                 href="mailto:{{settings.core.ContactSettings.email}}"
                                                 class="button"
                                         >
-                                            Написать нам
+                                            {% trans "Написать нам" %}
                                         </a>
                                     </div>
                                 </div>
                                 <div class="col-md-7 col-12">
                                     <img src="{{img.url}}" class="tabs__content_img"
-                                         alt="Customers Block Picture">
+                                         alt="{% trans 'Customers Block Picture' %}">
                                 </div>
                                 {% endif %}
                                 {% endwith %}
                             </div>
                         </div>
                     </div>
-                    <!--HoReCa-->
                     <div class="tabs__content">
                         <div class="tabs__content_block">
                             <div class="row">
@@ -128,20 +122,19 @@
                                                 href="mailto:{{settings.core.ContactSettings.email}}"
                                                 class="button"
                                         >
-                                            Написать нам
+                                            {% trans "Написать нам" %}
                                         </a>
                                     </div>
                                 </div>
                                 <div class="col-md-7 col-12">
                                     <img src="{{img.url}}" class="tabs__content_img"
-                                         alt="Customers Block Picture">
+                                         alt="{% trans 'Customers Block Picture' %}">
                                 </div>
                                 {% endif %}
                                 {% endwith %}
                             </div>
                         </div>
                     </div>
-                    <!--Fitness Clubs-->
                     <div class="tabs__content">
                         <div class="tabs__content_block">
                             <div class="row">
@@ -155,20 +148,19 @@
                                                 href="mailto:{{settings.core.ContactSettings.email}}"
                                                 class="button"
                                         >
-                                            Написать нам
+                                            {% trans "Написать нам" %}
                                         </a>
                                     </div>
                                 </div>
                                 <div class="col-md-7 col-12">
                                     <img src="{{img.url}}" class="tabs__content_img"
-                                         alt="Customers Block Picture">
+                                         alt="{% trans 'Customers Block Picture' %}">
                                 </div>
                                 {% endif %}
                                 {% endwith %}
                             </div>
                         </div>
                     </div>
-                    <!--Confectionary Bakeries-->
                     <div class="tabs__content">
                         <div class="tabs__content_block">
                             <div class="row">
@@ -182,13 +174,13 @@
                                                 href="mailto:{{settings.core.ContactSettings.email}}"
                                                 class="button"
                                         >
-                                            Написать нам
+                                            {% trans "Написать нам" %}
                                         </a>
                                     </div>
                                 </div>
                                 <div class="col-md-7 col-12">
                                     <img src="{{img.url}}" class="tabs__content_img"
-                                         alt="Customers Block Picture">
+                                         alt="{% trans 'Customers Block Picture' %}">
                                 </div>
                                 {% endif %}
                                 {% endwith %}
@@ -200,9 +192,7 @@
         </div>
     </div>
 </section>
-<!--Statistics-->
 {% include "includes/statistics.html"%}
-<!--Image Hero-->
 {% with hero=page.image_hero.0 %}
 {% if hero.block_type == 'image_jumbotron' %}
 {% image hero.value.background_image original as bg_image %}

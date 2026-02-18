@@ -1,5 +1,4 @@
-<!--Product Cards-->
-{% load wagtailcore_tags django_vite %}
+{% load wagtailcore_tags django_vite i18n %}
 {% for product in products %}
 <div class="col-lg-4 col-md-6 col-12">
     <div class="wrap">
@@ -7,12 +6,12 @@
             {% if product.discounted_price %}
             <div class="sticker">
                 <i class="nut-icon icons-actciya"></i>
-                <p>Акция</p>
+                <p>{% trans "Акция" %}</p>
             </div>
             {% elif product.is_new %}
             <div class="sticker">
                 <i class="nut-icon icons-novinka"></i>
-                <p>Новинка</p>
+                <p>{% trans "Новинка" %}</p>
             </div>
             {% endif %}
 
@@ -35,7 +34,7 @@
                     {{ product.name }}
                 </div>
                 <div class="production__item_art">
-                    <span>Арт:</span> {{ product.sku }}
+                    <span>{% trans "Арт:" %}</span> {{ product.sku }}
                 </div>
                 <div class="production__item_descr">
                     {{ product.features.all|join:", " }}
@@ -46,8 +45,8 @@
                             <i class="nut-icon icons-food-scale-tool"></i>
                         </div>
                         <div class="weight_item_descr">
-                            <p>Масса</p>
-                            <p><span>{{ product.weight }}<i>г.</i></span></p>
+                            <p>{% trans "Масса" %}</p>
+                            <p><span>{{ product.weight }}<i>{% trans "г." %}</i></span></p>
                         </div>
                     </div>
                     <div class="weight_item">
@@ -55,32 +54,32 @@
                             <i class="nut-icon icons-group"></i>
                         </div>
                         <div class="weight_item_descr">
-                            <p>Упаковка</p>
-                            <p><span>вакуумная</span></p>
+                            <p>{% trans "Упаковка" %}</p>
+                            <p><span>{% trans "вакуумная" %}</span></p>
                         </div>
                     </div>
                 </div>
                 <div class="production__item_sum">
                     <div class="sum_item">
                         <div class="sum_item_title">
-                            <p>Цена: </p>
+                            <p>{% trans "Цена:" %} </p>
                         </div>
                         {% if product.discounted_price %}
                         <div class="sum_item_new">
-                            <p>{{ product.discounted_price|floatformat:0 }} <i>грн.</i></p>
+                            <p>{{ product.discounted_price|floatformat:0 }} <i>{% trans "грн." %}</i></p>
                         </div>
                         <div class="sum_item_old">
-                            <p>{{ product.price|floatformat:0 }} <i>грн.</i></p>
+                            <p>{{ product.price|floatformat:0 }} <i>{% trans "грн." %}</i></p>
                         </div>
                         {% else %}
                         <div class="sum_item_new">
-                            <p>{{ product.price|floatformat:0 }} <i>грн.</i></p>
+                            <p>{{ product.price|floatformat:0 }} <i>{% trans "грн." %}</i></p>
                         </div>
                         {% endif %}
                     </div>
                     <div class="sum_item">
                         <div class="sum_item_button">
-                            <a href="{% pageurl product_page %}?product_id={{ product.id }}" class="button">Купить</a>
+                            <a href="{% pageurl product_page %}?product_id={{ product.id }}" class="button">{% trans "Купить" %}</a>
                         </div>
                     </div>
                 </div>
@@ -89,14 +88,13 @@
     </div>
 </div>
 {% endfor %}
-<!--Form Filters-->
 <div id="filter-form-inner" hx-swap-oob="true">
     <div class="row">
         <div class="col-lg-7">
             <div class="row align-items-center">
                 <div class="col-lg-3">
                     <div class="production__filter_title">
-                        <p>Фильтр</p>
+                        <p>{% trans "Фильтр" %}</p>
                         <i class="nut-icon icons-settings"></i>
                     </div>
                 </div>
@@ -113,21 +111,21 @@
                 <div class="col-lg-5 align-self-center">
                     {{ filter_form.sort_price }}
                     <div class="production__filter_price">
-                        <span>Стоимость</span>
+                        <span>{% trans "Стоимость" %}</span>
                         <i class="ordering-icon nut-icon icons-arrow-down {% if filter_form.sort_price.value == 'desc' %}accent{% endif %}"></i>
                         <i class="ordering-icon nut-icon icons-right-top {% if filter_form.sort_price.value == 'asc' %}accent{% endif %}"></i>
                     </div>
                 </div>
                 <div class="col-lg-7">
                     <div class="production__filter_button">
-                        <button type="submit" class="button">Применить</button>
+                        <button type="submit" class="button">{% trans "Применить" %}</button>
                         <a href="#"
                            class="button_close"
                            hx-get="{% url 'shop:catalog' %}"
                            hx-target="#product-grid"
                         >
                             <i class="nut-icon icons-close-button"></i>
-                            <span> Сбросить</span>
+                            <span> {% trans "Сбросить" %}</span>
                         </a>
                     </div>
                 </div>
@@ -135,7 +133,6 @@
         </div>
     </div>
 </div>
-<!--Load More Button-->
 <div id="load-more-wrapper" hx-swap-oob="true">
     {% if page_obj.has_next %}
     <div class="row">
@@ -147,7 +144,7 @@
                hx-target="#product-grid"
                hx-swap="beforeend"
             >
-                Загрузить еще
+                {% trans "Загрузить еще" %}
             </a>
         </div>
     </div>

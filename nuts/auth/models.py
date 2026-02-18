@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
 from django.shortcuts import redirect, render
+from django.utils.translation import gettext as _
 
 from wagtail.models import Page
 from wagtail.fields import RichTextField
@@ -115,7 +116,7 @@ class RecoverPasswordPage(Page):
         forgot_url = forgot_page.get_url(request)
 
         if not uidb64 or not token:
-            messages.error(request, "Предоставленный токен доступа не валидный.")
+            messages.error(request, _("Предоставленный токен доступа не валидный."))
             return redirect(forgot_url)
 
         try:
@@ -123,7 +124,7 @@ class RecoverPasswordPage(Page):
             user = User.objects.get(pk=uid)
 
             if not account_activation_token.check_token(user, token):
-                messages.error(request, "Предоставленный токен доступа не валидный.")
+                messages.error(request, _("Предоставленный токен доступа не валидный."))
                 return redirect(forgot_url)
 
             context = self.get_context(request)
@@ -132,7 +133,7 @@ class RecoverPasswordPage(Page):
             return render(request, self.template, context)
 
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-            messages.error(request, "Предоставленный токен доступа не валидный.")
+            messages.error(request, _("Предоставленный токен доступа не валидный."))
             return redirect(forgot_url)
 
     class Meta:

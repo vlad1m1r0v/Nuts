@@ -2,6 +2,7 @@ from django.views import View
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.db import transaction
+from django.utils.translation import gettext as _
 
 from cart.models import Cart
 
@@ -22,7 +23,7 @@ class OrderCreateView(View):
         profile = getattr(request.user, 'customer_profile', None)
 
         if not cart or cart.cart_items_count == 0:
-            messages.error(request, "Ваша корзина пуста.")
+            messages.error(request, _("Ваша корзина пуста."))
             return redirect(checkout_page_url)
 
         form = OrderCreateForm(request.POST, customer_profile=profile)
@@ -44,11 +45,11 @@ class OrderCreateView(View):
 
                     cart.delete()
 
-                    messages.success(request, f"Заказ успешно оформлен.")
+                    messages.success(request, _("Заказ успешно оформлен."))
                     return redirect(thanks_page_url)
 
             except Exception as e:
-                messages.error(request, f"Произошла ошибка при сохранении заказа: {str(e)}")
+                messages.error(request, _("Произошла ошибка при сохранении заказа: %(error)s") % {'error': str(e)})
                 return redirect(request.META.get('HTTP_REFERER', '/'))
         else:
             for field, errors in form.errors.items():

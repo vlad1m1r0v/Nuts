@@ -1,5 +1,6 @@
+{% load i18n %}
 <nav class="navigation">
-    <p>Мои заказы</p>
+    <p>{% trans "Мои заказы" %}</p>
     <ul>
         {% if orders_history_page %}
         <li>
@@ -20,7 +21,7 @@
         {% endif %}
     </ul>
 
-    <p>Моя учетная занись</p>
+    <p>{% trans "Моя учетная запись" %}</p>
     <ul>
         {% if contact_information_page %}
         <li>

@@ -19,6 +19,8 @@ INSTALLED_APPS = [
     "wagtail_modeltranslation",
     "wagtail_modeltranslation.makemigrations",
     "wagtail_modeltranslation.migrate",
+    # modeltranslation
+    "modeltranslation",
     # apps
     "home",
     "search",
@@ -63,8 +65,6 @@ INSTALLED_APPS = [
     # unfold
     "unfold",
     "unfold.contrib.filters",
-    # modeltranslation
-    "modeltranslation",
     # django admin
     "django.contrib.admin",
     "django.contrib.auth",
@@ -168,6 +168,10 @@ LANGUAGES = (
     ("ru", _("Russian")),
     ("uk", _("Ukrainian"))
 )
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 MODELTRANSLATION_LANGUAGES = ('en', 'ru', 'uk')

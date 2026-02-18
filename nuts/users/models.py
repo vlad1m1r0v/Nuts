@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 
 from core.validators import ukrainian_phone_validator
 from locations.models import Address
@@ -24,8 +25,8 @@ class CustomerProfile(models.Model):
 
 class BusinessProfile(models.Model):
     class BusinessType(models.TextChoices):
-        LEGAL_ENTITY = 'LEGAL_ENTITY', 'Юридическое лицо'
-        FOP = 'FOP', 'ФОП'
+        LEGAL_ENTITY = 'LEGAL_ENTITY', _("Юридическое лицо")
+        FOP = 'FOP', _("ФОП")
 
     customer = models.OneToOneField(CustomerProfile, on_delete=models.CASCADE, related_name='business_profile', verbose_name="Профиль клиента")
     business_type = models.CharField(

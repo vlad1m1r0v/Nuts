@@ -1,5 +1,6 @@
-from django.contrib import messages
 from django.shortcuts import redirect
+from django.contrib import messages
+from django.utils.translation import gettext as _
 
 from auth.models import LoginPage
 
@@ -15,7 +16,7 @@ class CustomerProfileRequiredMixin:
             request.user.is_superuser,
             not hasattr(request.user, "customer_profile"),
         ]):
-            messages.warning(request, "Для доступа к этой странице необходимо войти в аккаунт.")
+            messages.warning(request, _("Для доступа к этой странице необходимо войти в аккаунт."))
             return redirect(login_url)
 
         return super().serve(request, *args, **kwargs)

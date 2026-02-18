@@ -3,11 +3,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
+from django.utils.translation import gettext_lazy as _
 
 from core.validators import ukrainian_phone_validator, validate_file_size
-
 from locations.models import Country, Region
-
 from users.validators import full_name_validator
 from users.models import BusinessProfile, CustomerProfile
 
@@ -15,97 +14,97 @@ from users.models import BusinessProfile, CustomerProfile
 class BaseRegistrationForm(forms.Form):
     # Contacts
     full_name = forms.CharField(
-        widget=forms.TextInput(attrs={"placeholder": "ФИО*"}),
+        widget=forms.TextInput(attrs={"placeholder": _("ФИО*")}),
         min_length=10,
         max_length=60,
-        label="ФИО",
+        label=_("ФИО"),
         validators=[full_name_validator],
         error_messages={
-            "required": "ФИО поле обязательное для заполнения.",
-            "max_length": "ФИО поле может местить максимум 60 символов.",
-            "min_length": "ФИО поле должно местить минимум 10 символов."
+            "required": _("ФИО поле обязательное для заполнения."),
+            "max_length": _("ФИО поле может местить максимум 60 символов."),
+            "min_length": _("ФИО поле должно местить минимум 10 символов.")
         }
     )
     email = forms.EmailField(
-        widget=forms.EmailInput(attrs={"placeholder": "E-Mail*"}),
-        label="E-Mail",
+        widget=forms.EmailInput(attrs={"placeholder": _("E-Mail*")}),
+        label=_("E-Mail"),
         error_messages={
-            "required": "E-Mail поле обязательное для заполнения.",
-            "invalid": "E-Mail не валидний."
+            "required": _("E-Mail поле обязательное для заполнения."),
+            "invalid": _("E-Mail не валидний.")
         }
     )
     phone = forms.CharField(
-        widget=forms.TelInput(attrs={"placeholder": "Телефон*"}),
-        label="Телефон",
+        widget=forms.TelInput(attrs={"placeholder": _("Телефон*")}),
+        label=_("Телефон"),
         validators=[ukrainian_phone_validator],
         error_messages={
-            "required": "Телефон поле обязательное для заполнения."
+            "required": _("Телефон поле обязательное для заполнения.")
         }
     )
     # Address
     country = forms.ModelChoiceField(
         queryset=Country.objects.all(),
-        empty_label="Страна",
-        label="Страна",
+        empty_label=_("Страна"),
+        label=_("Страна"),
         error_messages={
-            "required": "Страна поле обязательное для заполнения."
+            "required": _("Страна поле обязательное для заполнения.")
         }
     )
     region = forms.ModelChoiceField(
         queryset=Region.objects.all(),
-        empty_label="Область",
-        label="Область",
+        empty_label=_("Область"),
+        label=_("Область"),
         error_messages={
-            "required": "Область поле обязательное для заполнения."
+            "required": _("Область поле обязательное для заполнения.")
         }
     )
     city = forms.CharField(
-        widget=forms.TextInput(attrs={"placeholder": "Город*"}),
+        widget=forms.TextInput(attrs={"placeholder": _("Город*")}),
         min_length=3,
         max_length=30,
-        label="Город",
+        label=_("Город"),
         error_messages={
-            "required": "Город поле обязательное для заполнения.",
-            "max_length": "Город поле может местить максимум 30 символов.",
-            "min_length": "Город поле должно местить минимум 3 символа."
+            "required": _("Город поле обязательное для заполнения."),
+            "max_length": _("Город поле может местить максимум 30 символов."),
+            "min_length": _("Город поле должно местить минимум 3 символа.")
         }
     )
     address_line = forms.CharField(
-        widget=forms.TextInput(attrs={"placeholder": "Адрес"}),
+        widget=forms.TextInput(attrs={"placeholder": _("Адрес")}),
         min_length=20,
         max_length=100,
-        label="Адрес",
+        label=_("Адрес"),
         required=False,
         error_messages={
-            "max_length": "Адрес поле может местить максимум 100 символов.",
-            "min_length": "Адрес поле должно местить минимум 20 символов."
+            "max_length": _("Адрес поле может местить максимум 100 символов."),
+            "min_length": _("Адрес поле должно местить минимум 20 символов.")
         }
     )
     # Password and confirm password
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            "placeholder": "Пароль*"
+            "placeholder": _("Пароль*")
         }),
-        label="Пароль",
+        label=_("Пароль"),
         error_messages={
-            "required": "Пароль поле обязательное для заполнения."
+            "required": _("Пароль поле обязательное для заполнения.")
         }
     )
     password_confirm = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            "placeholder": "Подтвердите пароль*"
+            "placeholder": _("Подтвердите пароль*")
         }),
-        label="Подтвердите пароль",
+        label=_("Подтвердите пароль"),
         error_messages={
-            "required": "Подтвердите пароль поле обязательное для заполнения."
+            "required": _("Подтвердите пароль поле обязательное для заполнения.")
         }
     )
     # Agreed to terms
     agreed_to_terms = forms.BooleanField(
         widget=forms.CheckboxInput(attrs={"class": "checkbox-custom", "id": "individual_terms"}),
-        label="Согласие с условиями",
+        label=_("Согласие с условиями"),
         error_messages={
-            "required": "Согласие с условиями поле обязательное для заполнения."
+            "required": _("Согласие с условиями поле обязательное для заполнения.")
         }
     )
     # Avatar
@@ -114,27 +113,27 @@ class BaseRegistrationForm(forms.Form):
             "id": "individual_avatar_file",
             "class": "inputfile"
         }),
-        label="Аватар",
+        label=_("Аватар"), # Додав переклад
         validators=[
             FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'webp']),
             validate_file_size
         ],
         error_messages={
-            'required': 'Аватар поле обязательное для заполнения.',
-            'invalid_image': 'Загруженный файл не является изображением или поврежден.',
+            'required': _('Аватар поле обязательное для заполнения.'),
+            'invalid_image': _('Загруженный файл не является изображением или поврежден.'),
         }
     )
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
-            raise ValidationError("E-Mail поле: Пользователь с таким электронным адресом уже зарегистрирован.")
+            raise ValidationError(_("E-Mail поле: Пользователь с таким электронным адресом уже зарегистрирован."))
         return email
 
     def clean_phone(self):
         phone = self.cleaned_data.get('phone')
         if CustomerProfile.objects.filter(phone=phone).exists():
-            raise ValidationError("Телефон поле: Пользователь с таким номером телефона уже зарегистрирован.")
+            raise ValidationError(_("Телефон поле: Пользователь с таким номером телефона уже зарегистрирован."))
         return phone
 
     def clean_password(self):
@@ -143,7 +142,7 @@ class BaseRegistrationForm(forms.Form):
             validate_password(password)
         except ValidationError:
             raise ValidationError(
-                "Ваш пароль не соответствует требованиям безопасности.")
+                _("Ваш пароль не соответствует требованиям безопасности."))
         return password
 
     def clean(self):
@@ -152,14 +151,14 @@ class BaseRegistrationForm(forms.Form):
         country = cleaned_data.get("country")
         region = cleaned_data.get("region")
 
-        if region.country_id != country.pk:
-            raise ValidationError("Выбранная область не принадлежит указанной стране.")
+        if country and region and region.country_id != country.pk: # Додав перевірку country на None
+            raise ValidationError(_("Выбранная область не принадлежит указанной стране."))
 
         password = cleaned_data.get("password")
         password_confirm = cleaned_data.get("password_confirm")
 
         if all([password, password_confirm]) and password != password_confirm:
-            raise ValidationError("Пароли не совпадают.")
+            raise ValidationError(_("Пароли не совпадают."))
 
         return cleaned_data
 
@@ -168,7 +167,7 @@ class IndividualRegistrationForm(BaseRegistrationForm):
     is_fop = forms.BooleanField(
         widget=forms.CheckboxInput(attrs={"class": "checkbox-custom", "id": "checkbox-1"}),
         required=False,
-        label="Являюсь ФОП"
+        label=_("Являюсь ФОП")
     )
 
 
@@ -179,125 +178,125 @@ class BusinessRegistrationForm(BaseRegistrationForm):
             "id": "business_avatar_file",
             "class": "inputfile"
         }),
-        label="Аватар",
+        label=_("Аватар"),
         validators=[
             FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'webp']),
             validate_file_size
         ],
         error_messages={
-            'required': 'Аватар поле обязательное для заполнения.',
-            'invalid_image': 'Загруженный файл не является изображением или поврежден.',
+            'required': _('Аватар поле обязательное для заполнения.'),
+            'invalid_image': _('Загруженный файл не является изображением или поврежден.'),
         }
     )
     # Agreed to terms
     agreed_to_terms = forms.BooleanField(
         widget=forms.CheckboxInput(attrs={"class": "checkbox-custom", "id": "business_terms"}),
-        label="Согласие с условиями",
+        label=_("Согласие с условиями"),
         error_messages={
-            "required": "Согласие с условиями поле обязательное для заполнения."
+            "required": _("Согласие с условиями поле обязательное для заполнения.")
         }
     )
 
     business_type = forms.ChoiceField(
-        choices=[('ur', 'Юридическое лицо'), ('fop', 'ФОП')],
+        choices=[('ur', _('Юридическое лицо')), ('fop', _('ФОП'))],
         widget=forms.RadioSelect(attrs={'class': 'radio-custom'}),
         initial='ur',
-        label="Тип бизнеса"
+        label=_("Тип бизнеса")
     )
 
     okpo = forms.CharField(
         required=False,
         max_length=32,
-        label="ОКПО",
-        widget=forms.TextInput(attrs={"placeholder": "ОКПО"}),
-        error_messages={"max_length": "ОКПО поле может местить максимум 32 символа."}
+        label=_("ОКПО"),
+        widget=forms.TextInput(attrs={"placeholder": _("ОКПО")}),
+        error_messages={"max_length": _("ОКПО поле может местить максимум 32 символа.")}
     )
     edrpo = forms.CharField(
         required=False,
         max_length=32,
-        label="ЕДРПО",
-        widget=forms.TextInput(attrs={"placeholder": "ЕДРПО"}),
-        error_messages={"max_length": "ЕДРПО поле может местить максимум 32 символа."}
+        label=_("ЕДРПО"),
+        widget=forms.TextInput(attrs={"placeholder": _("ЕДРПО")}),
+        error_messages={"max_length": _("ЕДРПО поле может местить максимум 32 символа.")}
     )
 
     legal_country = forms.ModelChoiceField(
         queryset=Country.objects.all(),
         required=False,
-        label="Страна (юр.)",
-        empty_label="Страна"
+        label=_("Страна (юр.)"),
+        empty_label=_("Страна")
     )
     legal_region = forms.ModelChoiceField(
         queryset=Region.objects.all(),
         required=False,
-        label="Область (юр.)",
-        empty_label="Область"
+        label=_("Область (юр.)"),
+        empty_label=_("Область")
     )
     legal_city = forms.CharField(
         required=False,
         min_length=3,
         max_length=30,
-        label="Город (юр.)",
-        widget=forms.TextInput(attrs={"placeholder": "Город*"}),
+        label=_("Город (юр.)"),
+        widget=forms.TextInput(attrs={"placeholder": _("Город*")}),
         error_messages={
-            "max_length": "Город (юр.) поле может местить максимум 30 символов.",
-            "min_length": "Город (юр.) поле должно местить минимум 3 символа."
+            "max_length": _("Город (юр.) поле может местить максимум 30 символов."),
+            "min_length": _("Город (юр.) поле должно местить минимум 3 символа.")
         }
     )
     legal_address_line = forms.CharField(
         required=False,
         min_length=10,
         max_length=100,
-        label="Адрес (юр.)",
-        widget=forms.TextInput(attrs={"placeholder": "Адрес"}),
+        label=_("Адрес (юр.)"),
+        widget=forms.TextInput(attrs={"placeholder": _("Адрес")}),
         error_messages={
-            "max_length": "Адрес (юр.) поле может местить максимум 100 символов.",
-            "min_length": "Адрес (юр.) поле должно местить минимум 10 символов."
+            "max_length": _("Адрес (юр.) поле может местить максимум 100 символов."),
+            "min_length": _("Адрес (юр.) поле должно местить минимум 10 символов.")
         }
     )
     legal_index = forms.CharField(
         required=False,
         min_length=5,
         max_length=10,
-        label="Индекс (юр.)",
-        widget=forms.TextInput(attrs={"placeholder": "Индекс"}),
+        label=_("Индекс (юр.)"),
+        widget=forms.TextInput(attrs={"placeholder": _("Индекс")}),
         error_messages={
-            "max_length": "Индекс (юр.) поле может местить максимум 10 символов.",
-            "min_length": "Индекс (юр.) поле должно местить минимум 5 символов."
+            "max_length": _("Индекс (юр.) поле может местить максимум 10 символов."),
+            "min_length": _("Индекс (юр.) поле должно местить минимум 5 символов.")
         }
     )
 
     fop_country = forms.ModelChoiceField(
         queryset=Country.objects.all(),
         required=False,
-        label="Страна (деятельности)",
-        empty_label="Страна"
+        label=_("Страна (деятельности)"),
+        empty_label=_("Страна")
     )
     fop_region = forms.ModelChoiceField(
         queryset=Region.objects.all(),
         required=False,
-        label="Область (деятельности)",
-        empty_label="Область"
+        label=_("Область (деятельности)"),
+        empty_label=_("Область")
     )
     fop_city = forms.CharField(
         required=False,
         min_length=3,
         max_length=30,
-        label="Город (деятельности)",
-        widget=forms.TextInput(attrs={"placeholder": "Город*"}),
+        label=_("Город (деятельности)"),
+        widget=forms.TextInput(attrs={"placeholder": _("Город*")}),
         error_messages={
-            "max_length": "Город (деятельности) поле может местить максимум 30 символов.",
-            "min_length": "Город (деятельности) поле должно местить минимум 3 символа."
+            "max_length": _("Город (деятельности) поле может местить максимум 30 символов."),
+            "min_length": _("Город (деятельности) поле должно местить минимум 3 символа.")
         }
     )
     fop_address_line = forms.CharField(
         required=False,
         min_length=10,
         max_length=100,
-        label="Адрес (деятельности)",
-        widget=forms.TextInput(attrs={"placeholder": "Адрес"}),
+        label=_("Адрес (деятельности)"),
+        widget=forms.TextInput(attrs={"placeholder": _("Адрес")}),
         error_messages={
-            "max_length": "Адрес (деятельности) поле может местить максимум 100 символов.",
-            "min_length": "Адрес (деятельности) поле должно местить минимум 10 символов."
+            "max_length": _("Адрес (деятельности) поле может местить максимум 100 символов."),
+            "min_length": _("Адрес (деятельности) поле должно местить минимум 10 символов.")
         }
     )
 
@@ -307,56 +306,58 @@ class BusinessRegistrationForm(BaseRegistrationForm):
 
         if b_type == BusinessProfile.BusinessType.LEGAL_ENTITY:
             self._validate_required_fields(cleaned_data, [
-                ('okpo', 'ОКПО'),
-                ('legal_country', 'Страна (юр.)'),
-                ('legal_region', 'Область (юр.)'),
-                ('legal_city', 'Город (юр.)')
+                ('okpo', _('ОКПО')),
+                ('legal_country', _('Страна (юр.)')),
+                ('legal_region', _('Область (юр.)')),
+                ('legal_city', _('Город (юр.)'))
             ])
 
             l_country = cleaned_data.get('legal_country')
             l_region = cleaned_data.get('legal_region')
             if l_country and l_region and l_region.country_id != l_country.pk:
-                self.add_error('legal_region', "Область (юр.) поле: Выбранная область не принадлежит указанной стране.")
+                self.add_error('legal_region', _("Область (юр.) поле: Выбранная область не принадлежит указанной стране."))
 
         elif b_type == BusinessProfile.BusinessType.FOP:
             self._validate_required_fields(cleaned_data, [
-                ('edrpo', 'ЕДРПО'),
-                ('fop_country', 'Страна (деятельности)'),
-                ('fop_region', 'Область (деятельности)'),
-                ('fop_city', 'Город (деятельности)')
+                ('edrpo', _('ЕДРПО')),
+                ('fop_country', _('Страна (деятельности)')),
+                ('fop_region', _('Область (деятельности)')),
+                ('fop_city', _('Город (деятельности)'))
             ])
 
             f_country = cleaned_data.get('fop_country')
             f_region = cleaned_data.get('fop_region')
             if f_country and f_region and f_region.country_id != f_country.pk:
                 self.add_error('fop_region',
-                               "Область (деятельности) поле: Выбранная область не принадлежит указанной стране.")
+                               _("Область (деятельности) поле: Выбранная область не принадлежит указанной стране."))
 
         return cleaned_data
 
     def _validate_required_fields(self, cleaned_data, fields_with_labels):
         for field_name, label in fields_with_labels:
             if not cleaned_data.get(field_name):
-                self.add_error(field_name, f"{label} поле обязательное для заполнения.")
+                # Тут використовуємо іменований плейсхолдер для гнучкого перекладу
+                msg = _("%(label)s поле обязательное для заполнения.") % {'label': label}
+                self.add_error(field_name, msg)
 
 
 class CustomerLoginForm(forms.Form):
     email = forms.EmailField(
-        widget=forms.EmailInput(attrs={"placeholder": "E-Mail*"}),
-        label="E-Mail",
+        widget=forms.EmailInput(attrs={"placeholder": _("E-Mail*")}),
+        label=_("E-Mail"),
         error_messages={
-            "required": "E-Mail поле обязательное для заполнения.",
-            "invalid": "E-Mail не валидний."
+            "required": _("E-Mail поле обязательное для заполнения."),
+            "invalid": _("E-Mail не валидний.")
         }
     )
 
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            "placeholder": "Пароль*"
+            "placeholder": _("Пароль*")
         }),
-        label="Пароль",
+        label=_("Пароль"),
         error_messages={
-            "required": "Пароль поле обязательное для заполнения."
+            "required": _("Пароль поле обязательное для заполнения.")
         }
     )
 
@@ -366,17 +367,17 @@ class CustomerLoginForm(forms.Form):
             validate_password(password)
         except ValidationError:
             raise ValidationError(
-                "Ваш пароль не соответствует требованиям безопасности.")
+                _("Ваш пароль не соответствует требованиям безопасности."))
         return password
 
 
 class CustomerForgotPasswordForm(forms.Form):
     email = forms.EmailField(
-        widget=forms.EmailInput(attrs={"placeholder": "E-Mail*"}),
-        label="E-Mail",
+        widget=forms.EmailInput(attrs={"placeholder": _("E-Mail*")}),
+        label=_("E-Mail"),
         error_messages={
-            "required": "E-Mail поле обязательное для заполнения.",
-            "invalid": "E-Mail не валидний."
+            "required": _("E-Mail поле обязательное для заполнения."),
+            "invalid": _("E-Mail не валидний.")
         }
     )
 
@@ -392,9 +393,9 @@ class CustomerForgotPasswordForm(forms.Form):
             )
 
             if not hasattr(user, 'customer_profile'):
-                raise ValidationError("У пользователя нет личного кабинета.")
+                raise ValidationError(_("У пользователя нет личного кабинета."))
         except User.DoesNotExist:
-            raise ValidationError("Пользователь с данным E-Mail не обнаружен.")
+            raise ValidationError(_("Пользователь с данным E-Mail не обнаружен."))
 
         return email
 
@@ -402,20 +403,20 @@ class CustomerForgotPasswordForm(forms.Form):
 class CustomerResetPasswordForm(forms.Form):
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            "placeholder": "Пароль*"
+            "placeholder": _("Пароль*")
         }),
-        label="Пароль",
+        label=_("Пароль"),
         error_messages={
-            "required": "Пароль поле обязательное для заполнения."
+            "required": _("Пароль поле обязательное для заполнения.")
         }
     )
     password_confirm = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            "placeholder": "Подтвердите пароль*"
+            "placeholder": _("Подтвердите пароль*")
         }),
-        label="Подтвердите пароль",
+        label=_("Подтвердите пароль"),
         error_messages={
-            "required": "Подтвердите пароль поле обязательное для заполнения."
+            "required": _("Подтвердите пароль поле обязательное для заполнения.")
         }
     )
 
@@ -425,7 +426,7 @@ class CustomerResetPasswordForm(forms.Form):
             validate_password(password)
         except ValidationError:
             raise ValidationError(
-                "Ваш пароль не соответствует требованиям безопасности.")
+                _("Ваш пароль не соответствует требованиям безопасности."))
         return password
 
     def clean(self):
@@ -435,6 +436,6 @@ class CustomerResetPasswordForm(forms.Form):
         password_confirm = cleaned_data.get("password_confirm")
 
         if all([password, password_confirm]) and password != password_confirm:
-            raise ValidationError("Пароли не совпадают.")
+            raise ValidationError(_("Пароли не совпадают."))
 
         return cleaned_data

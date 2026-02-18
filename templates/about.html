@@ -1,7 +1,6 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags core_tags %}
+{% load wagtailcore_tags wagtailimages_tags core_tags i18n %}
 {% block content %}
-<!--Video Hero-->
 {% with block=page.hero.0 %}
 {% if block.block_type == 'video_jumbotron' %}
 <section class="first-section overlay">
@@ -23,16 +22,14 @@
 </section>
 {% endif %}
 {% endwith %}
-<!--About Producer-->
+
 <section class="manufacturer">
     <div class="container">
         <div class="row align-items-center">
-            <!--Block Title And Description-->
             <div class="col-md-5">
                 <h2>{{ page.title }}</h2>
                 <p>{{ page.description|richtext }}</p>
             </div>
-            <!--Video Carousel-->
             <div class="col-md-7">
                 <div class="manufacturer-container swiper-container">
                     <div class="swiper-wrapper">
@@ -48,7 +45,6 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <!--Arrows-->
                     <div class="wrap">
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
@@ -58,7 +54,7 @@
         </div>
     </div>
 </section>
-<!--Owner And History-->
+
 <section class="history gray_section">
     <div class="container">
         <div class="row no-gutters">
@@ -67,7 +63,7 @@
                     <div class="row no-gutters">
                         <div class="col-md-5">
                             {% image page.owner_photo original as img %}
-                            <img src="{{img.url}}" alt="Owner Photo">
+                            <img src="{{img.url}}" alt="{% trans 'Owner Photo' %}">
                         </div>
                         <div class="col-md-7">
                             <div class="blockquote_block">
@@ -80,7 +76,7 @@
                                         href="mailto:{{settings.core.ContactSettings.email}}"
                                         class="button button_transparent"
                                 >
-                                    Написать нам
+                                    {% trans "Написать нам" %}
                                 </a>
                             </div>
                         </div>
@@ -96,9 +92,9 @@
         </div>
     </div>
 </section>
-<!--Statistics-->
+
 {% include "includes/statistics.html" %}
-<!--Gallery-->
+
 <section class="benefit gray_section gallery_section">
     <div class="container">
         <div class="row align-items-center justify-content-center">
@@ -109,7 +105,6 @@
         </div>
         <div class="row justify-content-center">
             {% for block in gallery_page.content|slice:":5" %}
-            <!--Video-->
             {% if block.block_type == 'video' %}
             <div class="col-lg-4 col-md-6 col-12">
                 <div class="wrap item_small">
@@ -123,7 +118,6 @@
                 </div>
             </div>
             {% endif %}
-            <!--Image With Text-->
             {% if block.block_type == 'image_with_text' %}
             {% image block.value.image original as img %}
             <div class="col-md-6 col-12">
@@ -136,7 +130,6 @@
                 </div>
             </div>
             {% endif %}
-            <!--Video Jumbotron-->
             {% if block.block_type == 'video_jumbotron' %}
             <div class="col-lg-12 col-md-12 col-12">
                 <div class="wrap">
@@ -155,12 +148,12 @@
         </div>
         <div class="row">
             <div class="wrapper">
-                <a href="{% pageurl gallery_page %}" class="button button_transparent">Смотреть всю галерею</a>
+                <a href="{% pageurl gallery_page %}" class="button button_transparent">{% trans "Смотреть всю галерею" %}</a>
             </div>
         </div>
     </div>
 </section>
-<!--Image Hero-->
+
 {% with hero=page.image_hero.0 %}
 {% image hero.value.background_image original as bg_image %}
 <div class="parallax" data-scrollax-parent="true">
@@ -177,14 +170,13 @@
         </div>
     </section>
 </div>
-<!--News-->
+
 <section class="news gray_section">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6 col-12">
                 <h2>{{ news_page.title }}</h2>
                 <p class="news__descr">{{ news_page.description }}</p>
-
             </div>
             <div class="col-md-6 col-12 d-flex justify-content-end">
                 <div class="wrap">
@@ -192,9 +184,7 @@
                 </div>
             </div>
             <div class="col-12">
-                <!-- Swiper -->
                 <div class="news-container swiper-container">
-                    <!-- Add Arrows -->
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                     <div class="swiper-wrapper">
@@ -205,7 +195,7 @@
                             {% if main_media.block_type == 'image' %}
                             {% image main_media.value original as img %}
                             <span class="video_wrap">
-                                <img src="{{img.url}}" alt="News Main Media Image">
+                                <img src="{{img.url}}" alt="{% trans 'News Main Media Image' %}">
                             </span>
                             {% endif %}
                             {% if main_media.block_type == 'video' %}
@@ -224,7 +214,7 @@
                                 </div>
                                 <h3>{{ news.title }}</h3>
                                 <p>{{ news.get_excerpt }}</p>
-                                <a href="{% pageurl news %}">Читать <i class="nut-icon icons-read-more"></i></a>
+                                <a href="{% pageurl news %}">{% trans "Читать" %} <i class="nut-icon icons-read-more"></i></a>
                             </div>
                         </div>
                     </div>
@@ -235,11 +225,10 @@
     </div>
     <div class="row">
         <div class="wrapper">
-            <a href="{% pageurl news_page %}" class="button button_transparent">Смотреть все новости</a>
+            <a href="{% pageurl news_page %}" class="button button_transparent">{% trans "Смотреть все новости" %}</a>
         </div>
     </div>
     </div>
 </section>
-
 {% endwith %}
 {% endblock %}

@@ -1,20 +1,21 @@
+{% load i18n %}
 {% if request.user.is_authenticated and request.user.customer_profile %}
 <li>
-    <a href="{{ profile_page.url }}"><i class="nut-icon icons-man-user"></i><span>Профиль</span></a>
+    <a href="{{ profile_page.url }}"><i class="nut-icon icons-man-user"></i><span>{% trans "Профиль" %}</span></a>
 </li>
 <li>
     <form id="logout__button" method="POST" class="d-inline-block" action="{% url 'custom_auth:logout' %}">
         {% csrf_token %}
         <a href="#" onclick="document.getElementById('logout__button').submit()">
-            <span>Выйти</span>
+            <span>{% trans "Выйти" %}</span>
         </a>
     </form>
 </li>
 {% else %}
 <li>
-    <a href="{{ login_page.url }}"><i class="nut-icon icons-man-user"></i><span>Вход</span></a>
+    <a href="{{ login_page.url }}"><i class="nut-icon icons-man-user"></i><span>{% trans "Вход" %}</span></a>
 </li>
 <li>
-    <a href="{{ register_page.url }}"><span>Регистрация</span></a>
+    <a href="{{ register_page.url }}"><span>{% trans "Регистрация" %}</span></a>
 </li>
 {% endif %}

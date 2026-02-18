@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils.translation import gettext as _
 
 from wagtail.models import Page
 from wagtail.fields import StreamField
@@ -51,7 +52,7 @@ class ProductPage(Page):
         product_id = request.GET.get('product_id')
 
         if not product_id:
-            messages.error(request, "Не указан идентфикатор товара.")
+            messages.error(request, _("Не указан идентфикатор товара."))
             return context
 
         try:
@@ -60,7 +61,7 @@ class ProductPage(Page):
             return context
 
         except Product.DoesNotExist:
-            messages.error(request, "Товар с указаным идентификатором не обнаружен.")
+            messages.error(request, _("Товар с указаным идентификатором не обнаружен."))
             return context
 
     class Meta:

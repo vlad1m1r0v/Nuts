@@ -1,10 +1,10 @@
-{% load core_tags l10n %}
+{% load core_tags l10n i18n %}
 <div id="contacts">
     <div class="container">
         <div class="row">
             <div class="col-lg-5 col-12">
                 <div class="wrap">
-                    <h2>Контакты</h2>
+                    <h2>{% trans "Контакты" %}</h2>
                     <div class="bottom_social">
                         <div class="bottom_social_tel">
                             <i class="nut-icon icons-phone"></i>
@@ -54,13 +54,13 @@
                     <address class="bottom_address">
                         <ul>
                             <li>
-                                <b>Офис и отдел продаж</b>
+                                <b>{% trans "Офис и отдел продаж" %}</b>
                                 <p>
                                     {{settings.core.ContactSettings.office_and_sales_department_address|wordwrap:30|linebreaksbr}}
                                 </p>
                             </li>
                             <li>
-                                <b>Производство</b>
+                                <b>{% trans "Производство" %}</b>
                                 <p>
                                     {{ settings.core.ContactSettings.production_address|wordwrap:30|linebreaksbr }}
                                 </p>

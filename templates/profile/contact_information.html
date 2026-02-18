@@ -1,9 +1,9 @@
 {% extends "profile/base.html" %}
-{% load django_vite %}
+{% load django_vite i18n %}
 {% block profile_content %}
 <form class="container-fluid" action="{% url 'profiles:contact-information' %}" method="POST"
       enctype="multipart/form-data">
-    <div class="form__title">Контактная информация</div>
+    <div class="form__title">{% trans "Контактная информация" %}</div>
     {% csrf_token %}
     <div class="row">
         <div class="col-md-6">
@@ -12,7 +12,7 @@
             {{ field }}
             {% endif %}
             {% endfor %}
-            <button class="button float-left mt-3" type="submit">Сохранить</button>
+            <button class="button float-left mt-3" type="submit">{% trans "Сохранить" %}</button>
         </div>
         <div class="col-md-6 align-self-center">
             <div class="wrapper">
@@ -22,7 +22,7 @@
                             for="{{ form.avatar.id_for_label }}"
                             class="label__photo"
                             style="background-image: url({% if request.user.customer_profile.avatar %}{{ request.user.customer_profile.avatar.url }}{% else %}{% vite_asset_url 'src/img/istockphoto-674199444-612x612.jpg' %}{% endif %})">
-                        <span>Загрузить фото</span>
+                        <span>{% trans "Загрузить фото" %}</span>
                     </label>
                 </div>
             </div>

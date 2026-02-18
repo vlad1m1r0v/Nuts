@@ -1,28 +1,28 @@
 {% extends "profile/base.html" %}
-{% load wagtailimages_tags %}
+{% load wagtailimages_tags i18n %}
 {% block profile_content %}
 {% if is_business %}
 <div class="col-md-6">
     <form class="container-fluid" action="{% url 'profiles:address-information' %}" method="POST">
         {% csrf_token %}
-        <div class="form__title">1. Реквизиты</div>
+        <div class="form__title">{% trans "1. Реквизиты" %}</div>
         {% if biz_type == "LEGAL_ENTITY" %}
         {{ form.okpo }}
         {% else %}
         {{ form.edrpo }}
         {% endif %}
-        <div class="form__title">2. Адрес</div>
+        <div class="form__title">{% trans "2. Адрес" %}</div>
         {{ form.country }}
         {{ form.region }}
         {{ form.city }}
         {{ form.street_address }}
-        <div class="form__title">3. Юридический адрес</div>
+        <div class="form__title">{% trans "3. Юридический адрес" %}</div>
         {{ form.legal_country }}
         {{ form.legal_region }}
         {{ form.legal_city }}
         {{ form.legal_address_line }}
         {{ form.legal_index }}
-        <button class="button mt-3" type="submit">Сохранить</button>
+        <button class="button mt-3" type="submit">{% trans "Сохранить" %}</button>
     </form>
 </div>
 <div class="col-md-6 align-self-end">
@@ -38,12 +38,12 @@
 <div class="col-lg-6">
     <form class="container-fluid" action="{% url 'profiles:address-information' %}" method="POST">
         {% csrf_token %}
-        <div class="form__title">Адрес</div>
+        <div class="form__title">{% trans "Адрес" %}</div>
         {{ form.country }}
         {{ form.region }}
         {{ form.city }}
         {{ form.street_address }}
-        <button class="button mt-3" type="submit">Сохранить</button>
+        <button class="button mt-3" type="submit">{% trans "Сохранить" %}</button>
     </form>
 </div>
 <div class="col-lg-6 align-self-end"></div>
