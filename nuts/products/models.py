@@ -151,6 +151,7 @@ class Product(models.Model):
 
 class ProductImage(models.Model):
     id = models.BigAutoField(primary_key=True)
+    order = models.PositiveIntegerField(default=0, db_index=True)
     product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
@@ -162,6 +163,10 @@ class ProductImage(models.Model):
         verbose_name="Изображение"
     )
 
+    def __str__(self):
+        return f"Картинка #{self.order + 1}"
+
     class Meta:
+        ordering = ['order']
         verbose_name = "Изображение товара"
         verbose_name_plural = "Изображения товаров"

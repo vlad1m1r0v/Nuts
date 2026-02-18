@@ -54,8 +54,11 @@ from products.models import Product, ProductFeature, ProductImage
 
 class ProductImageInline(TabularInline):
     model = ProductImage
-    extra = 1
-    fields = ("image",)
+    ordering_field = "order"
+    extra = 0
+    hide_ordering_field = True
+    fields = ("image", "order")
+
 
 
 class ProductFeaturesFilter(MultipleDropdownFilter):
