@@ -19,7 +19,7 @@
                 <div class="swiper-wrapper">
                     {% for item in product.images.all %}
                     <div class="swiper-slide">
-                        <a href="{% pageurl product_page  %}?product_id={{ product.id }}"><img src="{{ item.image.url }}" alt="{{ product.name }}"/></a>
+                        <a href="{% pageurl product_page  %}{{product.slug}}/"><img src="{{ item.image.url }}" alt="{{ product.name }}"/></a>
                     </div>
                     {% endfor %}
                 </div>
@@ -79,7 +79,7 @@
                     </div>
                     <div class="sum_item">
                         <div class="sum_item_button">
-                            <a href="{% pageurl product_page %}?product_id={{ product.id }}" class="button">{% trans "Купить" %}</a>
+                            <a href="{% pageurl product_page %}{{product.slug}}/" class="button">{% trans "Купить" %}</a>
                         </div>
                     </div>
                 </div>

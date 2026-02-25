@@ -1,13 +1,19 @@
-{% load i18n wagtail_modeltranslation %}
+{% load i18n wagtail_modeltranslation wagtailroutablepage_tags %}
 {% get_available_languages_wmt as languages %}
 {% get_current_language as language_code %}
 
-{% for language in languages %}
-{% if language != language_code %}
+{% for lg in languages %}
+{% if lg != language_code %}
 <li>
-    <a href="{% change_lang language page %}{% if query_parameters %}?{{ query_parameters }}{% endif %}">
-        {{ language|capfirst }}
+    {% if product and page %}
+    <a href="{% change_lang lg page %}{% language lg %}{{product.slug}}{% endlanguage %}/">
+        {{ lg|capfirst }}
     </a>
+    {% else %}
+    <a href="{% change_lang lg page %}">
+        {{ lg|capfirst }}
+    </a>
+    {% endif %}
 </li>
 {% endif %}
 {% endfor %}

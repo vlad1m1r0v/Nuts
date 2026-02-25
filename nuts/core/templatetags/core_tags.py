@@ -59,12 +59,13 @@ def menu_links(context):
 def language_switcher(context):
     request = context.get('request')
     page = context.get('page') or context.get('self')
-
+    product = context.get('product')
     query_parameters = request.GET.urlencode()
 
     return {
         'request': request,
         'page': page,
+        'product': product,
         'query_parameters': query_parameters
     }
 

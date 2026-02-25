@@ -21,6 +21,7 @@ class ProductFeatureTR(TranslationOptions):
 @register(Product)
 class ProductTR(TranslationOptions):
     fields = (
+        'slug',
         'name',
         'ingredients',
     )

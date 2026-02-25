@@ -3,13 +3,14 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext as _
 
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.models import Page
 from wagtail.fields import StreamField
 from wagtail.admin.panels import FieldPanel
 from .blocks import ProductImageWithTextBlock
 
 
-class ProductPage(Page):
+class ProductPage(RoutablePageMixin, Page):
     parent_page_types = ['shop.ShopPage']
     subpage_types = []
     max_count = 1
@@ -46,23 +47,20 @@ class ProductPage(Page):
         FieldPanel("delivery_info")
     ]
 
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
+    @route(r'^$')
+    def no_product_view(self, request):
+        messages.error(request, _("Не указан идентфикатор товара."))
+        return self.render(request)
 
-        product_id = request.GET.get('product_id')
-
-        if not product_id:
-            messages.error(request, _("Не указан идентфикатор товара."))
-            return context
-
+    @route(r'^(?P<slug>[-\w]+)/$')
+    def product_view(self, request, slug=None):
         try:
-            product = Product.objects.prefetch_related('images', 'features').get(pk=product_id)
-            context['product'] = product
-            return context
+            product = Product.objects.prefetch_related('images', 'features').get(slug=slug)
+            return self.render(request, context_overrides={'product': product})
 
         except Product.DoesNotExist:
             messages.error(request, _("Товар с указаным идентификатором не обнаружен."))
-            return context
+            return self.render(request)
 
     class Meta:
         verbose_name = "Product page"
@@ -85,6 +83,9 @@ class ProductFeature(models.Model):
 
 class Product(models.Model):
     id = models.BigAutoField(primary_key=True)
+
+    slug = models.SlugField(allow_unicode=True)
+
     name = models.CharField(
         max_length=120,
         verbose_name="Название товара"
